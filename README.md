@@ -1,1 +1,1 @@
-# med-ed
+# Med Ed

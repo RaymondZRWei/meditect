@@ -30,8 +30,8 @@
     const routes: Route[] = [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
-        { name: "Leaderboard", path: "/leaderboard" },
-        { name: "Stats for Nerds", path: "/stats-for-nerds" },
+        { name: "History", path: "/history" },
+        { name: "Statistics", path: "/stats" },
     ];
 
     $: isPlaying = $page.url.pathname.includes("/play");

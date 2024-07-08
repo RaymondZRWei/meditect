@@ -20,8 +20,8 @@
                 </span>
             </h1>
             <p class="mb-6 opacity-70 lg:mb-8 md:text-lg lg:text-xl">
-                Med Ed aims to tackle the problem of medical illiteracy. It
-                integrates medical education into a captivating gaming
+                Med-Ed aims to tackle the problem of medical illiteracy. It
+                integrates medical education into a captivating c
                 experience that hones medical knowledge.
             </p>
             <a class="btn btn-primary" href="/play">Start Playing</a>

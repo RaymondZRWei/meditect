@@ -1,17 +1,18 @@
 <script lang="ts">
-    import { T, T as Threlte, useLoader } from "@threlte/core";
-    import { createTransition, Float, GLTF } from "@threlte/extras";
-    import * as THREE from "three";
-
-    import { GLTFLoader } from "three/examples/jsm/Addons.js";
-    import { gsap } from "gsap";
-    import { elasticOut } from "svelte/easing";
     import { onMount } from "svelte";
+    import { elasticOut } from "svelte/easing";
+
+    import { gsap } from "gsap";
+
+    import * as THREE from "three";
+    import { T, T as Threlte, useLoader } from "@threlte/core";
+    import { createTransition, Float } from "@threlte/extras";
+    import { GLTFLoader } from "three/examples/jsm/Addons.js";
 
     export let position: [number, number, number] = [0, 0, 0];
+    export let scale: [number, number, number] = [1, 1, 1];
     export let rate: number = 0.5;
-    export let path: string = '/dna-model/scene.gltf';
-	export let scale: [number, number, number] = [1, 1, 1];
+    export let path: string = "/dna-model/scene.gltf";
 
     const sfx = [
         new Audio("/sounds/hit1.ogg"),
@@ -23,12 +24,17 @@
 
     let visible = false;
     // let model: THREE.Group | null = null;
-	let model = useLoader(GLTFLoader).load(path)
+    let model = useLoader(GLTFLoader).load(path);
 
     let reducedMotionRate = 0;
 
-    function handleClick(event: MouseEvent) {
+    const handleClick = (
+        event: MouseEvent & {
+            currentTarget: EventTarget & HTMLDivElement;
+        },
+    ) => {
         gsap.utils.random(sfx).play();
+
         if ("object" in event && event.object instanceof THREE.Mesh) {
             gsap.to(event.object.rotation, {
                 x: `0`,
@@ -39,7 +45,7 @@
                 yoyo: true,
             });
         }
-    }
+    };
 
     const bounce = createTransition((ref) => {
         return {
@@ -72,7 +78,8 @@
         floatIntensity={5 * compoundRate}
     >
         {#if $model}
-            <T is={$model.scene}
+            <T
+                is={$model.scene}
                 {visible}
                 in={bounce}
                 interactive

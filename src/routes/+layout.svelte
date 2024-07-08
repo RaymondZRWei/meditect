@@ -42,10 +42,7 @@
         'bg-base-100 z-50'}"
 >
     <a href="/" class="flex items-center gap-5">
-        <img
-            alt="Med Ed Logo"
-            class="h-[3.25rem] w-[3.25rem]"
-        />
+        <img alt="Med Ed Logo" class="h-[3.25rem] w-[3.25rem]" />
         {#if !isPlaying}
             <div class="mt-2 text-3xl font-bold">Med Ed</div>
         {/if}

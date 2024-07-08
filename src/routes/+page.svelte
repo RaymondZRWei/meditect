@@ -26,7 +26,9 @@
             </p>
             <a class="btn btn-primary" href="/play">Start Playing</a>
         </div>
-        <div class="row-end-2 -mx-[200px] md:row-end-1 lg:mt-0 lg:col-span-4 lg:flex">
+        <div
+            class="row-end-2 -mx-[200px] md:row-end-1 lg:mt-0 lg:col-span-4 lg:flex"
+        >
             <!-- <img src={heroImage} alt="mockup" /> -->
             <Scene />
         </div>

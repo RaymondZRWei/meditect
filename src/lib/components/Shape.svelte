@@ -5,7 +5,7 @@
     import { gsap } from "gsap";
 
     import * as THREE from "three";
-    import { T, T as Threlte, useLoader } from "@threlte/core";
+    import { T as Threlte, useLoader } from "@threlte/core";
     import { createTransition, Float } from "@threlte/extras";
     import { GLTFLoader } from "three/examples/jsm/Addons.js";
 
@@ -13,14 +13,6 @@
     export let scale: [number, number, number] = [1, 1, 1];
     export let rate: number = 0.5;
     export let path: string = "/dna-model/scene.gltf";
-
-    const sfx = [
-        new Audio("/sounds/hit1.ogg"),
-        new Audio("/sounds/hit2.ogg"),
-        new Audio("/sounds/hit3.ogg"),
-        new Audio("/sounds/hit4.ogg"),
-        new Audio("/sounds/hit5.ogg"),
-    ];
 
     let visible = false;
     // let model: THREE.Group | null = null;
@@ -79,13 +71,15 @@
         floatIntensity={5 * compoundRate}
     >
         {#if $model}
-            <T
-                is={$model.scene}
-                {visible}
-                in={bounce}
-                interactive
-                on:click={handleClick}
-            />
+            <Threlte.Mesh>
+                <Threlte
+                    interactive
+                    on:click={handleClick}
+                    {visible}
+                    in={bounce}
+                    is={$model.scene}
+                ></Threlte>
+            </Threlte.Mesh>
         {/if}
     </Float>
 </Threlte.Group>

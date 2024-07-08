@@ -38,7 +38,7 @@
 </script>
 
 <header
-    class="p-10 w-full flex overflow-auto justify-between items-center {!isPlaying &&
+    class="p-10 w-full flex overflow-auto md:sticky md:top-0 justify-between items-center {!isPlaying &&
         'bg-base-100 z-50'}"
 >
     <a href="/" class="flex items-center gap-5">

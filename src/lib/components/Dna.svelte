@@ -20,6 +20,7 @@
     near={1}
     far={40}
 />
+
 <Environment files="smallroom.hdr" path="/" format="hdr"></Environment>
 <ContactShadows
     position={[0, -6, 0]}

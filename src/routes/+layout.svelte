@@ -38,12 +38,11 @@
 </script>
 
 <header
-    class="fixed p-10 w-full flex justify-between items-center {!isPlaying &&
+    class="p-10 w-full flex overflow-auto justify-between items-center {!isPlaying &&
         'bg-base-100 z-50'}"
 >
     <a href="/" class="flex items-center gap-5">
         <img
-            src={"TODO: ADD LOGO HERE"}
             alt="Med Ed Logo"
             class="h-[3.25rem] w-[3.25rem]"
         />

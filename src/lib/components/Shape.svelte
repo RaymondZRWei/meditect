@@ -33,7 +33,8 @@
             currentTarget: EventTarget & HTMLDivElement;
         },
     ) => {
-        gsap.utils.random(sfx).play();
+        //no need for sound
+        // gsap.utils.random(sfx).play();
 
         if ("object" in event && event.object instanceof THREE.Mesh) {
             gsap.to(event.object.rotation, {

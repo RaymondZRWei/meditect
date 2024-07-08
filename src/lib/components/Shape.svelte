@@ -15,7 +15,6 @@
     export let path: string = "/dna-model/scene.gltf";
 
     let visible = false;
-    // let model: THREE.Group | null = null;
     let model = useLoader(GLTFLoader).load(path);
 
     let reducedMotionRate = 0;
@@ -25,9 +24,6 @@
             currentTarget: EventTarget & HTMLDivElement;
         },
     ) => {
-        //no need for sound
-        // gsap.utils.random(sfx).play();
-
         if ("object" in event && event.object instanceof THREE.Mesh) {
             gsap.to(event.object.rotation, {
                 x: `0`,

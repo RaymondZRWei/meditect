@@ -35,7 +35,7 @@
     const routes: Route[] = [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
-        { name: "History", path: "/history" },
+        // { name: "History", path: "/history" },
         { name: "Statistics", path: "/stats" },
     ];
 

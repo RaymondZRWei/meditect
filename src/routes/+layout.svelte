@@ -43,7 +43,10 @@
 </script>
 
 <header
-    class="p-10 w-full flex overflow-auto md:sticky md:top-0 justify-between items-center {!isPlaying &&
+    class="p-10 w-full flex overflow-auto {$page.url.pathname.substr(0, 5) ===
+    '/play'
+        ? 'md:absolute'
+        : 'md:sticky'} md:top-0 justify-between items-center {!isPlaying &&
         'bg-base-100 z-50'}"
 >
     <!-- Mobile -->

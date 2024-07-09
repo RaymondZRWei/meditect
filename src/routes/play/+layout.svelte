@@ -13,6 +13,9 @@
     import EndScreen from "./EndScreen.svelte";
     import tutorialStage from "$lib/stores/tutorialStage";
     import Stat from "$lib/components/Stat.svelte";
+    import IconChecklist from "~icons/solar/checklist-minimalistic-linear";
+    import CheckList from "./Checklist.svelte";
+    import Checklist from "./Checklist.svelte";
 
     let pageURL = "";
     let pageUnsubscribe: Unsubscriber;
@@ -59,27 +62,43 @@
             return g;
         });
     };
+
+
+    // TODO: SET ITEMS AS THE SAME DATA TYPE AS EVERYTHING ELSE
+    let openChecklist = false;
+    let items;
+
+    onMount(() => {
+        let checklist = localStorage.getItem("checklist");
+        if (checklist)
+        items = JSON.parse(checklist);
+    });
 </script>
 
 <EndScreen />
 
 {#if !$game.loading}
-        <div
-            class="modal"
-            class:modal-open={$tutorialStage === 0 &&
-                pageURL !== "/play/portfolio"}
-        >
-            <div class="modal-box">
-                <h3 class="font-bold text-3xl">Welcome to Market Master</h3>
-                <p class="py-4">
-                    <!-- TODO: PUT INTRO HERE -->
-                </p>
+    <div
+        class="modal"
+        class:modal-open={$tutorialStage === 0 && pageURL !== "/play/portfolio"}
+    >
+        <div class="modal-box">
+            <h3 class="font-bold text-3xl">Welcome to Market Master</h3>
+            <p class="py-4">
+                <!-- TODO: PUT INTRO HERE -->
+            </p>
 
-                <div class="modal-action">
-                    <a class="btn btn-primary" href="/play" on:click={() => $tutorialStage++}> Start </a>
-                </div>
+            <div class="modal-action">
+                <a
+                    class="btn btn-primary"
+                    href="/play"
+                    on:click={() => $tutorialStage++}
+                >
+                    Start
+                </a>
             </div>
         </div>
+    </div>
 
     <main class="max-w-screen-lg mx-auto min-h-screen flex flex-col relative">
         <!-- TODO: TUTORIAL TIP FOR ADVANCE BUTTON -->
@@ -163,6 +182,15 @@
             {/each}
         </div>
     </main>
+
+    <button
+        class="absolute bottom-1 left-1 h-20 w-20 flex items-center justify-center"
+        on:click={() => (openChecklist = true)}
+    >
+        <IconChecklist class="w-full h-1/2 my-4" />
+    </button>
+
+    <Checklist bind:items bind:isOpen={openChecklist} />
 
     <EventModal event={eventModal} />
 {/if}

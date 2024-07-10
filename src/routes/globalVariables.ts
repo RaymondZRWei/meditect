@@ -1,3 +1,4 @@
+//h
 interface affliction {
   name: string;
   responseHR: number[];

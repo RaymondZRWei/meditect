@@ -11,8 +11,8 @@ interface affliction {
 
   testResultsRespiratoryRate: number[];
   testResultsOxygenSaturation: number[];
-  testResultsBloodGlucoseLevels: string[];
-  testResultsPainLevel: string[];
+  testResultsBloodGlucoseLevels: number[];
+  testResultsPainLevel: number[];
 }
 export let currentAffliction: affliction;
 function giveAffliction() {
@@ -51,13 +51,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 85 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 75 - Math.round(Math.random() * 5);
 
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "normal";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 70+Math.round(Math.random()*30);
 
-    currentAffliction.testResultsPainLevel[0] = "mild";
-    currentAffliction.testResultsPainLevel[1] = "mild";
-    currentAffliction.testResultsPainLevel[2] = "unresponsive";
+    currentAffliction.testResultsPainLevel[0] = 3+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = -1;
+    currentAffliction.testResultsPainLevel[2] = -2;
   } else if (rand == 1) {
     currentAffliction.name = "Pulmonary Embolism";
     currentAffliction.responseHR[0] = Math.round(100 + Math.random() * 20);
@@ -101,13 +101,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 80 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 70 - Math.round(Math.random() * 5);
 
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "normal";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 70+Math.round(Math.random()*30);
 
-    currentAffliction.testResultsPainLevel[0] = "high";
-    currentAffliction.testResultsPainLevel[1] = "excruciating";
-    currentAffliction.testResultsPainLevel[2] = "unresponsive";
+    currentAffliction.testResultsPainLevel[0] = 6+Math.round(Math.random()*2)/2;
+    currentAffliction.testResultsPainLevel[1] = 8+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[2] = -2;
   } else if (rand == 2) {
     currentAffliction.name = "Asthma Attack";
     currentAffliction.responseHR[0] = Math.round(100 + Math.random() * 20);
@@ -144,13 +144,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 85 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 70 - Math.round(Math.random() * 5);
 
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "high";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 126+Math.round(Math.random()*20);
 
-    currentAffliction.testResultsPainLevel[0] = "normal";
-    currentAffliction.testResultsPainLevel[1] = "high";
-    currentAffliction.testResultsPainLevel[2] = "unresponsive";
+    currentAffliction.testResultsPainLevel[0] = 5+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = 6+Math.round(Math.random()*2)/2;
+    currentAffliction.testResultsPainLevel[2] = -2;
   } else if (rand == 3) {
     currentAffliction.name = "Heart Attack";
     currentAffliction.responseHR[0] = Math.round(110 + Math.random() * 20);
@@ -179,13 +179,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 75 - Math.round(Math.random() * 5);
     currentAffliction.testResultsOxygenSaturation[2] = 65 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "elevated";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 100+Math.round(Math.random()*25);
   
-    currentAffliction.testResultsPainLevel[0] = "excruciating";
-    currentAffliction.testResultsPainLevel[1] = "unconscious";
-    currentAffliction.testResultsPainLevel[2] = "unresponsive";
+    currentAffliction.testResultsPainLevel[0] = 8+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = -1;
+    currentAffliction.testResultsPainLevel[2] = -2;
   } else if (rand == 4) {
     currentAffliction.name = "Stroke";
     currentAffliction.responseHR[0] = Math.round(90 + Math.random() * 20);
@@ -214,13 +214,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 78 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 75 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "mild";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "high";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 70-Math.round(Math.random()*10)-5;
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 126+Math.round(Math.random()*20);;
   
-    currentAffliction.testResultsPainLevel[0] = "normal";
-    currentAffliction.testResultsPainLevel[1] = "mild";
-    currentAffliction.testResultsPainLevel[2] = "mild";
+    currentAffliction.testResultsPainLevel[0] = 4+Math.round(Math.random()*1)/2;
+    currentAffliction.testResultsPainLevel[1] = 3+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[2] = 3+Math.round(Math.random()*2)/2-1;
   } else if (rand == 5) {
     currentAffliction.name = "Sepsis";
     currentAffliction.responseHR[0] = Math.round(90 + Math.random() * 20);
@@ -249,13 +249,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 85 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 78 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "high";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "high";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);;
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);;
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 126+Math.round(Math.random()*20);;
   
-    currentAffliction.testResultsPainLevel[0] = "normal";
-    currentAffliction.testResultsPainLevel[1] = "high";
-    currentAffliction.testResultsPainLevel[2] = "excruciating";
+    currentAffliction.testResultsPainLevel[0] = 4+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = 7+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[2] = 8+Math.round(Math.random()*2)/2;
   }else if (rand == 6) {
     currentAffliction.name = "Food Poisoning";
     currentAffliction.responseHR[0] = Math.round(100 + Math.random() * 10);
@@ -284,13 +284,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 97 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 98 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "elevated";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 100+Math.round(Math.random()*25);
   
-    currentAffliction.testResultsPainLevel[0] = "mild";
-    currentAffliction.testResultsPainLevel[1] = "high";
-    currentAffliction.testResultsPainLevel[2] = "excruciating";
+    currentAffliction.testResultsPainLevel[0] = 3+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = 7+Math.round(Math.random()*1)/2-1;
+    currentAffliction.testResultsPainLevel[2] = 8+Math.round(Math.random()*2)/2;
   } else if (rand == 7) {
     currentAffliction.name = "Acute Pancreatitis";
     currentAffliction.responseHR[0] = Math.round(95 + Math.random() * 10);
@@ -319,13 +319,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 92 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 90 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "high";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 126+Math.round(Math.random()*20);
   
-    currentAffliction.testResultsPainLevel[0] = "high";
-    currentAffliction.testResultsPainLevel[1] = "very high";
-    currentAffliction.testResultsPainLevel[2] = "excruciating";
+    currentAffliction.testResultsPainLevel[0] = 7+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = currentAffliction.testResultsPainLevel[0]+0.5;
+    currentAffliction.testResultsPainLevel[2] = 8+Math.round(Math.random()*2)/2;
   } else if (rand == 8) {
     currentAffliction.name = "Staph Infection";
     currentAffliction.responseHR[0] = Math.round(80 + Math.random() * 10);
@@ -354,13 +354,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 97 - Math.round(Math.random() * 3);
     currentAffliction.testResultsOxygenSaturation[2] = 98;
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "elevated";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = 100+Math.round(Math.random()*25);
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 100+Math.round(Math.random()*25);
   
-    currentAffliction.testResultsPainLevel[0] = "mild";
-    currentAffliction.testResultsPainLevel[1] = "normal";
-    currentAffliction.testResultsPainLevel[2] = "high";
+    currentAffliction.testResultsPainLevel[0] = 3+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = 4+Math.round(Math.random()*2)/2;
+    currentAffliction.testResultsPainLevel[2] = 7+Math.round(Math.random()*2)/2-1;
   } else if (rand == 9) {
     currentAffliction.name = "Laceration (arm)";
     currentAffliction.responseHR[0] = Math.round(80 + Math.random() * 20);
@@ -389,13 +389,13 @@ function giveAffliction() {
     currentAffliction.testResultsOxygenSaturation[1] = 95 - Math.round(Math.random() * 7);
     currentAffliction.testResultsOxygenSaturation[2] = 93 - Math.round(Math.random() * 5);
   
-    currentAffliction.testResultsBloodGlucoseLevels[0] = "normal";
-    currentAffliction.testResultsBloodGlucoseLevels[1] = "slightly elevated";
-    currentAffliction.testResultsBloodGlucoseLevels[2] = "elevated";
+    currentAffliction.testResultsBloodGlucoseLevels[0] = 70+Math.round(Math.random()*30);
+    currentAffliction.testResultsBloodGlucoseLevels[1] = currentAffliction.testResultsBloodGlucoseLevels[0]+10;
+    currentAffliction.testResultsBloodGlucoseLevels[2] = 100+Math.round(Math.random()*25)+10;
   
-    currentAffliction.testResultsPainLevel[0] = "normal";
-    currentAffliction.testResultsPainLevel[1] = "normal";
-    currentAffliction.testResultsPainLevel[2] = "high";
+    currentAffliction.testResultsPainLevel[0] = 4+Math.round(Math.random()*2)/2-1;
+    currentAffliction.testResultsPainLevel[1] = currentAffliction.testResultsPainLevel[0]+Math.round(Math.random()*2)/2;
+    currentAffliction.testResultsPainLevel[2] = 7+Math.round(Math.random()*2)/2-1;
   }
   
 }

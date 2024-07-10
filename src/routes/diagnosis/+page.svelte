@@ -86,13 +86,13 @@
           <input
               type="range"
               min="50"
-              max="300"
+              max="250"
               bind:value={$value3}
               on:input={(e) => updateValue(e, value3)}
           />
           <SemicircleGauge
               value={value3}
-              maxValue={300}
+              maxValue={250}
               width={200}
               height={100}
           />

@@ -12,11 +12,11 @@
             <h1
                 class="mb-4 text-4xl font-bold tracking-tight !leading-[1.1] md:text-5xl xl:text-6xl"
             >
-                A Medical Education Program through
+                Medical Education through
                 <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
                 >
-                    Interactive Learning
+                    Simulated Experience
                 </span>
             </h1>
             <p class="mb-6 opacity-70 md:mb-8 md:text-lg lg:text-xl">

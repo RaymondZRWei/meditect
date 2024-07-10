@@ -1,24 +1,17 @@
 <script lang="ts">
-    export let title: string = "Placeholder Title"
-    export let value: string = "Placeholder Value"
-    export let symbol;
-    export let datatip: string = ""
+    export let title: string;
+    export let value: number;
+    export let symbol: any;
+    export let tooltip: string;
 </script>
 
-<div class="stat">
-    <div class="stat-title">{title}</div>
-    <div class="stat-value">
+<div class="bg-blue-500 w-full rounded-lg p-6">
+    <div class="text-white">{title}</div>
+    <div class="text-slate-500">
         {value}
     </div>
 
-    <div class="stat-figure">
-        <div
-            class="tooltip tooltip-bottom"
-            data-tip={datatip}
-        >
-            <div class="h-8 w-8 opacity-60">
-                <svelte:component this={symbol} />
-            </div>
-        </div>
+    <div>
+        <svelte:component this={symbol} class="size-8 opacity-60" />
     </div>
 </div>

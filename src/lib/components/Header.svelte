@@ -2,6 +2,7 @@
     import { page } from "$app/stores";
 
     import logo from "$lib/images/logo.png";
+    import game from "$lib/store/game";
 
     interface Route {
         name: string;
@@ -14,13 +15,13 @@
         { name: "Statistics", path: "/stats" },
     ];
 
-    $: isPlaying = $page.url.pathname.includes("/game");
+    $: isPlaying = $page.url.pathname.includes("/game") && $game;
 </script>
 
 <header
-    class="p-8 w-full flex overflow-auto {isPlaying
+    class="py-8 px-12 w-full flex overflow-auto {isPlaying
         ? 'absolute'
-        : 'fixed z-50 bg-transparent'} top-0 justify-between items-center"
+        : 'sticky z-50 bg-transparent'} top-0 justify-between items-center"
 >
     <a href="/" class="flex items-center gap-3">
         <img src={logo} alt="Med Ed Logo" class="size-12" />

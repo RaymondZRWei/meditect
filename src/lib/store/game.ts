@@ -1,6 +1,6 @@
 import { browser } from "$app/environment";
 import { writable } from "svelte/store";
-import type { GameData } from "$lib/types";
+import type { GameData, StoredGameData } from "$lib/types";
 
 const getInitialValue = (): StoredGameData => {
     if (browser) {
@@ -15,8 +15,6 @@ const getInitialValue = (): StoredGameData => {
 
     return undefined;
 };
-
-type StoredGameData = GameData | null | undefined;
 
 const initialValue = getInitialValue();
 

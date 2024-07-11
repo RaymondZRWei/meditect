@@ -6,6 +6,7 @@ export const medicines: Medicine[] = [
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
+            game.disease.arbitraryValues.opioid += 50;
 
             return game;
         },

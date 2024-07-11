@@ -4,7 +4,7 @@
 
     import WelcomeModal from "./WelcomeModal.svelte";
     import game from "$lib/store/game";
-    import type { UserData } from "$lib/types";
+    import type { StoredUserData } from "$lib/types";
 
     const startGame = () => {
         // Picking a random disease
@@ -17,7 +17,13 @@
         game.set(gameData);
     };
 
-    const getUserCompletedDiseases = (userData: UserData) => {
+    const getUserCompletedDiseases = (userData: StoredUserData) => {
+        if (!userData)
+            return {
+                completedDiseases: null,
+                partiallyCompletedDiseases: null,
+            };
+
         let completedDiseases: Set<string> = new Set();
         let partiallyCompletedDiseases: Set<string> = new Set();
 
@@ -33,6 +39,9 @@
 
         return { completedDiseases, partiallyCompletedDiseases };
     };
+
+    $: ({ completedDiseases, partiallyCompletedDiseases } =
+        getUserCompletedDiseases($userData));
 </script>
 
 {#if $userData === undefined}
@@ -41,42 +50,67 @@
 
 <WelcomeModal />
 
-{#if $userData}
-    {@const { completedDiseases, partiallyCompletedDiseases } =
-        getUserCompletedDiseases($userData)}
-
-    <div class="mt-16">
-        <h1 class="text-3xl font-bold">Med Ed Dashboard</h1>
-        <div class="flex justify-between gap-10">
-            <section class="grow">
-                <h2>Disease Certifications</h2>
-                <div class="flex flex-col">
+<div class="mt-16">
+    <div class="grid grid-cols-10 gap-8">
+        <div class="col-span-7">
+            <h1 class="text-5xl font-bold mb-4">Dashboard</h1>
+            <p class="text-slate-500 mb-10">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+                consequatur unde recusandae aliquid, amet accusamus vitae
+                consectetur, omnis quo porro necessitatibus. Est quam libero
+                incidunt dolores voluptatum accusamus ab dolorem.
+            </p>
+            <section>
+                <h2 class="text-3xl font-bold mb-6">Disease Certifications</h2>
+                <div class="grid grid-cols-2 gap-4">
                     {#each diseases as disease}
-                        {@const completed = completedDiseases.has(disease.name)}
-                        {@const partiallyCompleted =
-                            partiallyCompletedDiseases.has(disease.name)}
-                        <div>
-                            <h2
-                                class="text-lg font-semibold {completed
-                                    ? 'bg-green-400'
-                                    : partiallyCompleted
-                                      ? 'bg-yellow-400'
-                                      : 'bg-red-400'}"
-                            >
+                        <div
+                            class="flex justify-between items-center bg-slate-100 rounded-lg p-5"
+                        >
+                            <h2 class="text-lg font-semibold">
                                 {disease.name}
                             </h2>
+                            {#if completedDiseases !== null && partiallyCompletedDiseases !== null}
+                                {@const completed = completedDiseases.has(
+                                    disease.name,
+                                )}
+                                {@const partiallyCompleted =
+                                    partiallyCompletedDiseases.has(
+                                        disease.name,
+                                    )}
+                                <div
+                                    class="size-3 rounded-full {completed
+                                        ? 'bg-green-400'
+                                        : partiallyCompleted
+                                          ? 'bg-yellow-400'
+                                          : 'bg-red-400'}"
+                                ></div>
+                            {/if}
                         </div>
                     {/each}
                 </div>
             </section>
-            <section class="p-10 bg-slate-300 rounded-lg">
+        </div>
+        <div class="flex flex-col gap-3 col-span-3">
+            <section class="p-8 bg-slate-100 rounded-lg flex flex-col gap-3">
                 <button
                     on:click={startGame}
-                    class="bg-primary px-6 py-3.5 rounded-lg text-white"
+                    class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3.5 rounded-lg text-white"
                 >
                     Start Game
                 </button>
+                <button
+                    on:click={startGame}
+                    class="bg-secondary hover:bg-secondary-dark transition-colors px-6 py-3.5 rounded-lg text-white"
+                >
+                    Past Games
+                </button>
+            </section>
+            <section
+                class="grow p-8 bg-slate-100 rounded-lg flex flex-col gap-3"
+            >
+                <h2 class="text-3xl font-bold">Account Stats</h2>
             </section>
         </div>
     </div>
-{/if}
+</div>

@@ -59,9 +59,12 @@ export interface GameData extends ContinuousSymptomStore, TestableSymptomStore {
     testResults: TestResult[];
     disease: Disease;
     qualitativeSymptoms: string[];
+    pain: number;
     doctorHints: string[];
     doctorIntervention: string | null;
 }
+
+export type StoredGameData = GameData | null | undefined;
 
 export interface GameResult extends ContinuousSymptomStore {
     elapsedTime: number;
@@ -73,3 +76,5 @@ export interface GameResult extends ContinuousSymptomStore {
 export interface UserData {
     games: GameResult[];
 }
+
+export type StoredUserData = UserData | null | undefined;

@@ -2,6 +2,7 @@
     import { writable, type Writable } from "svelte/store";
     import { onMount } from "svelte";
     import SemicircleGauge from "./SemicircleGauge.svelte";
+    import Checklist from "./Checklist.svelte";
 
     const value1 = writable<number | null>(null);
     const value2 = writable<number | null>(null);
@@ -27,8 +28,8 @@
 </script>
 
 <div class="grid grid-cols-2 mt-24">
-    <div class="col-span-1 gap-8 flex flex-col">
-        <div class="flex">
+    <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
+        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
             <div class="gauge">
                 <input
                     type="range"
@@ -55,7 +56,7 @@
             </div>
         </div>
 
-        <div class="box">
+        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
             <div class="gauge">
                 <input
                     type="range"
@@ -82,7 +83,7 @@
             </div>
         </div>
 
-        <div class="box">
+        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
             <div class="gauge">
                 <input
                     type="range"
@@ -108,7 +109,8 @@
                 >
             </div>
         </div>
-        <div class="box">
+
+        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
             <div class="gauge">
                 <input
                     type="range"
@@ -135,7 +137,9 @@
             </div>
         </div>
     </div>
-    <div class="col-span-1">hi</div>
+    <div class="col-span-1">
+        <Checklist />
+    </div>
 </div>
 
 <style>

@@ -55,7 +55,7 @@
     };
 </script>
 
-<div class="h-full bg-purple-400 p-5">
+<div class="h-full p-5">
     <div class="flex items-center justify-between">
         <div>
             <h2>Tests</h2>

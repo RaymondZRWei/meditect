@@ -113,70 +113,74 @@
 {:else if $game === null}
     <Dashboard />
 {:else}
-    <div class="flex gap-3 h-full">
-        <Stat
-            title="Heart Rate"
-            value={$game.heartRate.value}
-            tooltip="This pops up on hover"
-            symbol={MaterialSymbolsMonitorHeart}
-        />
-        <Stat
-            title="Blood Pressure Systolic"
-            value={$game.bloodPressureSystolic.value}
-            tooltip="This pops up on hover"
-            symbol={F7Dial}
-        />
-        <Stat
-            title="Blood Pressure Diastolic"
-            value={$game.bloodPressureDiastolic.value}
-            tooltip="This pops up on hover"
-            symbol={F7Dial}
-        />
-
-        <button
-            on:click={increaseElapsedTime}
-            class="bg-blue-500 w-full rounded-lg p-6 flex justify-between"
-        >
-            <div class="flex flex-col bg-orange-400 items-start">
-                <div class="text-white">Elapsed Time</div>
-                <div class="text-slate-500">
-                    {$game.elapsedTime} minutes
-                </div>
-            </div>
-
-            <div>
-                <MaterialSymbolsAlarm class="size-8 opacity-60" />
-            </div>
-        </button>
-    </div>
-
-    <div>
-        {#if pageIndex === 0}
-            <Symptoms bind:game={$game} />
-        {:else if pageIndex === 1}
-            <Treatments bind:game={$game} />
-        {:else if pageIndex === 2}
-            <Tests bind:game={$game} />
-        {/if}
-    </div>
-
-    <div class="w-full flex items-stretch my-4">
-        {#each pages as page, i}
-            {@const isActivePage = i === pageIndex}
-            <button
-                class="text-center flex flex-col p-4 items-center justify-center rounded-md w-full {isActivePage
-                    ? 'bg-violet-700'
-                    : 'bg-violet-100'}"
-                on:click={() => {
-                    pageIndex = i;
-                }}
-            >
-                <svelte:component
-                    this={page.icon}
-                    class="size-7 opacity-90 mx-auto mb-1"
+    <div class="flex flex-col h-screen justify-between py-6">
+        <div class="flex grow h-full">
+            <section class="flex flex-col gap-3 h-full">
+                <Stat
+                    title="Heart Rate"
+                    value={$game.heartRate.value}
+                    tooltip="This pops up on hover"
+                    symbol={MaterialSymbolsMonitorHeart}
                 />
-                <span>{page.name}</span>
-            </button>
-        {/each}
+                <Stat
+                    title="Blood Pressure Systolic"
+                    value={$game.bloodPressureSystolic.value}
+                    tooltip="This pops up on hover"
+                    symbol={F7Dial}
+                />
+                <Stat
+                    title="Blood Pressure Diastolic"
+                    value={$game.bloodPressureDiastolic.value}
+                    tooltip="This pops up on hover"
+                    symbol={F7Dial}
+                />
+
+                <button
+                    on:click={increaseElapsedTime}
+                    class="bg-slate-100 w-full h-full rounded-lg p-6 flex justify-between"
+                >
+                    <div class="flex flex-col text-left justify-between h-full">
+                        <div class="text-black font-medium">Elapsed Time</div>
+                        <div class="flex items-end gap-1 text-slate-600">
+                            <span class="text-4xl font-bold">
+                                {$game.elapsedTime}
+                            </span>
+                            <span class="text-base">minutes</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <MaterialSymbolsAlarm class="size-8 opacity-60" />
+                    </div>
+                </button>
+            </section>
+            {#if pageIndex === 0}
+                <Symptoms bind:game={$game} />
+            {:else if pageIndex === 1}
+                <Treatments bind:game={$game} />
+            {:else if pageIndex === 2}
+                <Tests bind:game={$game} />
+            {/if}
+        </div>
+
+        <section class="w-full flex items-stretch gap-3 h-min pt-4">
+            {#each pages as page, i}
+                {@const isActivePage = i === pageIndex}
+                <button
+                    class="text-center flex flex-col p-4 items-center justify-center rounded-md w-full {isActivePage
+                        ? 'bg-slate-300/80'
+                        : 'bg-slate-100'}"
+                    on:click={() => {
+                        pageIndex = i;
+                    }}
+                >
+                    <svelte:component
+                        this={page.icon}
+                        class="size-7 opacity-90 mx-auto mb-1"
+                    />
+                    <span>{page.name}</span>
+                </button>
+            {/each}
+        </section>
     </div>
 {/if}

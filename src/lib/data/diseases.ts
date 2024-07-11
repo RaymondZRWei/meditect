@@ -58,19 +58,23 @@ export const diseases: StoredDisease[] = [
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
                 heartRate: {
-                    value: Math.round(100 + Math.random() * 20),
+                    value: Math.round(50 + Math.random() * 10),
                     prevValues: [],
                 },
                 bloodPressureSystolic: {
-                    value: Math.round(140 - Math.random() * 5),
+                    value: Math.round(100 + Math.random() * 10 - 7),
                     prevValues: [],
                 },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                bloodPressureDiastolic: {
+                    value: Math.round(60 + Math.random() * 6 - 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 95 - Math.round(Math.random() * 10),
+                respiratoryRate: 12 + Math.round(Math.random() * 3) - 2,
+                pain: 20 + Math.round(Math.random() * 10) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient is drowsy, pale, and has a decreased level of responsiveness.",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -83,7 +87,56 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            // if (opioidLevel > 60) {
+            //     game.heartRate.value = moveSymptomTowardsValue(
+            //         game.heartRate.value,
+            //         timeSinceLastUpdate,
+            //         35,
+            //     );
+            //     game.oxygenSaturation = moveSymptomTowardsValue(
+            //         game.oxygenSaturation,
+            //         timeSinceLastUpdate,
+            //         75,
+            //     );
+            //     game.respiratoryRate = moveSymptomTowardsValue(
+            //         game.respiratoryRate,
+            //         timeSinceLastUpdate,
+            //         2,
+            //     );
+            // } else if (opioidLevel > 30) {
+            //     game.heartRate.value = moveSymptomTowardsValue(
+            //         game.heartRate.value,
+            //         timeSinceLastUpdate,
+            //         45,
+            //     );
+            //     game.oxygenSaturation = moveSymptomTowardsValue(
+            //         game.oxygenSaturation,
+            //         timeSinceLastUpdate,
+            //         90,
+            //     );
+            //     game.respiratoryRate = moveSymptomTowardsValue(
+            //         game.respiratoryRate,
+            //         timeSinceLastUpdate,
+            //         10,
+            //     );
+            // } else if (opioidLevel > 0) {
+            //     game.heartRate.value = moveSymptomTowardsValue(
+            //         game.heartRate.value,
+            //         timeSinceLastUpdate,
+            //         60,
+            //     );
+            //     game.oxygenSaturation = moveSymptomTowardsValue(
+            //         game.oxygenSaturation,
+            //         timeSinceLastUpdate,
+            //         95,
+            //     );
+            //     game.respiratoryRate = moveSymptomTowardsValue(
+            //         game.respiratoryRate,
+            //         timeSinceLastUpdate,
+            //         15,
+            //     );
+
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -92,44 +145,27 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
+                    2,
                 );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
+                game.pain = moveSymptomTowardsValue(
+                    game.pain,
                     timeSinceLastUpdate,
-                    45,
+                    20,
                 );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
+                game.bloodPressureSystolic.value = moveSymptomTowardsValue(
+                    game.bloodPressureSystolic.value,
                     timeSinceLastUpdate,
-                    90,
+                    70,
                 );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
+                game.bloodPressureDiastolic.value = moveSymptomTowardsValue(
+                    game.bloodPressureDiastolic.value,
                     timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    35,
                 );
             } else {
                 game.finished = true;
@@ -137,14 +173,9 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient becomes unresponsive. The head doctor intervenes and administers a dose of naloxone.";
                 game.finished = true;
 
                 return game;
@@ -195,14 +226,24 @@ export const diseases: StoredDisease[] = [
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 80, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(100 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(140 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(90 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 90 - Math.round(Math.random() * 10),
+                respiratoryRate: 22 + Math.round(Math.random() * 3) - 2,
+                pain: 60 + Math.round(Math.random() * 20) / 2,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient suffers from intense chest pain and has difficulty breathing",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -215,7 +256,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -224,44 +265,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -319,21 +328,32 @@ export const diseases: StoredDisease[] = [
     },
     //THIRD
     {
-        name: "Opioid Overdose",
+        name: "Asthma Attack",
         arbitraryValues: {
-            opioid: 100,
+            asthma: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressure: { value: 100, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(100 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(140 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(90 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 92 - Math.round(Math.random() * 10),
+                respiratoryRate: 20 + Math.round(Math.random() * 3) - 2,
+                pain: 5 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient is wheezing and feels a tightness in their chest",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -346,7 +366,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -355,44 +375,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -450,21 +438,32 @@ export const diseases: StoredDisease[] = [
     },
     //FOURTH
     {
-        name: "Opioid Overdose",
+        name: "Heart Attack",
         arbitraryValues: {
-            opioid: 100,
+            heart: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressure: { value: 100, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(110 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(160 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(95 - Math.random() * 3),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 90 - Math.round(Math.random() * 10),
+                respiratoryRate: 24 + Math.round(Math.random() * 4) - 2,
+                pain: 8 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient is in agony. They are struggling to breath, confused and feel a tightness in their chest",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -477,7 +476,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -486,44 +485,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -581,21 +548,32 @@ export const diseases: StoredDisease[] = [
     },
     //FIFTH
     {
-        name: "Opioid Overdose",
+        name: "Stroke",
         arbitraryValues: {
-            opioid: 100,
+            stroke: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressure: { value: 100, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(90 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(170 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(90 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 85 - Math.round(Math.random() * 10),
+                respiratoryRate: 25 + Math.round(Math.random() * 3) - 2,
+                pain: 4 + Math.round(Math.random() * 1) / 2,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient feels numb and their speech is impeded",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -608,7 +586,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -617,44 +595,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -712,22 +658,32 @@ export const diseases: StoredDisease[] = [
     },
     //SIXTH
     {
-        name: "Opioid Overdose",
+        name: "Sepsis",
         arbitraryValues: {
-            opioid: 100,
+            sepsis: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(90 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(110 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(70 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 92 - Math.round(Math.random() * 4),
+                respiratoryRate: 20 + Math.round(Math.random() * 5) - 2,
+                pain: 4 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient seems to be confused and they are very uncomfortable",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -740,7 +696,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -749,44 +705,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -844,22 +768,32 @@ export const diseases: StoredDisease[] = [
     },
     //SEVENTH
     {
-        name: "Opioid Overdose",
+        name: "Food Poisoning",
         arbitraryValues: {
-            opioid: 100,
+            food: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(100 + Math.random() * 10),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(115 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(75 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 97 - Math.round(Math.random() * 5),
+                respiratoryRate: 17 + Math.round(Math.random() * 4) - 2,
+                pain: 3 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient feels a sharp pain in their stomach and is sweating profusely",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -872,7 +806,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -881,44 +815,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -976,22 +878,32 @@ export const diseases: StoredDisease[] = [
     },
     //EIGHTH
     {
-        name: "Opioid Overdose",
+        name: "Acute Pancreatitis",
         arbitraryValues: {
-            opioid: 100,
+            acute: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(95 + Math.random() * 10),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(130 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(80 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 94 - Math.round(Math.random() * 10),
+                respiratoryRate: 22 + Math.round(Math.random() * 4) - 2,
+                pain: 7 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "The patient has difficulty breathing and feels an acute epigastric pain",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -1004,7 +916,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -1013,44 +925,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -1108,22 +988,32 @@ export const diseases: StoredDisease[] = [
     },
     //NINTH
     {
-        name: "Opioid Overdose",
+        name: "Staph",
         arbitraryValues: {
-            opioid: 100,
+            staph: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 55, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(80 + Math.random() * 10),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(120 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(80 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 97 - Math.round(Math.random() * 5),
+                respiratoryRate: 15 + Math.round(Math.random() * 3) - 2,
+                pain: 4 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
-                    "The patient is drowsy and not very responsive.",
+                    "There are swollen red bumps on the patient's skin",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -1136,7 +1026,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -1145,44 +1035,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;
@@ -1242,18 +1100,28 @@ export const diseases: StoredDisease[] = [
     {
         name: "Laceration",
         arbitraryValues: {
-            opioid: 100,
+            laceration: 100,
         },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
                 elapsedTime: 0,
-                heartRate: { value: 80, prevValues: [] },
-                bloodPressureSystolic: { value: 130, prevValues: [] },
-                bloodPressureDiastolic: { value: 130, prevValues: [] },
-                bloodGlucose: 120,
-                oxygenSaturation: 92,
-                respiratoryRate: 17,
+                heartRate: {
+                    value: Math.round(80 + Math.random() * 20),
+                    prevValues: [],
+                },
+                bloodPressureSystolic: {
+                    value: Math.round(130 - Math.random() * 5),
+                    prevValues: [],
+                },
+                bloodPressureDiastolic: {
+                    value: Math.round(90 - Math.random() * 4),
+                    prevValues: [],
+                },
+                bloodGlucose: 70 + Math.round(Math.random() * 30),
+                oxygenSaturation: 95 - Math.round(Math.random() * 10),
+                respiratoryRate: 15 + Math.round(Math.random() * 3) - 2,
+                pain: 6 + Math.round(Math.random() * 2) / 2 - 1,
                 qualitativeSymptoms: [
                     "There is a large wound on the patient's arm",
                 ],
@@ -1268,7 +1136,7 @@ export const diseases: StoredDisease[] = [
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
-            if (opioidLevel > 60) {
+            if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(
                     game.heartRate.value,
                     timeSinceLastUpdate,
@@ -1277,44 +1145,12 @@ export const diseases: StoredDisease[] = [
                 game.oxygenSaturation = moveSymptomTowardsValue(
                     game.oxygenSaturation,
                     timeSinceLastUpdate,
-                    85,
+                    75,
                 );
                 game.respiratoryRate = moveSymptomTowardsValue(
                     game.respiratoryRate,
                     timeSinceLastUpdate,
-                    7,
-                );
-            } else if (opioidLevel > 30) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    45,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    90,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    10,
-                );
-            } else if (opioidLevel > 0) {
-                game.heartRate.value = moveSymptomTowardsValue(
-                    game.heartRate.value,
-                    timeSinceLastUpdate,
-                    60,
-                );
-                game.oxygenSaturation = moveSymptomTowardsValue(
-                    game.oxygenSaturation,
-                    timeSinceLastUpdate,
-                    95,
-                );
-                game.respiratoryRate = moveSymptomTowardsValue(
-                    game.respiratoryRate,
-                    timeSinceLastUpdate,
-                    15,
+                    2,
                 );
             } else {
                 game.finished = true;

@@ -4,8 +4,10 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#ff0000",
-                secondary: "#00ff00",
+                primary: "#3b82f6",
+                "primary-dark": "#2563eb",
+                secondary: "#14b8a6",
+                "secondary-dark": "#0d9488",
             },
         },
     },

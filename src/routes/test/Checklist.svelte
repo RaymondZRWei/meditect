@@ -1,95 +1,149 @@
 <script lang="ts">
-    export let isOpen: boolean = false;
+    import { createAccordion, melt } from "@melt-ui/svelte";
+    import { slide } from "svelte/transition";
+
+    import IconUp from "~icons/material-symbols/keyboard-double-arrow-up-rounded";
+    import IconDown from "~icons/material-symbols/keyboard-double-arrow-down-rounded";
+    import IconConstant from "~icons/oui/token-constant";
+
+    const {
+        elements: { content, item, trigger, root },
+        helpers: { isSelected },
+    } = createAccordion({
+        defaultValue: "item-1",
+    });
+
     export let items = [
         {
-            disease: "Disease1",
-            treatments: ["Med1", "Med2", "Med3"],
+            disease: "Opioid Overdose",
+            stats: {
+                rr: IconDown,
+                os: IconDown,
+                gl: IconConstant,
+                pain: IconUp,
+            },
             checked: false,
-            notes: "",
         },
         {
-            disease: "Disease2",
-            treatments: ["Med1", "Med2", "Med3"],
+            disease: "Pulmonary Embolism",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
             checked: false,
-            notes: "",
         },
         {
-            disease: "Disease3",
-            treatments: ["Med1", "Med2", "Med3"],
+            disease: "Asthma Attack",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
             checked: false,
-            notes: "",
         },
         {
-            disease: "Disease4",
-            treatments: ["Med1", "Med2", "Med3"],
+            disease: "Heart Attack",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
             checked: false,
-            notes: "",
         },
         {
-            disease: "Disease5",
-            treatments: ["Med1", "Med2", "Med3"],
+            disease: "Stroke",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
             checked: false,
-            notes: "",
+        },
+        {
+            disease: "Sepsis",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            checked: false,
+        },
+        {
+            disease: "Food Poisoning",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            checked: false,
+        },
+        {
+            disease: "Acute Pancreatitis",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            checked: false,
+        },
+        {
+            disease: "Staph",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            checked: false,
+        },
+        {
+            disease: "Laceration",
+            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            checked: false,
         },
     ];
 </script>
 
-<div class="modal" class:modal-open={isOpen}>
-    <div class="modal-box">
-        <h3 class="font-bold text-3xl">Checklist</h3>
+<main class="text-secondary flex flex-col h-full">
+    <h3 class="font-bold text-3xl">Checklist</h3>
 
-        <!-- Items -->
-        <div class="mt-4 h-80 flex flex-col overflow-auto">
-            {#each items as item}
-                <div class="collapse !pointer-events-none !overflow-visible">
-                    <input
-                        type="checkbox"
-                        class="pointer-events-auto w-10/12"
-                    />
-                    <div
-                        class="collapse-title flex justify-center items-center"
+    <!-- Items -->
+    <div
+        class="mt-4 mx-4 h-80 flex flex-col overflow-auto text-secondary"
+        {...root}
+    >
+        {#each items as { disease, stats, checked }, i}
+            <div
+                {...$item(disease)}
+                use:item
+                class="overflow-hidden transition-colors
+            >
+                <h2
+                    class="flex justify-start items-center {i !== 0 &&
+                        'border-t border-t-neutral-300'}"
+                >
+                    <button
+                        {...$trigger(disease)}
+                        use:trigger
+                        class="flex-1 text-left cursor-pointer"
                     >
-                        <span class="flex flex-col justify-center items-start">
-                            <h3 class="text-lg">{item.disease}</h3>
-                            <div class="font-extralight text-secondary">
-                                {#each item.treatments as treatment}
-                                    <span>{treatment + " "}</span>
-                                {/each}
+                        {disease}
+                    </button>
+                    <input type="checkbox" bind:checked class="ml-auto" />
+                </h2>
+                {#if $isSelected(disease)}
+                    <div
+                        class="content text-sm text-neutral-600 mb-4"
+                        {...$content(disease)}
+                        use:content
+                        transition:slide
+                    >
+                        <div class="py-4 px-8 h-fit flex flex-col">
+                            <div class="flex items-center">
+                                <span>Respiratory Rate</span>
+                                <span class="ml-auto">
+                                    <svelte:component this={stats.rr}
+                                    ></svelte:component>
+                                </span>
                             </div>
-                        </span>
-                        <span class="ml-auto">
-                            <input
-                                type="checkbox"
-                                class="z-100 pointer-events-auto"
-                                bind:checked={item.checked}
-                            />
-                        </span>
-                    </div>
-                    <div class="collapse-content overflow-auto">
-                        <div
-                            class=" h-fit flex justify-center items-center p-4"
-                        >
-                            <textarea
-                                name="paragraph_text"
-                                class="textarea textarea-bordered w-full h-20 py-1 px-2 pointer-events-auto"
-                                bind:value={item.notes}
-                            />
+                            <div class="flex items-center">
+                                <span>Oxygen Saturation</span>
+                                <span class="ml-auto">
+                                    <svelte:component this={stats.os}
+                                    ></svelte:component>
+                                </span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>Blood Glucose Levels</span>
+                                <span class="ml-auto">
+                                    <svelte:component this={stats.gl}
+                                    ></svelte:component>
+                                </span>
+                            </div>
+                            <div class="flex items-center">
+                                <span>Pain Level</span>
+                                <span class="ml-auto">
+                                    <svelte:component this={stats.pain}
+                                    ></svelte:component>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {/each}
-        </div>
-
-        <div class="modal-action">
-            <button
-                class="btn"
-                on:click={() => {
-                    isOpen = false;
-                    localStorage.setItem("checklist", JSON.stringify(items));
-                }}
-            >
-                Close
-            </button>
-        </div>
+                {/if}
+            </div>
+        {/each}
     </div>
-</div>
+
+    <div class="flex-1 flex flex-col justify-center items-start p-4">
+        <span>Notes:</span>
+        <textarea name="paragraph_text" class="h-full w-full px-4 py-2" />
+    </div>
+</main>

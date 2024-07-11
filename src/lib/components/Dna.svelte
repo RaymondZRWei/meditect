@@ -32,7 +32,7 @@
 
 <!-- Pill -->
 <Shape
-    scale={[0.28, 0.28, 0.28]}
+    scale={[0.25, 0.25, 0.25]}
     position={[-2, -1, 0]}
     rate={1}
     path={"/dna-model/scene.gltf"}

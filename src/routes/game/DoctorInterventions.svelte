@@ -83,7 +83,7 @@
 
                 <button
                     on:click={saveAndGoToDashboard}
-                    class="bg-fuchsia-400 outline-none"
+                    class="bg-primary hover:bg-primary-dark transition-colors px-6 py-4"
                 >
                     Save and Go to Dashboard
                 </button>
@@ -124,7 +124,7 @@
                     on:click={() => {
                         lastHintIndexShown = totalDoctorHints;
                     }}
-                    class="bg-fuchsia-400 outline-none"
+                    class="bg-primary hover:bg-primary-dark transition-colors px-6 py-4"
                 >
                     Close
                 </button>

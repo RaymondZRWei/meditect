@@ -18,7 +18,8 @@
             if (!data) return data;
 
             const storedGame: GameResult = {
-                bloodPressure: $game.bloodPressure,
+                bloodPressureDiastolic: $game.bloodPressureDiastolic,
+                bloodPressureSystolic: $game.bloodPressureSystolic,
                 disease: $game.disease,
                 elapsedTime: $game.elapsedTime,
                 heartRate: $game.heartRate,

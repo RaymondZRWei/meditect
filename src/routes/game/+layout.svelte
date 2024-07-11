@@ -1,6 +1,6 @@
-<main
-    class="max-w-screen-lg mx-auto min-h-screen grid relative bg-orange-400"
+<div
+    class="max-w-screen-lg mx-auto bg-slate-200 h-full grid"
     style="grid-template-rows: auto 1fr auto;"
 >
     <slot />
-</main>
+</div>

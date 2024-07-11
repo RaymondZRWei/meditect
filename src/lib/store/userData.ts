@@ -23,7 +23,12 @@ const initialValue = getInitialValue();
 const userData = writable<StoredUserData>(initialValue);
 
 userData.subscribe((value) => {
-    if (browser && value) {
+    if (browser && value !== undefined) {
+        if (value === null) {
+            window.localStorage.removeItem("userData");
+            return;
+        }
+
         window.localStorage.setItem("userData", JSON.stringify(value));
     }
 });

@@ -11,7 +11,7 @@
 
 <section>
     <h2 class="text-2xl font-semibold">Treatments</h2>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-2">
         {#each Object.values(medicines) as medicine}
             <div class="flex gap-3">
                 <div>

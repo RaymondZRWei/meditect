@@ -2,12 +2,6 @@ import type { Test } from "../types";
 
 export const tests: Test[] = [
     {
-        name: "Thermometer",
-        description: "Measures the patient's temperature.",
-        queriedSymptoms: ["temperature"],
-        duration: 1,
-    },
-    {
         name: "Oximeter",
         description: "Measures the patient's oxygen saturation.",
         queriedSymptoms: ["oxygenSaturation"],

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { type ComponentType } from "svelte";
 
-    import Fa6SolidHouse from "~icons/fa6-solid/house";
+    import MaterialSymbolsSearchInsights from "~icons/material-symbols/search-insights";
     import PhJarLabelFill from "~icons/ph/jar-label-fill";
     import F7Dial from "~icons/f7/dial";
     import MaterialSymbolsAlarm from "~icons/material-symbols/alarm";
@@ -28,7 +28,7 @@
     const pages: Page[] = [
         {
             name: "Symptoms",
-            icon: Fa6SolidHouse,
+            icon: MaterialSymbolsSearchInsights,
         },
         {
             name: "Treatments",
@@ -82,9 +82,14 @@
             1,
         );
         gameData.bloodGlucose = varyAndRound(gameData.bloodGlucose, -2, 2);
-        gameData.temperature = varyAndRound(gameData.temperature, -1, 1);
-        gameData.bloodPressure.value = varyAndRound(
-            gameData.bloodPressure.value,
+        gameData.bloodPressureSystolic.value = varyAndRound(
+            gameData.bloodPressureSystolic.value,
+            -2,
+            2,
+        );
+
+        gameData.bloodPressureDiastolic.value = varyAndRound(
+            gameData.bloodPressureDiastolic.value,
             -2,
             2,
         );
@@ -108,7 +113,7 @@
 {:else if $game === null}
     <Dashboard />
 {:else}
-    <div class="flex gap-3">
+    <div class="flex gap-3 h-full">
         <Stat
             title="Heart Rate"
             value={$game.heartRate.value}
@@ -116,19 +121,32 @@
             symbol={MaterialSymbolsMonitorHeart}
         />
         <Stat
-            title="Blood Pressure"
-            value={$game.bloodPressure.value}
+            title="Blood Pressure Systolic"
+            value={$game.bloodPressureSystolic.value}
+            tooltip="This pops up on hover"
+            symbol={F7Dial}
+        />
+        <Stat
+            title="Blood Pressure Diastolic"
+            value={$game.bloodPressureDiastolic.value}
             tooltip="This pops up on hover"
             symbol={F7Dial}
         />
 
-        <button on:click={increaseElapsedTime}>
-            <Stat
-                title="Elapsed Time"
-                value={$game.elapsedTime}
-                tooltip="This pops up on hover"
-                symbol={MaterialSymbolsAlarm}
-            />
+        <button
+            on:click={increaseElapsedTime}
+            class="bg-blue-500 w-full rounded-lg p-6 flex justify-between"
+        >
+            <div class="flex flex-col bg-orange-400 items-start">
+                <div class="text-white">Elapsed Time</div>
+                <div class="text-slate-500">
+                    {$game.elapsedTime} minutes
+                </div>
+            </div>
+
+            <div>
+                <MaterialSymbolsAlarm class="size-8 opacity-60" />
+            </div>
         </button>
     </div>
 
@@ -155,7 +173,7 @@
             >
                 <svelte:component
                     this={page.icon}
-                    class="size-6 opacity-90 mx-auto mb-0.5"
+                    class="size-7 opacity-90 mx-auto mb-1"
                 />
                 <span>{page.name}</span>
             </button>

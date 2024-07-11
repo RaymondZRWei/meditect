@@ -1,9 +1,12 @@
-const continuousSymptoms = ["heartRate", "bloodPressure"] as const;
+const continuousSymptoms = [
+    "heartRate",
+    "bloodPressureSystolic",
+    "bloodPressureDiastolic",
+] as const;
 
 export type ContinuousSymptoms = (typeof continuousSymptoms)[number];
 
 export type TestableSymptoms =
-    | "temperature"
     | "oxygenSaturation"
     | "respiratoryRate"
     | "bloodGlucose";

@@ -45,29 +45,38 @@
     {@const { completedDiseases, partiallyCompletedDiseases } =
         getUserCompletedDiseases($userData)}
 
-    <div>
-        <section>
-            <h2>Diseases</h2>
-            <div class="flex flex-col">
-                {#each diseases as disease}
-                    {@const completed = completedDiseases.has(disease.name)}
-                    {@const partiallyCompleted = partiallyCompletedDiseases.has(
-                        disease.name,
-                    )}
-                    <div>
-                        <h2
-                            class="text-lg font-semibold {completed
-                                ? 'bg-green-400'
-                                : partiallyCompleted
-                                  ? 'bg-yellow-400'
-                                  : 'bg-red-400'}"
-                        >
-                            {disease.name}
-                        </h2>
-                    </div>
-                {/each}
-            </div>
-        </section>
-        <button on:click={startGame} class="bg-slate-600">Start Game</button>
+    <div class="mt-16">
+        <h1 class="text-3xl font-bold">Med Ed Dashboard</h1>
+        <div class="flex justify-between gap-10">
+            <section class="grow">
+                <h2>Disease Certifications</h2>
+                <div class="flex flex-col">
+                    {#each diseases as disease}
+                        {@const completed = completedDiseases.has(disease.name)}
+                        {@const partiallyCompleted =
+                            partiallyCompletedDiseases.has(disease.name)}
+                        <div>
+                            <h2
+                                class="text-lg font-semibold {completed
+                                    ? 'bg-green-400'
+                                    : partiallyCompleted
+                                      ? 'bg-yellow-400'
+                                      : 'bg-red-400'}"
+                            >
+                                {disease.name}
+                            </h2>
+                        </div>
+                    {/each}
+                </div>
+            </section>
+            <section class="p-10 bg-slate-300 rounded-lg">
+                <button
+                    on:click={startGame}
+                    class="bg-primary px-6 py-3.5 rounded-lg text-white"
+                >
+                    Start Game
+                </button>
+            </section>
+        </div>
     </div>
 {/if}

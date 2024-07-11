@@ -144,7 +144,7 @@
         <span>Notes:</span>
         <textarea
             name="paragraph_text"
-            class="h-full w-full px-4 py-2 border-solid border-black border-[1px] rounded-sm resize-none"
+            class="h-full w-full px-4 py-2 border-solid border-black border-[1px] text-sm rounded-sm resize-none"
         />
     </div>
 </main>

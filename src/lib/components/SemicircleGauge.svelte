@@ -1,13 +1,10 @@
 <script lang="ts">
-    import { writable, type Writable, derived } from "svelte/store";
-
-    export let value: Writable<number | null> = writable(null);
-    export let defaultValue: number = 25; 
-    export let maxValue: number = 100; 
-    export let width: number = 200; 
-    export let height: number = 100; 
+    export let value: number | null;
+    export let defaultValue: number = 25;
+    export let maxValue: number = 100;
+    export let width: number = 200;
+    export let height: number = 100;
     export let strokeWidth: number = 8;
-
 
     function describeArc(
         x: number,
@@ -64,11 +61,11 @@
     let svgPath: string;
     let color: string;
 
-    const displayValue = derived(value, ($value) =>
-        $value == null ? "?" : $value,
-    );
+    $: updateValue(value);
 
-    $: value.subscribe((val) => {
+    function updateValue(val: number | null) {
+        if (!val) val = maxValue;
+
         const adjustedStartAngle = -25;
         const adjustedEndAngle = 205;
         const endAngle =
@@ -83,8 +80,7 @@
             endAngle,
         );
         color = getColor(val ?? defaultValue);
-    });
-
+    }
 
     let fontSize = Math.min(width, height) / 5;
 </script>
@@ -99,7 +95,11 @@
         font-size={fontSize}
         fill="#000"
     >
-        {$displayValue}
+        {#if value}
+            {value}
+        {:else}
+            ?
+        {/if}
     </text>
 </svg>
 

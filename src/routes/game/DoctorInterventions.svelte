@@ -3,12 +3,22 @@
     import userData from "$lib/store/userData";
     import type { GameResult } from "$lib/types";
     import { createDialog, melt } from "@melt-ui/svelte";
+    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
 
     const {
         elements: { overlay, content, title, description, portalled },
     } = createDialog({
         forceVisible: true,
+    });
+
+    let lastHintIndexShown: number | null = null;
+
+    onMount(() => {
+        if ($game) {
+            lastHintIndexShown =
+                structuredClone($game.doctorHints).length || null;
+        }
     });
 
     const saveAndGoToDashboard = () => {
@@ -34,8 +44,6 @@
 
         game.set(null);
     };
-
-    let lastHintIndexShown = 0;
 </script>
 
 {#if $game}
@@ -63,7 +71,7 @@
                     use:melt={$title}
                     class="m-0 text-lg font-medium text-black"
                 >
-                    Game Over
+                    Treatment Successful
                 </h2>
                 <p
                     use:melt={$description}

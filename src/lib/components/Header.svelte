@@ -20,7 +20,7 @@
 
 <header
     class="py-8 px-12 w-full flex overflow-auto {isPlaying
-        ? 'absolute'
+        ? 'absolute -z-10'
         : 'sticky z-50 bg-transparent'} top-0 justify-between items-center"
 >
     <a href="/" class="flex items-center gap-3">

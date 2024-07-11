@@ -2,10 +2,10 @@
     import { createDialog, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
-    import type { GameData, Test, TestResult } from "$lib/types";
+    import type { GameData, TestResult } from "$lib/types";
     import { tests } from "$lib/data/tests";
-
-    import Tests from "$lib/components/Test.svelte";
+    import Test from "$lib/components/Test.svelte";
+    import Checklist from "$lib/components/Checklist.svelte";
 
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
 
@@ -57,14 +57,44 @@
     };
 </script>
 
-<Tests />
+<div class="grid grid-cols-2">
+    <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
+        <Test
+            title="Respiratory Rate"
+            unit="Breaths per Min"
+            actionMessage="Count"
+            maxValue={30}
+        />
+        <Test
+            title="Oxygen Saturation"
+            unit="% Sp02"
+            actionMessage="Use Pulse Oximetry"
+            maxValue={100}
+        />
+        <Test
+            title="Blood Glucose Level"
+            unit="mg / dL"
+            actionMessage="Use Glucometer"
+            maxValue={100}
+        />
+        <Test
+            title="Pain Level"
+            unit="Scale 0-100"
+            actionMessage="Ask Patient"
+            maxValue={100}
+        />
+    </div>
+    <div class="col-span-1">
+        <Checklist />
+    </div>
+</div>
 
 <div class="h-full p-5">
     <div class="flex items-center justify-between">
         <div>
             <h2>Tests</h2>
         </div>
-        <button use:melt={$trigger} aria-label="New Test" class="outline-none">
+        <button use:melt={$trigger} aria-label="New Test">
             <Fa6SolidPlus class="size-8" />
         </button>
     </div>

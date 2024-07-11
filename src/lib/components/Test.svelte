@@ -27,9 +27,11 @@
     });
 </script>
 
-<div class="grid grid-cols-2 mt-24">
+<div class="grid grid-cols-2">
     <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
-        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
+        <div
+            class="bg-slate-100 min-w-[650px] h-full rounded-lg p-5 flex justify-between mx-8"
+        >
             <div class="gauge">
                 <input
                     type="range"
@@ -56,7 +58,9 @@
             </div>
         </div>
 
-        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
+        <div
+            class="bg-slate-100 min-w-[650px] h-full rounded-lg p-5 flex justify-between mx-8"
+        >
             <div class="gauge">
                 <input
                     type="range"
@@ -83,7 +87,9 @@
             </div>
         </div>
 
-        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
+        <div
+            class="bg-slate-100 min-w-[650px] h-full rounded-lg p-5 flex justify-between mx-8"
+        >
             <div class="gauge">
                 <input
                     type="range"
@@ -110,7 +116,9 @@
             </div>
         </div>
 
-        <div class="flex mx-8 bg-[#cbc3e3] rounded-lg min-w-[650px]">
+        <div
+            class="bg-slate-100 min-w-[650px] h-full rounded-lg p-5 flex justify-between mx-8"
+        >
             <div class="gauge">
                 <input
                     type="range"

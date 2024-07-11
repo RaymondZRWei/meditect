@@ -95,13 +95,13 @@
             <section class="p-8 bg-slate-100 rounded-lg flex flex-col gap-3">
                 <button
                     on:click={startGame}
-                    class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3.5 rounded-lg text-white"
+                    class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
                 >
                     Start Game
                 </button>
                 <button
                     on:click={startGame}
-                    class="bg-secondary hover:bg-secondary-dark transition-colors px-6 py-3.5 rounded-lg text-white"
+                    class="bg-secondary hover:bg-secondary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
                 >
                     Past Games
                 </button>

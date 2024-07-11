@@ -70,21 +70,19 @@
             checked: false,
         },
     ];
+    let text = "";
 </script>
 
-<main class="text-secondary flex flex-col h-full">
-    <h3 class="font-bold text-3xl">Checklist</h3>
+<main class="flex flex-col h-full">
+    <h3 class="text-black font-bold text-3xl">Checklist</h3>
 
     <!-- Items -->
-    <div
-        class="mt-4 mx-4 h-80 flex flex-col overflow-auto text-secondary"
-        {...root}
-    >
+    <div class="mt-4 mx-4 flex flex-col overflow-auto text-slate-600" {...root}>
         {#each items as { disease, stats, checked }, i}
             <div
                 {...$item(disease)}
                 use:item
-                class="overflow-hidden transition-colors
+                class="overflow-hidden transition-colors"
             >
                 <h2
                     class="flex justify-start items-center {i !== 0 &&
@@ -101,7 +99,7 @@
                 </h2>
                 {#if $isSelected(disease)}
                     <div
-                        class="content text-sm text-neutral-600 mb-4"
+                        class="content text-sm text-slate-400 mb-4"
                         {...$content(disease)}
                         use:content
                         transition:slide
@@ -144,6 +142,9 @@
 
     <div class="flex-1 flex flex-col justify-center items-start p-4">
         <span>Notes:</span>
-        <textarea name="paragraph_text" class="h-full w-full px-4 py-2" />
+        <textarea
+            name="paragraph_text"
+            class="h-full w-full px-4 py-2 border-solid border-black border-[1px] rounded-sm resize-none"
+        />
     </div>
 </main>

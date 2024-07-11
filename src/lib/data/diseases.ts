@@ -182,34 +182,28 @@ export const diseases: StoredDisease[] = [
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is losing mobility and appears confused.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "A purple hue develop's on the patient's skin from cyanosis.",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient was found near an empty pill bottle before hospitalized",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -243,7 +237,7 @@ export const diseases: StoredDisease[] = [
                 respiratoryRate: 22 + Math.round(Math.random() * 3) - 2,
                 pain: 60 + Math.round(Math.random() * 20) / 2,
                 qualitativeSymptoms: [
-                    "The patient suffers from intense chest pain and has difficulty breathing",
+                    "The patient suffers from intense chest pain and difficulty breathing.",
                 ],
                 doctorHints: [],
                 doctorIntervention: null,
@@ -252,7 +246,7 @@ export const diseases: StoredDisease[] = [
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
-            const opioidLevel = game.disease.arbitraryValues.opioid;
+            const opioidLevel = game.disease.arbitraryValues.pulmonar;
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
 
@@ -272,54 +266,53 @@ export const diseases: StoredDisease[] = [
                     timeSinceLastUpdate,
                     2,
                 );
+                game.bloodPressureSystolic.value = moveSymptomTowardsValue(
+                    game.bloodPressureSystolic.value,
+                    timeSinceLastUpdate,
+                    70,
+                );
+                game.bloodPressureDiastolic.value = moveSymptomTowardsValue(
+                    game.bloodPressureDiastolic.value,
+                    timeSinceLastUpdate,
+                    35,
+                );
             } else {
                 game.finished = true;
                 return game;
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens.",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: Reports show the patient recently returned from a long flight.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: The symptoms resemble effects of blood clotting",
                 );
             }
 
@@ -388,48 +381,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -498,48 +480,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -608,48 +579,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -718,48 +678,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -828,48 +777,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -938,48 +876,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -1048,48 +975,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 
@@ -1158,48 +1074,37 @@ export const diseases: StoredDisease[] = [
             }
 
             // Intervention check
-            if (
-                (opioidLevel > 60 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 30)) ||
-                (opioidLevel > 0 &&
-                    isFirstTimeAboveElapsedTime(game, prevGame, 60))
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "You did not treat the patient in time, they are in critical condition. The head doctor intervened and administered a dose of naloxone.";
+                    "The patient suffers from excrutiating pain. The head doctor intervenes and administers a dose of rivaroxaban.";
                 game.finished = true;
 
                 return game;
             }
 
             // TODO: move these to use arbitrary value
-            if (game.respiratoryRate < 10) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient has shallow breathing.",
+                    "The patient is sweating heavily and their skin becomes pale.",
                 );
             }
 
-            if (game.oxygenSaturation < 90) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game = addQualitativeSymptom(
                     game,
-                    "The patient's lip appears to be turning blue.",
+                    "The patient complains that chest pain worsens",
                 );
             }
 
             // Hint check
-            if (
-                game.respiratoryRate < 10 &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 20)
-            ) {
+            if (isFirstTimeAboveElapsedTime(game, prevGame, 10)) {
                 game.doctorHints.push(
-                    "A depressant must be causing the patient's respiratory rate to be low.",
+                    "Hint: The patient has had a history of cardiac issues.",
                 );
-            } else if (
-                game.oxygenSaturation &&
-                isFirstTimeAboveElapsedTime(game, prevGame, 35)
-            ) {
+            } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Try checking the patient's respiratory rate or oxygen saturation.",
+                    "Hint: Patient has a history of prescription pain medication usage.",
                 );
             }
 

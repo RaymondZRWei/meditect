@@ -46,9 +46,9 @@
 
             <button
                 on:click={createNewUser}
-                class="bg-fuchsia-400 outline-none"
+                class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3 outline-none rounded-lg text-white"
             >
-                Start
+                Close
             </button>
         </div>
     </div>

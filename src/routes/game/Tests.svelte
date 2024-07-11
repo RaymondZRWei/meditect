@@ -5,6 +5,8 @@
     import type { GameData, Test, TestResult } from "$lib/types";
     import { tests } from "$lib/data/tests";
 
+    import Tests from "$lib/components/Test.svelte";
+
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
 
     export let game: GameData;
@@ -55,12 +57,14 @@
     };
 </script>
 
+<Tests />
+
 <div class="h-full p-5">
     <div class="flex items-center justify-between">
         <div>
             <h2>Tests</h2>
         </div>
-        <button use:melt={$trigger} aria-label="New Test">
+        <button use:melt={$trigger} aria-label="New Test" class="outline-none">
             <Fa6SolidPlus class="size-8" />
         </button>
     </div>
@@ -114,7 +118,7 @@
             <div class="flex flex-col gap-3">
                 {#each tests as test}
                     <button
-                        class="text-left"
+                        class="text-left outline-none"
                         class:bg-fuchsia-400={selectedTest === test}
                         on:click={() => (selectedTest = test)}
                     >
@@ -124,12 +128,13 @@
             </div>
 
             <div>
-                <button use:melt={$close}>Close</button>
+                <button class="outline-none" use:melt={$close}>Close</button>
 
                 {#if selectedTest}
                     <button
                         on:click={() => adminsterTest(selectedTest)}
                         use:melt={$close}
+                        class="outline-none"
                     >
                         Administer
                     </button>

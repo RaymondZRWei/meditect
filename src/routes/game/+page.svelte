@@ -1,22 +1,24 @@
 <script lang="ts">
     import { type ComponentType } from "svelte";
 
+    import game from "$lib/store/game";
+    import { diseases } from "$lib/data/diseases";
+    import type { GameData } from "$lib/types";
+
     import MaterialSymbolsSearchInsights from "~icons/material-symbols/search-insights";
     import PhJarLabelFill from "~icons/ph/jar-label-fill";
     import F7Dial from "~icons/f7/dial";
     import MaterialSymbolsAlarm from "~icons/material-symbols/alarm";
     import MaterialSymbolsMonitorHeart from "~icons/material-symbols/monitor-heart";
     import MaterialSymbolsAddChart from "~icons/material-symbols/add-chart";
+    import Fa6SolidPlus from "~icons/fa6-solid/plus";
 
     import Stat from "$lib/components/Stat.svelte";
     import Tests from "./Tests.svelte";
     import Treatments from "./Treatments.svelte";
     import Symptoms from "./Symptoms.svelte";
     import Dashboard from "./Dashboard.svelte";
-    import game from "$lib/store/game";
-    import { diseases } from "$lib/data/diseases";
     import DoctorInterventions from "./DoctorInterventions.svelte";
-    import type { GameData } from "$lib/types";
 
     let pageIndex = 0;
 
@@ -114,53 +116,53 @@
     <Dashboard />
 {:else}
     <div class="flex flex-col h-screen justify-between py-6">
-        <div class="flex grow h-full">
-            <section class="flex flex-col gap-3 h-full">
+        <div class="grid grid-cols-9 gap-6 grow h-full">
+            <section class="flex flex-col gap-3 h-full col-span-2">
+                <button
+                    on:click={increaseElapsedTime}
+                    class="bg-slate-100 w-full h-full rounded-lg p-5 flex flex-col justify-between outline-none"
+                >
+                    <div class="text-black font-medium">Elapsed Time</div>
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex items-end gap-1 text-slate-600">
+                            <span class="text-5xl font-extrabold">
+                                {$game.elapsedTime}
+                            </span>
+                            <span class="text-base">minutes</span>
+                        </div>
+                        <button
+                            class="outline-none"
+                            aria-label="Increment Time"
+                        >
+                            <Fa6SolidPlus class="size-8 opacity-60" />
+                        </button>
+                    </div>
+                </button>
                 <Stat
                     title="Heart Rate"
                     value={$game.heartRate.value}
                     tooltip="This pops up on hover"
-                    symbol={MaterialSymbolsMonitorHeart}
                 />
                 <Stat
                     title="Blood Pressure Systolic"
                     value={$game.bloodPressureSystolic.value}
                     tooltip="This pops up on hover"
-                    symbol={F7Dial}
                 />
                 <Stat
                     title="Blood Pressure Diastolic"
                     value={$game.bloodPressureDiastolic.value}
                     tooltip="This pops up on hover"
-                    symbol={F7Dial}
                 />
-
-                <button
-                    on:click={increaseElapsedTime}
-                    class="bg-slate-100 w-full h-full rounded-lg p-6 flex justify-between"
-                >
-                    <div class="flex flex-col text-left justify-between h-full">
-                        <div class="text-black font-medium">Elapsed Time</div>
-                        <div class="flex items-end gap-1 text-slate-600">
-                            <span class="text-4xl font-bold">
-                                {$game.elapsedTime}
-                            </span>
-                            <span class="text-base">minutes</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <MaterialSymbolsAlarm class="size-8 opacity-60" />
-                    </div>
-                </button>
             </section>
-            {#if pageIndex === 0}
-                <Symptoms bind:game={$game} />
-            {:else if pageIndex === 1}
-                <Treatments bind:game={$game} />
-            {:else if pageIndex === 2}
-                <Tests bind:game={$game} />
-            {/if}
+            <div class="h-full col-span-7">
+                {#if pageIndex === 0}
+                    <Symptoms bind:game={$game} />
+                {:else if pageIndex === 1}
+                    <Treatments bind:game={$game} />
+                {:else if pageIndex === 2}
+                    <Tests bind:game={$game} />
+                {/if}
+            </div>
         </div>
 
         <section class="w-full flex items-stretch gap-3 h-min pt-4">
@@ -168,8 +170,8 @@
                 {@const isActivePage = i === pageIndex}
                 <button
                     class="text-center flex flex-col p-4 items-center justify-center rounded-md w-full {isActivePage
-                        ? 'bg-slate-300/80'
-                        : 'bg-slate-100'}"
+                        ? 'bg-slate-200'
+                        : 'bg-slate-50 hover:bg-slate-100'} transition-colors outline-none"
                     on:click={() => {
                         pageIndex = i;
                     }}

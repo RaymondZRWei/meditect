@@ -17,9 +17,12 @@
                 <div>
                     {medicine.name} - {medicine.duration}
                 </div>
-                <button on:click={() => administerMedicine(medicine)}
-                    >Administer</button
+                <button
+                    on:click={() => administerMedicine(medicine)}
+                    class="outline-none"
                 >
+                    Administer
+                </button>
             </div>
         {/each}
     </div>

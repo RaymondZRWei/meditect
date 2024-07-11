@@ -4,8 +4,8 @@
     export let game: GameData;
 </script>
 
-<div class="h-full grid grid-cols-3">
-    <div class="col-span-2">the graphs go here</div>
+<div class="h-full grid grid-cols-3 gap-6">
+    <div class="col-span-2 bg-slate-100 p-6 rounded-lg">the graphs go here</div>
     <div class="bg-slate-600 rounded-lg p-8 col-span-1">
         <h2 class="text-white font-bold text-3xl mb-5">Observations</h2>
         <div class="flex flex-col gap-3 text-slate-200">

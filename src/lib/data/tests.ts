@@ -19,4 +19,10 @@ export const tests: Test[] = [
         queriedSymptoms: ["bloodGlucose"],
         duration: 2,
     },
+    {
+        name: "Pain Test",
+        description: "Measures the patient's pain level.",
+        queriedSymptoms: ["pain"],
+        duration: 2,
+    },
 ];

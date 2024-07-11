@@ -55,6 +55,21 @@
             ...game.testResults,
         ];
     };
+
+    let rr;
+
+    $: if (game.testResults) {
+        game.testResults.forEach((testResult) => {
+            if (testResult.testName === tests[0].name) {
+                rr = testResult.results.respiratoryRate;
+                console.log(typeof(testResult.results))
+            }
+        });
+    }
+
+    let os;
+    let gl;
+    let pl;
 </script>
 
 <div class="grid grid-cols-2">
@@ -64,24 +79,29 @@
             unit="Breaths per Min"
             actionMessage="Count"
             maxValue={30}
+            value={rr}
+            onclick={() => adminsterTest(tests[0])}
         />
         <TestButton
             title="Oxygen Saturation"
             unit="% Sp02"
             actionMessage="Use Pulse Oximetry"
             maxValue={100}
+            onclick={() => adminsterTest(tests[1])}
         />
         <TestButton
             title="Blood Glucose Level"
             unit="mg / dL"
             actionMessage="Use Glucometer"
             maxValue={100}
+            onclick={() => adminsterTest(tests[2])}
         />
         <TestButton
             title="Pain Level"
             unit="Scale 0-100"
             actionMessage="Ask Patient"
             maxValue={100}
+            onclick={() => adminsterTest(tests[3])}
         />
     </div>
     <div class="col-span-1">
@@ -101,7 +121,7 @@
     {#if game.testResults.length === 0}
         <p>No tests administered yet.</p>
     {:else}
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3 overflow-auto max-h-28">
             {#each game.testResults as test}
                 <div class="flex justify-between bg-red-300">
                     <div>

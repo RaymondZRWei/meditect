@@ -1,16 +1,22 @@
 <script lang="ts">
+    import userData from "$lib/store/userData";
     import { createDialog, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
     const {
         elements: { overlay, content, title, description, close, portalled },
-        states: { open },
     } = createDialog({
         forceVisible: true,
     });
+
+    const createNewUser = () => {
+        userData.set({
+            games: [],
+        });
+    };
 </script>
 
-{#if $open}
+{#if $userData === null}
     <div use:melt={$portalled}>
         <div
             use:melt={$overlay}
@@ -27,16 +33,23 @@
             use:melt={$content}
         >
             <h2 use:melt={$title} class="m-0 text-lg font-medium text-black">
-                Edit profile
+                Welcome to Med Ed
             </h2>
             <p
                 use:melt={$description}
                 class="mb-5 mt-2 leading-normal text-zinc-600"
             >
-                Make changes to your profile here. Click save when you're done.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Pariatur molestiae quo quod expedita magnam animi quidem fuga.
+                Beatae, ea in.
             </p>
 
-            <button use:melt={$close} class="bg-fuchsia-400">Cancel</button>
+            <button
+                on:click={createNewUser}
+                class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3 outline-none rounded-lg text-white"
+            >
+                Close
+            </button>
         </div>
     </div>
 {/if}

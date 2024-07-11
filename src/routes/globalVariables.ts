@@ -13,25 +13,33 @@ interface affliction {
   testResultsBloodGlucoseLevels: number[];
   testResultsPainLevel: number[];
 }
-
 export let currentAffliction: affliction;
-
 function giveAffliction() {
   let rand = Math.floor(Math.random() * 10);
   if (rand == 0) {
     currentAffliction.name = "Opioid Overdose";
     currentAffliction.responseHR[0] = Math.round(50 + Math.random() * 10);
-    currentAffliction.responseBP1[0] = Math.round(100 + Math.random() * 10 - 7);
-    currentAffliction.responseBP2[0] = Math.round(60 + Math.random() * 6 - 4);
+    currentAffliction.responseBP1[0] = Math.round(
+      100 + Math.random() * 10 - 7,
+    );
+    currentAffliction.responseBP2[0] = Math.round(
+      60 + Math.random() * 6 - 4,
+    );
 
     currentAffliction.responseHR[1] = Math.round(35 + Math.random() * 10);
-    currentAffliction.responseBP1[1] = Math.round(80 + Math.random() * 10 - 7);
-    currentAffliction.responseBP2[1] = Math.round(45 + Math.random() * 6 - 4);
+    currentAffliction.responseBP1[1] = Math.round(
+      80 + Math.random() * 10 - 7,
+    );
+    currentAffliction.responseBP2[1] = Math.round(
+      45 + Math.random() * 6 - 4,
+    );
 
-
-    currentAffliction.responseHR[2] = currentAffliction.responseHR[1] - Math.round(Math.random() * 10);
-    currentAffliction.responseBP1[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 10);
-    currentAffliction.responseBP2[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 6);
+    currentAffliction.responseHR[2] =
+      currentAffliction.responseHR[1] - Math.round(Math.random() * 10);
+    currentAffliction.responseBP1[2] =
+      currentAffliction.responseBP1[1] - Math.round(Math.random() * 10);
+    currentAffliction.responseBP2[2] =
+      currentAffliction.responseBP1[1] - Math.round(Math.random() * 6);
 
     currentAffliction.responseQualitative[0].push("Pale skin");
     currentAffliction.responseQualitative[0].push("Shallow breaths");
@@ -40,17 +48,25 @@ function giveAffliction() {
     currentAffliction.responseQualitative[1].push("Unconscious");
     currentAffliction.responseQualitative[1].push("Cyanosis");
 
-    currentAffliction.responseQualitative[2].push("Completely unresponsive");
+    currentAffliction.responseQualitative[2].push(
+      "Completely unresponsive",
+    );
 
     currentAffliction.effectiveCures.push("placeholder");
 
-    currentAffliction.testResultsRespiratoryRate[0] = 12 + Math.round(Math.random() * 3) - 2;
-    currentAffliction.testResultsRespiratoryRate[1] = 7 + Math.round(Math.random() * 3);
-    currentAffliction.testResultsRespiratoryRate[2] = 2 + Math.round(Math.random() * 6);
+    currentAffliction.testResultsRespiratoryRate[0] =
+      12 + Math.round(Math.random() * 3) - 2;
+    currentAffliction.testResultsRespiratoryRate[1] =
+      7 + Math.round(Math.random() * 3);
+    currentAffliction.testResultsRespiratoryRate[2] =
+      2 + Math.round(Math.random() * 6);
 
-    currentAffliction.testResultsOxygenSaturation[0] = 95 - Math.round(Math.random() * 10);
-    currentAffliction.testResultsOxygenSaturation[1] = 85 - Math.round(Math.random() * 7);
-    currentAffliction.testResultsOxygenSaturation[2] = 75 - Math.round(Math.random() * 5);
+    currentAffliction.testResultsOxygenSaturation[0] =
+      95 - Math.round(Math.random() * 10);
+    currentAffliction.testResultsOxygenSaturation[1] =
+      85 - Math.round(Math.random() * 7);
+    currentAffliction.testResultsOxygenSaturation[2] =
+      75 - Math.round(Math.random() * 5);
 
     currentAffliction.testResultsBloodGlucoseLevels[0] = 70 + Math.round(Math.random() * 30);
     currentAffliction.testResultsBloodGlucoseLevels[1] = 70 + Math.round(Math.random() * 30);
@@ -66,13 +82,23 @@ function giveAffliction() {
     currentAffliction.responseBP2[0] = Math.round(90 - Math.random() * 4);
 
     currentAffliction.responseHR[1] = Math.round(130 + Math.random() * 10);
-    currentAffliction.responseBP1[1] = Math.round(160 + Math.random() * 10 - 7);
+    currentAffliction.responseBP1[1] = Math.round(
+      160 + Math.random() * 10 - 7,
+    );
     currentAffliction.responseBP2[1] = Math.round(100 + Math.random() * 7);
 
-
-    currentAffliction.responseHR[2] = currentAffliction.responseHR[1] - Math.round(Math.random() * 10) - 100;
-    currentAffliction.responseBP1[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 10) - 90;
-    currentAffliction.responseBP2[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 6) - 55;
+    currentAffliction.responseHR[2] =
+      currentAffliction.responseHR[1] -
+      Math.round(Math.random() * 10) -
+      100;
+    currentAffliction.responseBP1[2] =
+      currentAffliction.responseBP1[1] -
+      Math.round(Math.random() * 10) -
+      90;
+    currentAffliction.responseBP2[2] =
+      currentAffliction.responseBP1[1] -
+      Math.round(Math.random() * 6) -
+      55;
 
     currentAffliction.responseQualitative[0].push("Intense chest pain");
     currentAffliction.responseQualitative[0].push("Pale skin");
@@ -82,25 +108,37 @@ function giveAffliction() {
     currentAffliction.responseQualitative[0].push("Difficulty breathing");
     currentAffliction.responseQualitative[0].push("Confusion");
 
-    currentAffliction.responseQualitative[1].push("Excruciating chest pain");
+    currentAffliction.responseQualitative[1].push(
+      "Excruciating chest pain",
+    );
     currentAffliction.responseQualitative[1].push("Cyanosis");
     currentAffliction.responseQualitative[1].push("Extreme distress");
-    currentAffliction.responseQualitative[1].push("Breathing becomes more difficult");
+    currentAffliction.responseQualitative[1].push(
+      "Breathing becomes more difficult",
+    );
     currentAffliction.responseQualitative[1].push("Extreme sweating");
 
-    currentAffliction.responseQualitative[2].push("Completely unresponsive");
+    currentAffliction.responseQualitative[2].push(
+      "Completely unresponsive",
+    );
     currentAffliction.responseQualitative[2].push("Agonal breathing");
     currentAffliction.responseQualitative[1].push("Cyanosis worsens");
 
     currentAffliction.effectiveCures.push("placeholder");
 
-    currentAffliction.testResultsRespiratoryRate[0] = 22 + Math.round(Math.random() * 3) - 2;
-    currentAffliction.testResultsRespiratoryRate[1] = 24 + Math.round(Math.random() * 3);
-    currentAffliction.testResultsRespiratoryRate[2] = 5 + Math.round(Math.random() * 2);
+    currentAffliction.testResultsRespiratoryRate[0] =
+      22 + Math.round(Math.random() * 3) - 2;
+    currentAffliction.testResultsRespiratoryRate[1] =
+      24 + Math.round(Math.random() * 3);
+    currentAffliction.testResultsRespiratoryRate[2] =
+      5 + Math.round(Math.random() * 2);
 
-    currentAffliction.testResultsOxygenSaturation[0] = 90 - Math.round(Math.random() * 10);
-    currentAffliction.testResultsOxygenSaturation[1] = 80 - Math.round(Math.random() * 7);
-    currentAffliction.testResultsOxygenSaturation[2] = 70 - Math.round(Math.random() * 5);
+    currentAffliction.testResultsOxygenSaturation[0] =
+      90 - Math.round(Math.random() * 10);
+    currentAffliction.testResultsOxygenSaturation[1] =
+      80 - Math.round(Math.random() * 7);
+    currentAffliction.testResultsOxygenSaturation[2] =
+      70 - Math.round(Math.random() * 5);
 
     currentAffliction.testResultsBloodGlucoseLevels[0] = 70 + Math.round(Math.random() * 30);
     currentAffliction.testResultsBloodGlucoseLevels[1] = 70 + Math.round(Math.random() * 30);
@@ -116,13 +154,23 @@ function giveAffliction() {
     currentAffliction.responseBP2[0] = Math.round(90 - Math.random() * 4);
 
     currentAffliction.responseHR[1] = Math.round(130 + Math.random() * 10);
-    currentAffliction.responseBP1[1] = Math.round(170 + Math.random() * 10 - 7);
+    currentAffliction.responseBP1[1] = Math.round(
+      170 + Math.random() * 10 - 7,
+    );
     currentAffliction.responseBP2[1] = Math.round(105 + Math.random() * 7);
 
-
-    currentAffliction.responseHR[2] = currentAffliction.responseHR[1] - Math.round(Math.random() * 10) - 100;
-    currentAffliction.responseBP1[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 10) - 90;
-    currentAffliction.responseBP2[2] = currentAffliction.responseBP1[1] - Math.round(Math.random() * 6) - 55;
+    currentAffliction.responseHR[2] =
+      currentAffliction.responseHR[1] -
+      Math.round(Math.random() * 10) -
+      100;
+    currentAffliction.responseBP1[2] =
+      currentAffliction.responseBP1[1] -
+      Math.round(Math.random() * 10) -
+      90;
+    currentAffliction.responseBP2[2] =
+      currentAffliction.responseBP1[1] -
+      Math.round(Math.random() * 6) -
+      55;
 
     currentAffliction.responseQualitative[0].push("Tightness in chest");
     currentAffliction.responseQualitative[0].push("Wheezing");
@@ -132,18 +180,26 @@ function giveAffliction() {
     currentAffliction.responseQualitative[1].push("Cyanosis");
     currentAffliction.responseQualitative[1].push("Severe gasping");
 
-    currentAffliction.responseQualitative[2].push("Completely unresponsive");
+    currentAffliction.responseQualitative[2].push(
+      "Completely unresponsive",
+    );
     currentAffliction.responseQualitative[1].push("Cyanosis worsens");
 
     currentAffliction.effectiveCures.push("placeholder");
 
-    currentAffliction.testResultsRespiratoryRate[0] = 20 + Math.round(Math.random() * 3) - 2;
-    currentAffliction.testResultsRespiratoryRate[1] = 25 + Math.round(Math.random() * 3);
-    currentAffliction.testResultsRespiratoryRate[2] = 30 - Math.round(Math.random() * 2);
+    currentAffliction.testResultsRespiratoryRate[0] =
+      20 + Math.round(Math.random() * 3) - 2;
+    currentAffliction.testResultsRespiratoryRate[1] =
+      25 + Math.round(Math.random() * 3);
+    currentAffliction.testResultsRespiratoryRate[2] =
+      30 - Math.round(Math.random() * 2);
 
-    currentAffliction.testResultsOxygenSaturation[0] = 92 - Math.round(Math.random() * 10);
-    currentAffliction.testResultsOxygenSaturation[1] = 85 - Math.round(Math.random() * 7);
-    currentAffliction.testResultsOxygenSaturation[2] = 70 - Math.round(Math.random() * 5);
+    currentAffliction.testResultsOxygenSaturation[0] =
+      92 - Math.round(Math.random() * 10);
+    currentAffliction.testResultsOxygenSaturation[1] =
+      85 - Math.round(Math.random() * 7);
+    currentAffliction.testResultsOxygenSaturation[2] =
+      70 - Math.round(Math.random() * 5);
 
     currentAffliction.testResultsBloodGlucoseLevels[0] = 70 + Math.round(Math.random() * 30);
     currentAffliction.testResultsBloodGlucoseLevels[1] = 100 + Math.round(Math.random() * 25);

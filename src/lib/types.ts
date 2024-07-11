@@ -1,6 +1,12 @@
-export type ContinuousSymptoms = "heartRate" | "bloodPressure";
+const continuousSymptoms = [
+    "heartRate",
+    "bloodPressureSystolic",
+    "bloodPressureDiastolic",
+] as const;
+
+export type ContinuousSymptoms = (typeof continuousSymptoms)[number];
+
 export type TestableSymptoms =
-    | "temperature"
     | "oxygenSaturation"
     | "respiratoryRate"
     | "bloodGlucose";
@@ -10,20 +16,65 @@ export type QuantitativeSymptoms = ContinuousSymptoms | TestableSymptoms;
 export interface Test {
     name: string;
     description: string;
-    queriedSymptoms: QuantitativeSymptoms[];
+    queriedSymptoms: TestableSymptoms[];
+    duration: number;
+}
+
+export interface TestResult {
+    testName: string;
+    timeAdministered: number;
+    results: Partial<{ [key in TestableSymptoms]: number }>;
+    duration: number;
 }
 
 export interface Disease {
     name: string;
     arbitraryValues: { [key: string]: number };
-    updateSymptoms: (game: GameData) => GameData;
 }
 
-type QuantitativeSymptomStore = { [key in QuantitativeSymptoms]: number };
+export interface Medicine {
+    name: string;
+    duration: number;
+    updateGame: (game: GameData) => GameData;
+}
 
-export interface GameData extends QuantitativeSymptomStore {
+export interface StoredDisease extends Disease {
+    updateSymptoms: (game: GameData, prevGame: GameData) => GameData;
+    getDefaultGameData: () => GameData;
+}
+
+interface ContinuousSymptomStorage {
+    value: number;
+    prevValues: number[];
+}
+
+type ContinuousSymptomStore = {
+    [key in ContinuousSymptoms]: ContinuousSymptomStorage;
+};
+type TestableSymptomStore = { [key in TestableSymptoms]: number };
+
+export interface GameData extends ContinuousSymptomStore, TestableSymptomStore {
     finished: boolean;
     elapsedTime: number;
-    tests: Test[];
+    testResults: TestResult[];
     disease: Disease;
+    qualitativeSymptoms: string[];
+    pain: number;
+    doctorHints: string[];
+    doctorIntervention: string | null;
 }
+
+export type StoredGameData = GameData | null | undefined;
+
+export interface GameResult extends ContinuousSymptomStore {
+    elapsedTime: number;
+    disease: Disease;
+    doctorHints: string[];
+    doctorIntervention: string | null;
+}
+
+export interface UserData {
+    games: GameResult[];
+}
+
+export type StoredUserData = UserData | null | undefined;

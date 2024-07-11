@@ -2,9 +2,9 @@
     import { createDialog, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
-    import type { GameData, TestResult } from "$lib/types";
+    import type { GameData, Test, TestResult } from "$lib/types";
     import { tests } from "$lib/data/tests";
-    import Test from "$lib/components/Test.svelte";
+    import TestButton from "$lib/components/TestButton.svelte";
     import Checklist from "$lib/components/Checklist.svelte";
 
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
@@ -59,25 +59,25 @@
 
 <div class="grid grid-cols-2">
     <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
-        <Test
+        <TestButton
             title="Respiratory Rate"
             unit="Breaths per Min"
             actionMessage="Count"
             maxValue={30}
         />
-        <Test
+        <TestButton
             title="Oxygen Saturation"
             unit="% Sp02"
             actionMessage="Use Pulse Oximetry"
             maxValue={100}
         />
-        <Test
+        <TestButton
             title="Blood Glucose Level"
             unit="mg / dL"
             actionMessage="Use Glucometer"
             maxValue={100}
         />
-        <Test
+        <TestButton
             title="Pain Level"
             unit="Scale 0-100"
             actionMessage="Ask Patient"

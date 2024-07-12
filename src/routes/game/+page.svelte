@@ -93,14 +93,11 @@
             -2,
             2,
         );
-        if(gameData.pain>100){
-          // console.log("pain 2");
-          gameData.pain = 100;
-        }
-        if(gameData.pain<0){
-          // console.log("pain");
-          gameData.pain = 0;
-        }
+        gameData.pain = Math.max(
+            0,
+            Math.min(varyAndRound(gameData.pain, -2, 2), 100),
+        );
+
         game.set(newGameData);
 
         prevGame = structuredClone(newGameData);

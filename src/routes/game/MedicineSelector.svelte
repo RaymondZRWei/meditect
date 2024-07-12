@@ -1,7 +1,8 @@
 <script lang="ts">
     import { createTooltip, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
-    import type { GameData, Medicine } from "$lib/types";
+
+    import type { Medicine } from "$lib/types";
 
     const {
         elements: { trigger, content, arrow },

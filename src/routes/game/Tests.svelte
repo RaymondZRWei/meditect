@@ -160,7 +160,7 @@
                             {test.testName}
                         </div>
                         <div class="flex gap-10">
-                            {#each Object.entries(test.results) as [symptom, result]}
+                            {#each Object.values(test.results) as result}
                                 {result}
                             {/each}
                         </div>

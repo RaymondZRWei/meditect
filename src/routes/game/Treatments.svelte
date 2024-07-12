@@ -24,10 +24,12 @@
         forceVisible: true,
     });
 
-    const administerMedicine = (medicine: Medicine | null) => {
-        if (!medicine) return;
+    const administerMedicine = () => {
+        if (!selectedMedicine) return;
 
-        game = updateGameWithMedicine(game, medicine);
+        game = updateGameWithMedicine(game, selectedMedicine);
+
+        selectedMedicine = null;
     };
 </script>
 
@@ -47,7 +49,7 @@
             class="bg-primary hover:bg-primary-dark transition-all rounded-lg px-6 py-3.5 text-white disabled:opacity-20 float-right"
             disabled={selectedMedicine === null}
             use:melt={$trigger}
-            on:click={() => administerMedicine(selectedMedicine)}
+            on:click={administerMedicine}
         >
             Administer
         </button>

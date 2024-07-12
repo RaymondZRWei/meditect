@@ -14,10 +14,7 @@
         { name: "About", path: "/about" },
         { name: "Statistics", path: "/stats" },
     ];
-    console.log(routes);
-    let redirect = "/about";
     $: isPlaying = $page.url.pathname.includes("/game") && $game;
-    // $: isPlaying = true;
 </script>
 
 <header
@@ -41,8 +38,8 @@
                         : "text-slate-500"}
                 >
                     {name}
-            </a>
-        {/each}
-    </div>
+                </a>
+            {/each}
+        </div>
     {/if}
 </header>

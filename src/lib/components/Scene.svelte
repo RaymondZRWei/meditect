@@ -3,7 +3,7 @@
     import Dna from "./Dna.svelte";
 </script>
 
-<div class="w-full h-full">
+<div class="w-full aspect-square">
     <Canvas shadows>
         <Dna />
     </Canvas>

@@ -14,24 +14,21 @@
         { name: "About", path: "/about" },
         { name: "Statistics", path: "/stats" },
     ];
-    console.log(routes);
-    let redirect = "/about";
-    $: isPlaying = $page.url.pathname.includes("/game") && $game;
-    // $: isPlaying = true;
+    $: isPlaying = $page.url.pathname.includes("/game");
 </script>
 
 <header
-    class="py-8 px-12 flex overflow-auto {isPlaying
+    class="py-8 px-12 flex overflow-auto {isPlaying && $game !== null
         ? 'absolute'
         : 'sticky z-50 bg-white shadow-md w-full'} top-0 justify-between items-center"
 >
     <a href={routes[0].path} class="flex items-center gap-3">
         <img src={logo} alt="Med Ed Logo" class="size-12" />
-        {#if !isPlaying && $game !== undefined}
-            <div class="mt-2 text-4xl font-bold tracking-tight">Med Ed</div>
+        {#if !isPlaying || $game === null}
+            <div class="text-3xl font-bold tracking-tight">Med Ed</div>
         {/if}
     </a>
-    {#if !isPlaying}
+    {#if !isPlaying || $game === null}
         <div class="flex gap-14 items-center text-lg">
             {#each routes as { name, path }}
                 <a
@@ -41,8 +38,8 @@
                         : "text-slate-500"}
                 >
                     {name}
-            </a>
-        {/each}
-    </div>
+                </a>
+            {/each}
+        </div>
     {/if}
 </header>

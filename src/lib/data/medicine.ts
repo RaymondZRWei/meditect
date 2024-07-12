@@ -3,8 +3,7 @@ import type { GameData, Medicine } from "$lib/types";
 export const medicines: Medicine[] = [
     {
         name: "Naloxone",
-        description:
-            "Blocks the effects of certain stimulants in the brain. Restores normal breathing to those affected.",
+        description: "Blocks the effects of certain stimulants in the brain.",
         duration: 5,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.opioid) return game;

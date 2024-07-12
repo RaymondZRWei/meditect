@@ -16,10 +16,9 @@
     import Symptoms from "./Symptoms.svelte";
     import Dashboard from "./Dashboard.svelte";
     import DoctorInterventions from "./DoctorInterventions.svelte";
+    import Loading from "$lib/components/Loading.svelte";
 
     const CONTINUOUS_DATA_UPDATE_INTERVAL = 5;
-
-    let pageIndex = 0;
 
     interface Page {
         name: string;
@@ -93,14 +92,11 @@
             -2,
             2,
         );
-        if(gameData.pain>100){
-          // console.log("pain 2");
-          gameData.pain = 100;
-        }
-        if(gameData.pain<0){
-          // console.log("pain");
-          gameData.pain = 0;
-        }
+        gameData.pain = Math.max(
+            0,
+            Math.min(varyAndRound(gameData.pain, -2, 2), 100),
+        );
+
         game.set(newGameData);
 
         prevGame = structuredClone(newGameData);
@@ -116,7 +112,7 @@
 <DoctorInterventions />
 
 {#if $game === undefined}
-    <div>Loading Game...</div>
+    <Loading />
 {:else if $game === null}
     <Dashboard />
 {:else}
@@ -162,11 +158,11 @@
                 />
             </section>
             <div class="h-full col-span-3">
-                {#if pageIndex === 0}
+                {#if $game.pageIndex === 0}
                     <Symptoms bind:game={$game} />
-                {:else if pageIndex === 1}
+                {:else if $game.pageIndex === 1}
                     <Treatments bind:game={$game} />
-                {:else if pageIndex === 2}
+                {:else if $game.pageIndex === 2}
                     <Tests bind:game={$game} />
                 {/if}
             </div>
@@ -174,13 +170,15 @@
 
         <section class="w-full flex items-stretch gap-3 h-min pt-4">
             {#each pages as page, i}
-                {@const isActivePage = i === pageIndex}
+                {@const isActivePage = i === $game.pageIndex}
                 <button
                     class="text-center flex flex-col p-4 items-center justify-center rounded-xl w-full {isActivePage
                         ? 'bg-slate-200'
                         : 'bg-slate-50 hover:bg-slate-100'} transition-colors outline-none"
                     on:click={() => {
-                        pageIndex = i;
+                        if (!$game) return;
+
+                        $game.pageIndex = i;
                     }}
                 >
                     <svelte:component

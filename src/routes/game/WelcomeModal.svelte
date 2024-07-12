@@ -4,7 +4,7 @@
     import { fade } from "svelte/transition";
 
     const {
-        elements: { overlay, content, title, description, close, portalled },
+        elements: { overlay, content, title, description, portalled },
     } = createDialog({
         forceVisible: true,
     });

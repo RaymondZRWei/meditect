@@ -1,10 +1,10 @@
 <script lang="ts">
+    import { fade } from "svelte/transition";
+    import { createDialog, melt } from "@melt-ui/svelte";
+
     import game from "$lib/store/game";
     import userData from "$lib/store/userData";
     import type { GameResult } from "$lib/types";
-    import { createDialog, melt } from "@melt-ui/svelte";
-    import { onMount } from "svelte";
-    import { fade } from "svelte/transition";
 
     const {
         elements: { overlay, content, title, description, portalled },

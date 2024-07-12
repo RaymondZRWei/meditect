@@ -94,7 +94,7 @@
     }
 </script>
 
-<div class="bg-slate-100 p-8 rounded-xl h-full">
+<div class="bg-slate-100 p-10 rounded-xl h-full">
     <h2 class="text-3xl font-bold mb-4">Tests</h2>
 
     <div class="grid grid-cols-2">
@@ -133,7 +133,15 @@
             />
         </div>
         <div class="col-span-1">
-            <Checklist bind:game />
+            <Checklist />
+            <!-- <div class="flex-1 flex flex-col justify-center items-start p-4">
+                <span>Notes:</span>
+                <textarea
+                    name="paragraph_text"
+                    class="h-full w-full px-2 py-1 border-solid border-black border-[1px] text-sm rounded-sm resize-none"
+                    bind:value={game.notes}
+                />
+            </div> -->
         </div>
     </div>
 
@@ -160,7 +168,7 @@
                             {test.testName}
                         </div>
                         <div class="flex gap-10">
-                            {#each Object.entries(test.results) as [symptom, result]}
+                            {#each Object.values(test.results) as result}
                                 {result}
                             {/each}
                         </div>

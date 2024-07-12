@@ -6,13 +6,13 @@
     export let height: number = 100;
     export let strokeWidth: number = 8;
 
-    function describeArc(
+    const describeArc = (
         x: number,
         y: number,
         radius: number,
         startAngle: number,
         endAngle: number,
-    ): string {
+    ): string => {
         const start = polarToCartesian(x, y, radius, endAngle);
         const end = polarToCartesian(x, y, radius, startAngle);
 
@@ -33,21 +33,21 @@
         ].join(" ");
 
         return d;
-    }
+    };
 
-    function polarToCartesian(
+    const polarToCartesian = (
         centerX: number,
         centerY: number,
         radius: number,
         angleInDegrees: number,
-    ): { x: number; y: number } {
+    ): { x: number; y: number } => {
         const angleInRadians = ((angleInDegrees - 180) * Math.PI) / 180.0;
 
         return {
             x: centerX + radius * Math.cos(angleInRadians),
             y: centerY + radius * Math.sin(angleInRadians),
         };
-    }
+    };
 
     function getColor(value: number): string {
         const r = Math.min(255, Math.floor(255 * (value / maxValue)));
@@ -63,7 +63,7 @@
 
     $: updateValue(value);
 
-    function updateValue(val: number | null) {
+    const updateValue = (val: number | null) => {
         if (!val) val = maxValue;
 
         const adjustedStartAngle = -25;
@@ -80,7 +80,7 @@
             endAngle,
         );
         color = getColor(val ?? defaultValue);
-    }
+    };
 
     let fontSize = Math.min(width, height) / 5;
 </script>

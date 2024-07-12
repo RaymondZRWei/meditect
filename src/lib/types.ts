@@ -1,4 +1,4 @@
-const continuousSymptoms = [
+export const continuousSymptoms = [
     "heartRate",
     "bloodPressureSystolic",
     "bloodPressureDiastolic",
@@ -35,6 +35,7 @@ export interface Disease {
 
 export interface Medicine {
     name: string;
+    description: "";
     duration: number;
     updateGame: (game: GameData) => GameData;
 }

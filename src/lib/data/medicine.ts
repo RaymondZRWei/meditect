@@ -3,6 +3,7 @@ import type { GameData, Medicine } from "$lib/types";
 export const medicines: Medicine[] = [
     {
         name: "Antibiotics",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -13,6 +14,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Naloxone",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.opioid) return game;
@@ -23,6 +25,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Morphine",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             // // Side effect if opioid is not present
@@ -38,6 +41,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Rivaroxaban",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.opioid) return game;
@@ -48,6 +52,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Heparin",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -57,6 +62,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Warfarin",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -66,6 +72,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Thrombolytics",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -75,6 +82,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Fibrinolytics",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -84,6 +92,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Nitroglycerin",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -93,6 +102,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Intravenous Crystalloid IV",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -102,6 +112,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Loperamide",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -111,6 +122,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Ondansetron",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -120,6 +132,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Nafcillin",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -129,6 +142,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Vancomycin",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -138,6 +152,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Ibuprofen",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -147,6 +162,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Acetaminophen",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;
@@ -156,6 +172,7 @@ export const medicines: Medicine[] = [
     },
     {
         name: "Tetanus Prophylaxis",
+        description: "",
         duration: 5,
         updateGame: (game) => {
             game.disease.arbitraryValues.opioid += 50;

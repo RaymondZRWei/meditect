@@ -16,7 +16,7 @@ interface affliction {
 }
 export let currentAffliction: affliction;
 function giveAffliction() {
-  let rand = Math.floor(Math.random() * 10);
+  const rand = Math.floor(Math.random() * 10);
   if (rand == 0) {
     currentAffliction.name = "Opioid Overdose";
     currentAffliction.responseHR[0] = Math.round(50 + Math.random() * 10);

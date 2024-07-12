@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { createAccordion, melt } from "@melt-ui/svelte";
+    import { createAccordion } from "@melt-ui/svelte";
     import { slide } from "svelte/transition";
 
     import IconDoubleUp from "~icons/material-symbols/keyboard-double-arrow-up-rounded";
-    import IconUp from '~icons/material-symbols/keyboard-arrow-up-rounded'
+    import IconUp from "~icons/material-symbols/keyboard-arrow-up-rounded";
     import IconDoubleDown from "~icons/material-symbols/keyboard-double-arrow-down-rounded";
-    import IconDown from '~icons/material-symbols/keyboard-arrow-down-rounded'
+    import IconDown from "~icons/material-symbols/keyboard-arrow-down-rounded";
     import IconConstant from "~icons/oui/token-constant";
     import { onMount } from "svelte";
 
@@ -119,20 +119,19 @@
         },
     ];
 
-
     let text = "";
     onMount(() => {
-        let txt = localStorage.getItem("notes")
+        let txt = localStorage.getItem("notes");
         if (txt) text = txt;
 
         let data = localStorage.getItem("checklist");
         if (data) {
-            let parsedData = JSON.parse(data)
+            let parsedData = JSON.parse(data);
             parsedData.forEach((disease, i: number) => {
                 items[i].checked = disease.checked;
             });
         }
-    })
+    });
 
     function saveNotes(txt: string) {
         localStorage.setItem("notes", txt);
@@ -163,7 +162,12 @@
                     >
                         {disease}
                     </button>
-                    <input type="checkbox" bind:checked on:input={() => saveChecklist(items)} class="ml-auto" />
+                    <input
+                        type="checkbox"
+                        bind:checked
+                        on:input={() => saveChecklist(items)}
+                        class="ml-auto"
+                    />
                 </h2>
                 {#if $isSelected(disease)}
                     <div

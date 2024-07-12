@@ -116,8 +116,21 @@
 {:else if $game === null}
     <Dashboard />
 {:else}
-    <div class="flex flex-col h-screen justify-between py-9">
-        <div class="grid grid-cols-4 gap-6 grow h-full">
+    <div class="flex flex-col h-screen justify-between py-8">
+        <div
+            class="bg-slate-100 w-full p-4 rounded-xl mb-3 flex justify-between items-center"
+        >
+            <div class="text-lg font-medium pl-4">Bob Baker (45 years old)</div>
+            <button
+                class="bg-red-500 hover:bg-red-600 transition-colors px-6 py-3 text-white rounded-lg"
+                on:click={() => {
+                    game.set(null);
+                }}
+            >
+                Leave Game
+            </button>
+        </div>
+        <div class="grid grid-cols-4 gap-4 grow h-full">
             <section class="flex flex-col gap-3 h-full col-span-1">
                 <Stat
                     title="Elapsed Time"
@@ -168,11 +181,11 @@
             </div>
         </div>
 
-        <section class="w-full flex items-stretch gap-3 h-min pt-4">
+        <section class="w-full flex items-stretch gap-4 h-min pt-4">
             {#each pages as page, i}
                 {@const isActivePage = i === $game.pageIndex}
                 <button
-                    class="text-center flex flex-col p-4 items-center justify-center rounded-xl w-full {isActivePage
+                    class="text-center flex flex-col p-3.5 items-center justify-center rounded-xl w-full {isActivePage
                         ? 'bg-slate-200'
                         : 'bg-slate-50 hover:bg-slate-100'} transition-colors outline-none"
                     on:click={() => {
@@ -183,7 +196,7 @@
                 >
                     <svelte:component
                         this={page.icon}
-                        class="size-7 opacity-90 mx-auto mb-1"
+                        class="size-6 opacity-90 mx-auto mb-0.5"
                     />
                     <span>{page.name}</span>
                 </button>

@@ -46,10 +46,9 @@
         game.elapsedTime += selectedTest.duration;
     };
 
-    // Function to find the latest value of a symptom
-    function findLatestSymptomValue(
+    const findLatestSymptomValue = (
         symptom: TestableSymptoms,
-    ): number | undefined {
+    ): number | undefined => {
         for (let i = game.testResults.length - 1; i >= 0; i--) {
             let result = game.testResults[i].results[symptom];
             if (result) {
@@ -57,7 +56,7 @@
             }
         }
         return undefined;
-    }
+    };
 
     let latestRespiratoryRate: number | undefined;
     let latestOxygenSaturation: number | undefined;
@@ -95,10 +94,10 @@
 </script>
 
 <div class="bg-slate-100 p-10 rounded-xl h-full">
-    <h2 class="text-3xl font-bold mb-4">Tests</h2>
+    <h2 class="text-3xl font-bold mb-6">Tests</h2>
 
-    <div class="grid grid-cols-2">
-        <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
+    <div class="grid grid-cols-5">
+        <div class="col-span-3 gap-4 flex flex-col">
             <TestButton
                 title="Respiratory Rate"
                 unit="Breaths per Min"
@@ -132,7 +131,7 @@
                 onclick={() => adminsterTest(tests[3])}
             />
         </div>
-        <div class="col-span-1">
+        <div class="col-span-2">
             <Checklist />
             <!-- <div class="flex-1 flex flex-col justify-center items-start p-4">
                 <span>Notes:</span>
@@ -145,7 +144,7 @@
         </div>
     </div>
 
-    <div class="h-fit p-5">
+    <!-- <div class="h-fit p-5">
         <div class="flex items-center justify-between">
             <div>
                 <h2 class="font-bold text-lg mb-2">Tests</h2>
@@ -176,5 +175,5 @@
                 {/each}
             </div>
         {/if}
-    </div>
+    </div> -->
 </div>

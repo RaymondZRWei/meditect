@@ -3,7 +3,7 @@
 </script>
 
 <section class="grid h-full pb-32 pt-6 grid-cols-5 max-w-screen-xl mx-auto">
-    <div class="pt-32 col-span-3">
+    <div class="pt-28 col-span-3">
         <h1
             class="mb-4 text-4xl font-mono tracking-tighter !leading-[1.2] font-semibold md:text-5xl xl:text-6xl"
         >
@@ -14,7 +14,7 @@
                 Simulated Experience
             </span>
         </h1>
-        <p class="mb-6 text-slate-500 md:mb-8 md:text-lg lg:text-xl">
+        <p class="mb-6 text-slate-500 md:mb-10 md:text-lg lg:text-xl">
             There was a problem with learning medicine, it was boring! Med Ed
             solves that issue with game driven teaching where learning isn't
             just not boring, it's fun!

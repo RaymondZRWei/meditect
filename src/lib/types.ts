@@ -20,7 +20,7 @@ export type QuantitativeSymptoms = ContinuousSymptoms | TestableSymptoms;
 export interface Test {
     name: string;
     description: string;
-    queriedSymptoms: TestableSymptoms[];
+    queriedSymptoms: TestableSymptoms;
     duration: number;
 }
 

@@ -4,7 +4,6 @@
     export let maxValue: number = 100;
     export let width: number = 200;
     export let height: number = 100;
-    export let strokeWidth: number = 8;
 
     const describeArc = (
         x: number,
@@ -18,21 +17,7 @@
 
         const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-        const d = [
-            "M",
-            start.x,
-            start.y,
-            "A",
-            radius,
-            radius,
-            0,
-            largeArcFlag,
-            0,
-            end.x,
-            end.y,
-        ].join(" ");
-
-        return d;
+        return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
     };
 
     const polarToCartesian = (
@@ -49,29 +34,26 @@
         };
     };
 
-    function getColor(value: number): string {
+    const getColor = (value: number): string => {
         const r = Math.min(255, Math.floor(255 * (value / maxValue)));
         const g = Math.min(
             255,
             Math.floor(255 * ((maxValue - value) / maxValue)),
         );
         return `rgb(${r},${g},0)`;
-    }
+    };
 
-    let svgPath: string;
-    let color: string;
-
-    $: updateValue(value);
-
-    const updateValue = (val: number | null) => {
+    const updateValue = (val: number | null): [string, string] => {
         if (!val) val = maxValue;
 
         const adjustedStartAngle = -25;
         const adjustedEndAngle = 205;
+
         const endAngle =
             adjustedStartAngle +
             ((val ?? defaultValue) / maxValue) *
                 (adjustedEndAngle - adjustedStartAngle);
+
         svgPath = describeArc(
             width / 2,
             height / 2,
@@ -79,36 +61,26 @@
             adjustedStartAngle,
             endAngle,
         );
+
         color = getColor(val ?? defaultValue);
+
+        return [svgPath, color];
     };
 
-    let fontSize = Math.min(width, height) / 5;
+    $: [svgPath, color] = updateValue(value);
 </script>
 
-<svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
-    <path d={svgPath} stroke={color} stroke-width={strokeWidth} fill="none" />
-    <text
-        x="50%"
-        y="45%"
-        text-anchor="middle"
-        alignment-baseline="middle"
-        font-size={fontSize}
-        fill="#000"
+<div class="relative">
+    <svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
+        <path d={svgPath} stroke={color} stroke-width={5} fill="none" />
+    </svg>
+    <div
+        class="text-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center text-black z-50 pb-1"
     >
         {#if value}
             {value}
         {:else}
             ?
         {/if}
-    </text>
-</svg>
-
-<style>
-    svg {
-        display: block;
-        margin: auto;
-    }
-    text {
-        font-family: Arial, sans-serif;
-    }
-</style>
+    </div>
+</div>

@@ -11,6 +11,7 @@
         game = updateGameWithMedicine(game, medicine);
     };
 </script>
+<<<<<<< Updated upstream
 <section>
   <h2 class="text-2xl font-semibold">Treatments</h2>
   <div class="flex flex-col gap-2">
@@ -39,3 +40,24 @@
       {/if}
   </div>
 </section>
+=======
+
+<section class="bg-slate-100 p-8 rounded-xl h-full">
+    <h2 class="text-3xl font-bold mb-4">Treatments</h2>
+    <div class="flex flex-col gap-2">
+        {#each Object.values(medicines) as medicine}
+            <div class="flex gap-3">
+                <div>
+                    {medicine.name} - {medicine.duration}
+                </div>
+                <button
+                    on:click={() => administerMedicine(medicine)}
+                    class="outline-none"
+                >
+                    Administer
+                </button>
+            </div>
+        {/each}
+    </div>
+</section>
+>>>>>>> Stashed changes

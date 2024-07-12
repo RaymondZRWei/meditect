@@ -15,11 +15,6 @@
 
         // Updating the game data
         game.set(gameData);
-
-
-        // Reset tests
-        localStorage.removeItem("checklist")
-        localStorage.removeItem("notes")
     };
 
     const getUserCompletedDiseases = (userData: StoredUserData) => {
@@ -70,7 +65,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     {#each diseases as disease}
                         <div
-                            class="flex justify-between items-center bg-slate-100 rounded-lg p-5"
+                            class="flex justify-between items-center bg-slate-100 rounded-xl p-5"
                         >
                             <h2 class="text-lg font-semibold">
                                 {disease.name}
@@ -97,7 +92,7 @@
             </section>
         </div>
         <div class="flex flex-col gap-3 col-span-3">
-            <section class="p-8 bg-slate-100 rounded-lg flex flex-col gap-3">
+            <section class="p-8 bg-slate-100 rounded-xl flex flex-col gap-3">
                 <button
                     on:click={startGame}
                     class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
@@ -112,7 +107,7 @@
                 </button>
             </section>
             <section
-                class="grow p-8 bg-slate-100 rounded-lg flex flex-col gap-3"
+                class="grow p-8 bg-slate-100 rounded-xl flex flex-col gap-3"
             >
                 <h2 class="text-3xl font-bold">Account Stats</h2>
             </section>

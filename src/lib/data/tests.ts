@@ -20,7 +20,7 @@ export const tests: Test[] = [
         duration: 2,
     },
     {
-        name: "Pain Test",
+        name: "Pain Response",
         description: "Measures the patient's pain level.",
         queriedSymptoms: ["pain"],
         duration: 2,

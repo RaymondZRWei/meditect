@@ -85,7 +85,7 @@
         latestRespiratoryRate = findLatestSymptomValue("respiratoryRate");
         latestOxygenSaturation = findLatestSymptomValue("oxygenSaturation");
         latestGlucoseLevel = findLatestSymptomValue("bloodGlucose");
-        latestPain = findLatestSymptomValue("pain")
+        latestPain = findLatestSymptomValue("pain");
     }
 </script>
 
@@ -132,24 +132,21 @@
 <div class="h-full p-5">
     <div class="flex items-center justify-between">
         <div>
-            <h2>Tests</h2>
+            <h2 class="font-bold text-lg mb-2">Tests</h2>
         </div>
-        <button use:melt={$trigger} aria-label="New Test">
-            <Fa6SolidPlus class="size-8" />
-        </button>
     </div>
     {#if game.testResults.length === 0}
         <p>No tests administered yet.</p>
     {:else}
-        <div class="flex flex-col gap-3 overflow-auto max-h-28">
+        <div class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2">
             {#each game.testResults as test}
-                <div class="flex justify-between bg-red-300">
+                <div class="flex justify-between">
                     <div>
                         {test.testName}
                     </div>
                     <div class="flex gap-10">
                         {#each Object.entries(test.results) as [symptom, result]}
-                            {symptom}: {result}
+                            {result}
                         {/each}
                     </div>
                 </div>
@@ -157,7 +154,7 @@
         </div>
     {/if}
 </div>
-
+<!-- 
 {#if $open}
     <div use:melt={$portalled}>
         <div
@@ -212,4 +209,4 @@
             </div>
         </div>
     </div>
-{/if}
+{/if} -->

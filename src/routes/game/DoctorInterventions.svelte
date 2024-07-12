@@ -12,14 +12,9 @@
         forceVisible: true,
     });
 
-    let lastHintIndexShown: number | null = null;
-
-    onMount(() => {
-        if ($game) {
-            lastHintIndexShown =
-                structuredClone($game.doctorHints).length || null;
-        }
-    });
+    let lastHintIndexShown: number | null = $game
+        ? structuredClone($game.doctorHints).length || null
+        : null;
 
     const saveAndGoToDashboard = () => {
         if (!$game) return;
@@ -75,7 +70,7 @@
                 </h2>
                 <p
                     use:melt={$description}
-                    class="mb-5 mt-2 leading-normal text-zinc-600"
+                    class="mb-5 mt-2 leading-normal text-slate-600"
                 >
                     {#if $game.doctorIntervention}
                         <div>
@@ -123,7 +118,7 @@
                 </h2>
                 <p
                     use:melt={$description}
-                    class="mb-5 mt-2 leading-normal text-zinc-600"
+                    class="mb-5 mt-2 leading-normal text-slate-600"
                 >
                     {hintMessage}
                 </p>

@@ -1,13 +1,17 @@
 <script lang="ts">
-    import { createAccordion } from "@melt-ui/svelte";
     import { slide } from "svelte/transition";
+    import { createAccordion } from "@melt-ui/svelte";
+    import type { GameData } from "$lib/types";
+    import { diseases } from "$lib/data/diseases";
+    import { continuousSymptoms, testableSymptoms } from "$lib/types";
 
     import IconDoubleUp from "~icons/material-symbols/keyboard-double-arrow-up-rounded";
     import IconUp from "~icons/material-symbols/keyboard-arrow-up-rounded";
     import IconDoubleDown from "~icons/material-symbols/keyboard-double-arrow-down-rounded";
     import IconDown from "~icons/material-symbols/keyboard-arrow-down-rounded";
-    import IconConstant from "~icons/oui/token-constant";
-    import { onMount } from "svelte";
+    import BiDash from "~icons/bi/dash";
+
+    export let game: GameData;
 
     const {
         elements: { content, item, trigger, root },
@@ -15,139 +19,13 @@
     } = createAccordion({
         defaultValue: "item-1",
     });
-
-    export let items = [
-        {
-            disease: "Opioid Overdose",
-            stats: {
-                rr: IconDown,
-                os: IconDown,
-                gl: IconConstant,
-                pain: IconUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Pulmonary Embolism",
-            stats: {
-                rr: IconDoubleDown,
-                os: IconDown,
-                gl: IconConstant,
-                pain: IconDoubleUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Asthma Attack",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconUp,
-                pain: IconUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Heart Attack",
-            stats: {
-                rr: IconDoubleDown,
-                os: IconDown,
-                gl: IconUp,
-                pain: IconDoubleUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Stroke",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconDoubleUp,
-                pain: IconConstant,
-            },
-            checked: false,
-        },
-        {
-            disease: "Sepsis",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconDoubleUp,
-                pain: IconDoubleUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Food Poisoning",
-            stats: {
-                rr: IconUp,
-                os: IconConstant,
-                gl: IconUp,
-                pain: IconDoubleUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Acute Pancreatitis",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconDoubleUp,
-                pain: IconDoubleUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Staph",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconConstant,
-                pain: IconUp,
-            },
-            checked: false,
-        },
-        {
-            disease: "Laceration",
-            stats: {
-                rr: IconUp,
-                os: IconDown,
-                gl: IconConstant,
-                pain: IconUp,
-            },
-            checked: false,
-        },
-    ];
-
-    let text = "";
-    onMount(() => {
-        let txt = localStorage.getItem("notes");
-        if (txt) text = txt;
-
-        let data = localStorage.getItem("checklist");
-        if (data) {
-            let parsedData = JSON.parse(data);
-            parsedData.forEach((disease, i: number) => {
-                items[i].checked = disease.checked;
-            });
-        }
-    });
-
-    function saveNotes(txt: string) {
-        localStorage.setItem("notes", txt);
-    }
-
-    function saveChecklist(checklist) {
-        localStorage.setItem("checklist", JSON.stringify(checklist));
-    }
 </script>
 
 <main class="flex flex-col h-full pl-4">
-    <!-- Items -->
     <div class="mt-4 mx-4 flex flex-col overflow-auto text-slate-600" {...root}>
-        {#each items as { disease, stats, checked }, i}
+        {#each diseases as disease, i}
             <div
-                {...$item(disease)}
+                {...$item(disease.name)}
                 use:item
                 class="overflow-hidden transition-colors"
             >
@@ -156,56 +34,57 @@
                         'border-t border-t-neutral-300'}"
                 >
                     <button
-                        {...$trigger(disease)}
+                        {...$trigger(disease.name)}
                         use:trigger
                         class="flex-1 text-left cursor-pointer"
                     >
-                        {disease}
+                        {disease.name}
                     </button>
-                    <input
-                        type="checkbox"
-                        bind:checked
-                        on:input={() => saveChecklist(items)}
-                        class="ml-auto"
-                    />
                 </h2>
-                {#if $isSelected(disease)}
+                {#if $isSelected(disease.name)}
                     <div
                         class="content text-sm text-slate-400 mb-4"
-                        {...$content(disease)}
+                        {...$content(disease.name)}
                         use:content
                         transition:slide
                     >
-                        <div class="py-4 px-8 h-fit flex flex-col">
-                            <div class="flex items-center">
-                                <span>Respiratory Rate</span>
-                                <span class="ml-auto">
-                                    <svelte:component this={stats.rr}
-                                    ></svelte:component>
-                                </span>
-                            </div>
-                            <div class="flex items-center">
-                                <span>Oxygen Saturation</span>
-                                <span class="ml-auto">
-                                    <svelte:component this={stats.os}
-                                    ></svelte:component>
-                                </span>
-                            </div>
-                            <div class="flex items-center">
-                                <span>Blood Glucose Levels</span>
-                                <span class="ml-auto">
-                                    <svelte:component this={stats.gl}
-                                    ></svelte:component>
-                                </span>
-                            </div>
-                            <div class="flex items-center">
-                                <span>Pain Level</span>
-                                <span class="ml-auto">
-                                    <svelte:component this={stats.pain}
-                                    ></svelte:component>
-                                </span>
-                            </div>
-                        </div>
+                        {#each Object.entries(disease.statHints) as [symptom, modifier]}
+                            {@const symptomName = {
+                                ...continuousSymptoms,
+                                ...testableSymptoms,
+                            }[symptom]}
+
+                            {#if symptomName}
+                                <div class="flex">
+                                    <div>
+                                        {symptomName}
+                                    </div>
+                                    <div>
+                                        {#if modifier === -2}
+                                            <IconDoubleDown
+                                                class="size-5 text-red-500"
+                                            />
+                                        {:else if modifier === -1}
+                                            <IconDown
+                                                class="size-5 text-red-500"
+                                            />
+                                        {:else if modifier === 0}
+                                            <BiDash
+                                                class="size-5 text-slate-500"
+                                            />
+                                        {:else if modifier === 1}
+                                            <IconUp
+                                                class="size-5 text-green-500"
+                                            />
+                                        {:else if modifier === 2}
+                                            <IconDoubleUp
+                                                class="size-5 text-green-500"
+                                            />
+                                        {/if}
+                                    </div>
+                                </div>
+                            {/if}
+                        {/each}
                     </div>
                 {/if}
             </div>
@@ -217,8 +96,7 @@
         <textarea
             name="paragraph_text"
             class="h-full w-full px-2 py-1 border-solid border-black border-[1px] text-sm rounded-sm resize-none"
-            bind:value={text}
-            on:input={() => saveNotes(text)}
+            bind:value={game.notes}
         />
     </div>
 </main>

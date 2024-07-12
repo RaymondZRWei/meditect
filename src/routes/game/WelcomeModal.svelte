@@ -32,12 +32,12 @@
             }}
             use:melt={$content}
         >
-            <h2 use:melt={$title} class="m-0 text-lg font-medium text-black">
+            <h2 use:melt={$title} class="mb-3 text-3xl font-bold text-black">
                 Welcome to Med Ed
             </h2>
             <p
                 use:melt={$description}
-                class="mb-5 mt-2 leading-normal text-zinc-600"
+                class="mb-5 mt-2 leading-normal text-slate-600"
             >
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                 Pariatur molestiae quo quod expedita magnam animi quidem fuga.
@@ -48,7 +48,7 @@
                 on:click={createNewUser}
                 class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3 outline-none rounded-lg text-white"
             >
-                Close
+                Go to Dashboard
             </button>
         </div>
     </div>

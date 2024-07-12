@@ -1,16 +1,19 @@
-export const continuousSymptoms = [
-    "heartRate",
-    "bloodPressureSystolic",
-    "bloodPressureDiastolic",
-] as const;
+export const continuousSymptoms = {
+    heartRate: "Heart Rate",
+    bloodPressureSystolic: "Blood Pressure (Sys)",
+    bloodPressureDiastolic: "Blood Pressure (Dia)",
+};
 
-export type ContinuousSymptoms = (typeof continuousSymptoms)[number];
+export const testableSymptoms = {
+    oxygenSaturation: "Oxygen Saturation",
+    respiratoryRate: "Respiratory Rate",
+    bloodGlucose: "Blood Glucose",
+    pain: "Pain Level",
+};
 
-export type TestableSymptoms =
-    | "oxygenSaturation"
-    | "respiratoryRate"
-    | "bloodGlucose"
-    | "pain";
+export type ContinuousSymptoms = keyof typeof continuousSymptoms;
+
+export type TestableSymptoms = keyof typeof testableSymptoms;
 
 export type QuantitativeSymptoms = ContinuousSymptoms | TestableSymptoms;
 
@@ -41,6 +44,7 @@ export interface Medicine {
 }
 
 export interface StoredDisease extends Disease {
+    statHints: { [key in QuantitativeSymptoms]: -2 | -1 | 0 | 1 | 2 };
     updateSymptoms: (game: GameData, prevGame: GameData) => GameData;
     getDefaultGameData: () => GameData;
 }
@@ -64,6 +68,8 @@ export interface GameData extends ContinuousSymptomStore, TestableSymptomStore {
     pain: number;
     doctorHints: string[];
     doctorIntervention: string | null;
+    notes: string;
+    pageIndex: number;
 }
 
 export type StoredGameData = GameData | null | undefined;

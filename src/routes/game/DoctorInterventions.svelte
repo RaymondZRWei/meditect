@@ -67,14 +67,14 @@
                         use:melt={$title}
                         class="m-0 text-lg font-medium text-black"
                     >
-                        Treatment Successful
+                        Treatment Failed
                     </h2>
                 {:else}
                     <h2
                         use:melt={$title}
                         class="m-0 text-lg font-medium text-black"
                     >
-                        Treatment Failed
+                        Treatment Successful
                     </h2>
                 {/if}
                 <p

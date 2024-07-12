@@ -2,10 +2,10 @@
     import Scene from "$lib/components/Scene.svelte";
 </script>
 
-<section class="grid h-full pb-32 pt-6 pl-24 grid-cols-8">
-    <div class="pt-32 col-span-5">
+<section class="grid h-full pb-32 pt-6 grid-cols-5 max-w-screen-xl mx-auto">
+    <div class="pt-32 col-span-3">
         <h1
-            class="mb-4 text-4xl font-bold tracking-tight !leading-[1.1] md:text-5xl xl:text-6xl"
+            class="mb-4 text-4xl font-mono tracking-tighter !leading-[1.2] font-semibold md:text-5xl xl:text-6xl"
         >
             Medical Education through
             <span
@@ -28,7 +28,7 @@
             </a>
         </div>
     </div>
-    <div class="col-span-3">
+    <div class="col-span-2">
         <Scene />
     </div>
 </section>

@@ -23,18 +23,21 @@ const moveSymptomTowardsValue = (
   value: number,
 ): number => {
   const difference = symptomValue - value;
-  const differenceIncrement = difference / 15;
-
+  // changed because game is 30 minutes long
+  const differenceIncrement = difference / 30;
+  // console.log(timeSinceLastUpdate + " time");
   if (difference > 0) {
     symptomValue = Math.max(
       symptomValue - timeSinceLastUpdate * differenceIncrement,
       value,
     );
+    // console.log(differenceIncrement + " max thing");
   } else {
     symptomValue = Math.min(
       symptomValue + timeSinceLastUpdate * differenceIncrement,
       value,
     );
+    // console.log(differenceIncrement + " min thing");
   }
 
   return symptomValue;
@@ -166,7 +169,7 @@ export const diseases: StoredDisease[] = [
         game.bloodPressureDiastolic.value = moveSymptomTowardsValue(
           game.bloodPressureDiastolic.value,
           timeSinceLastUpdate,
-          35,
+          40,
         );
         game.bloodGlucose = moveSymptomTowardsValue(
           game.bloodGlucose,

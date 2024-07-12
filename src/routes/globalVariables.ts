@@ -1,3 +1,4 @@
+//unused, first iteration of code
 interface affliction {
   name: string;
   responseHR: number[];

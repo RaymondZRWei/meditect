@@ -127,7 +127,7 @@
         <TestButton
             title="Respiratory Rate"
             unit="Breaths per Min"
-            actionMessage="Count"
+            actionMessage="Use Spirometer"
             maxValue={30}
             value={latestRespiratoryRate}
             onclick={() => adminsterTest(tests[0])}
@@ -135,7 +135,7 @@
         <TestButton
             title="Oxygen Saturation"
             unit="% Sp02"
-            actionMessage="Use Pulse Oximetry"
+            actionMessage="Use Oximeter"
             maxValue={100}
             value={latestOxygenSaturation}
             onclick={() => adminsterTest(tests[1])}

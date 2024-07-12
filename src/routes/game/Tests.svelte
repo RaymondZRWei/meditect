@@ -1,7 +1,4 @@
 <script lang="ts">
-    import { createDialog, melt } from "@melt-ui/svelte";
-    import { fade } from "svelte/transition";
-
     import type {
         GameData,
         Test,
@@ -12,34 +9,9 @@
     import TestButton from "$lib/components/TestButton.svelte";
     import Checklist from "$lib/components/Checklist.svelte";
 
-    import Fa6SolidPlus from "~icons/fa6-solid/plus";
-    import { writable } from "svelte/store";
     import { tick } from "svelte";
 
     export let game: GameData;
-
-    // const {
-    //     elements: {
-    //         trigger,
-    //         overlay,
-    //         content,
-    //         title,
-    //         description,
-    //         close,
-    //         portalled,
-    //     },
-    //     states: { open },
-    // } = createDialog({
-    //     forceVisible: true,
-    // });
-
-    // let selectedTest: Test | null = null;
-
-    // open.subscribe((isOpen) => {
-    //     if (!isOpen) {
-    //         selectedTest = null;
-    //     }
-    // });
 
     const adminsterTest = (selectedTest: Test | null) => {
         if (!selectedTest) return;
@@ -122,131 +94,79 @@
     }
 </script>
 
-<div class="grid grid-cols-2">
-    <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
-        <TestButton
-            title="Respiratory Rate"
-            unit="Breaths per Min"
-            actionMessage="Use Spirometer"
-            maxValue={30}
-            value={latestRespiratoryRate}
-            onclick={() => adminsterTest(tests[0])}
-        />
-        <TestButton
-            title="Oxygen Saturation"
-            unit="% Sp02"
-            actionMessage="Use Oximeter"
-            maxValue={100}
-            value={latestOxygenSaturation}
-            onclick={() => adminsterTest(tests[1])}
-        />
-        <TestButton
-            title="Blood Glucose Level"
-            unit="mg / dL"
-            actionMessage="Use Glucometer"
-            maxValue={100}
-            value={latestGlucoseLevel}
-            onclick={() => adminsterTest(tests[2])}
-        />
-        <TestButton
-            title="Pain Level"
-            unit="Scale 0-100"
-            actionMessage="Ask Patient"
-            maxValue={100}
-            value={latestPain}
-            onclick={() => adminsterTest(tests[3])}
-        />
-    </div>
-    <div class="col-span-1">
-        <Checklist />
-    </div>
-</div>
+<div class="bg-slate-100 p-8 rounded-xl h-full">
+    <h2 class="text-3xl font-bold mb-4">Tests</h2>
 
-<div class="h-fit p-5">
-    <div class="flex items-center justify-between">
-        <div>
-            <h2 class="font-bold text-lg mb-2">Tests</h2>
+    <div class="grid grid-cols-2">
+        <div class="col-span-1 gap-4 flex flex-col py-4 overflow-auto">
+            <TestButton
+                title="Respiratory Rate"
+                unit="Breaths per Min"
+                actionMessage="Use Spirometer"
+                maxValue={30}
+                value={latestRespiratoryRate}
+                onclick={() => adminsterTest(tests[0])}
+            />
+            <TestButton
+                title="Oxygen Saturation"
+                unit="% Sp02"
+                actionMessage="Use Oximeter"
+                maxValue={100}
+                value={latestOxygenSaturation}
+                onclick={() => adminsterTest(tests[1])}
+            />
+            <TestButton
+                title="Blood Glucose Level"
+                unit="mg / dL"
+                actionMessage="Use Glucometer"
+                maxValue={100}
+                value={latestGlucoseLevel}
+                onclick={() => adminsterTest(tests[2])}
+            />
+            <TestButton
+                title="Pain Level"
+                unit="Scale 0-100"
+                actionMessage="Ask Patient"
+                maxValue={100}
+                value={latestPain}
+                onclick={() => adminsterTest(tests[3])}
+            />
+        </div>
+        <div class="col-span-1">
+            <Checklist bind:game />
         </div>
     </div>
-    {#if game.testResults.length === 0}
-        <p>No tests administered yet.</p>
-    {:else}
-        <div
-            class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2"
-        >
-            {#each game.testResults as test, i}
-                <div
-                    id={`line-${i}`}
-                    class="flex justify-between px-2 py-1 {i ===
-                        game.testResults.length - 1 && 'bg-slate-200'}"
-                >
-                    <div>{test.timeAdministered} min</div>
-                    <div>
-                        {test.testName}
-                    </div>
-                    <div class="flex gap-10">
-                        {#each Object.entries(test.results) as [symptom, result]}
-                            {result}
-                        {/each}
-                    </div>
-                </div>
-            {/each}
+
+    <div class="h-fit p-5">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="font-bold text-lg mb-2">Tests</h2>
+            </div>
         </div>
-    {/if}
-</div>
-<!-- 
-{#if $open}
-    <div use:melt={$portalled}>
-        <div
-            use:melt={$overlay}
-            class="fixed inset-0 z-50 bg-black/50"
-            transition:fade={{ duration: 150 }}
-        />
-        <div
-            class="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-[90vw]
-            max-w-[450px] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white
-            p-6 shadow-lg"
-            transition:fade={{
-                duration: 150,
-            }}
-            use:melt={$content}
-        >
-            <h2 use:melt={$title} class="m-0 text-lg font-medium text-black">
-                Choose a Test to Administer
-            </h2>
-            <p
-                use:melt={$description}
-                class="mb-5 mt-2 leading-normal text-zinc-600"
+        {#if game.testResults.length === 0}
+            <p>No tests administered yet.</p>
+        {:else}
+            <div
+                class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2"
             >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit,
-                vel?
-            </p>
-
-            <div class="flex flex-col gap-3">
-                {#each tests as test}
-                    <button
-                        class="text-left outline-none"
-                        class:bg-fuchsia-400={selectedTest === test}
-                        on:click={() => (selectedTest = test)}
+                {#each game.testResults as test, i}
+                    <div
+                        id={`line-${i}`}
+                        class="flex justify-between px-2 py-1 {i ===
+                            game.testResults.length - 1 && 'bg-slate-200'}"
                     >
-                        {test.name}
-                    </button>
+                        <div>{test.timeAdministered} min</div>
+                        <div>
+                            {test.testName}
+                        </div>
+                        <div class="flex gap-10">
+                            {#each Object.entries(test.results) as [symptom, result]}
+                                {result}
+                            {/each}
+                        </div>
+                    </div>
                 {/each}
             </div>
-
-            <div>
-                <button class="outline-none" use:melt={$close}>Close</button>
-
-                {#if selectedTest}
-                    <button
-                        on:click={() => adminsterTest(selectedTest)}
-                        use:melt={$close}
-                        class="outline-none"
-                    >
-                        Administer
-                    </button>
-                {/if}
-            </div>
-        </div>
+        {/if}
     </div>
-{/if} -->
+</div>

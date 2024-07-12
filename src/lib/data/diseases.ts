@@ -5,7 +5,6 @@ const isFirstTimeAboveElapsedTime = (
     prevGame: GameData,
     time: number,
 ) => {
-    console.log(game.elapsedTime, prevGame.elapsedTime, time);
     return prevGame.elapsedTime < time && game.elapsedTime >= time;
 };
 
@@ -23,21 +22,18 @@ const moveSymptomTowardsValue = (
     value: number,
 ): number => {
     const difference = symptomValue - value;
-    // changed because game is 30 minutes long
     const differenceIncrement = difference / 30;
-    // console.log(timeSinceLastUpdate + " time");
+
     if (difference > 0) {
         symptomValue = Math.max(
             symptomValue - timeSinceLastUpdate * differenceIncrement,
             value,
         );
-        // console.log(differenceIncrement + " max thing");
     } else {
         symptomValue = Math.min(
             symptomValue + timeSinceLastUpdate * differenceIncrement,
             value,
         );
-        // console.log(differenceIncrement + " min thing");
     }
 
     return symptomValue;
@@ -50,16 +46,31 @@ const storedDiseaseToDisease = (storedDisease: StoredDisease): Disease => {
     return disease;
 };
 
+const defaultGameData = {
+    elapsedTime: 0,
+    doctorHints: [],
+    doctorIntervention: null,
+    testResults: [],
+    finished: false,
+    notes: "",
+    pageIndex: 0,
+};
+
 export const diseases: StoredDisease[] = [
     {
         name: "Opioid Overdose",
         arbitraryValues: {
             opioid: 100,
         },
+        statHints: {
+            respiratoryRate: -1,
+            oxygenSaturation: -1,
+            bloodGlucose: 0,
+            pain: 1,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(50 + Math.random() * 10),
                     prevValues: [],
@@ -79,10 +90,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is drowsy, pale, and has a decreased level of responsiveness.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -225,10 +233,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             pulmonary: 100,
         },
+        statHints: {
+            respiratoryRate: -2,
+            oxygenSaturation: -1,
+            bloodGlucose: 0,
+            pain: 2,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(100 + Math.random() * 20),
                     prevValues: [],
@@ -248,10 +261,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient suffers from intense chest pain and difficulty breathing.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -344,10 +354,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             asthma: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 1,
+            pain: 1,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(100 + Math.random() * 20),
                     prevValues: [],
@@ -367,10 +382,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is wheezing and feels a tightness in their chest",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -461,10 +473,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             heart: 100,
         },
+        statHints: {
+            respiratoryRate: -2,
+            oxygenSaturation: -1,
+            bloodGlucose: 1,
+            pain: 2,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(150 + Math.random() * 20),
                     prevValues: [],
@@ -484,10 +501,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is in agony and feels a tightness in their chest",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -580,10 +594,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             stroke: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 2,
+            pain: 0,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(90 + Math.random() * 20),
                     prevValues: [],
@@ -603,10 +622,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient feels numb and their speech is impeded.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -698,10 +714,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             sepsis: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 2,
+            pain: 2,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(90 + Math.random() * 20),
                     prevValues: [],
@@ -721,10 +742,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient appears disoriented, agitated, and confused.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -817,10 +835,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             food: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: 0,
+            bloodGlucose: 1,
+            pain: 2,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(100 + Math.random() * 10),
                     prevValues: [],
@@ -840,10 +863,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient feels a sharp pain in their stomach and is sweating profusely.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -936,10 +956,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             acute: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 2,
+            pain: 2,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(95 + Math.random() * 10),
                     prevValues: [],
@@ -959,10 +984,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient has difficulty breathing and feels an acute epigastric pain.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -1055,10 +1077,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             staph: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 0,
+            pain: 1,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(80 + Math.random() * 10),
                     prevValues: [],
@@ -1078,10 +1105,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "There are swollen red bumps on the patient's skin.",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -1174,10 +1198,15 @@ export const diseases: StoredDisease[] = [
         arbitraryValues: {
             laceration: 100,
         },
+        statHints: {
+            respiratoryRate: 1,
+            oxygenSaturation: -1,
+            bloodGlucose: 0,
+            pain: 1,
+        },
         getDefaultGameData(this): GameData {
             return {
                 disease: storedDiseaseToDisease(this),
-                elapsedTime: 0,
                 heartRate: {
                     value: Math.round(80 + Math.random() * 20),
                     prevValues: [],
@@ -1197,10 +1226,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "There is a large wound on the patient's arm",
                 ],
-                doctorHints: [],
-                doctorIntervention: null,
-                testResults: [],
-                finished: false,
+                ...defaultGameData,
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {

@@ -17,6 +17,8 @@
     import Dashboard from "./Dashboard.svelte";
     import DoctorInterventions from "./DoctorInterventions.svelte";
 
+    const CONTINUOUS_DATA_UPDATE_INTERVAL = 5;
+
     let pageIndex = 0;
 
     interface Page {
@@ -43,7 +45,7 @@
         return Math.round(value + Math.random() * (high - low) + low);
     };
 
-    let prevGame: GameData | null = null;
+    let prevGame: GameData | null = $game ? structuredClone($game) : null;
 
     game.subscribe((gameData) => {
         if (!gameData) return;

@@ -19,24 +19,24 @@
 </script>
 
 <header
-    class="py-8 px-12 w-full flex overflow-auto {isPlaying
-        ? 'absolute -z-10'
-        : 'sticky z-50 bg-transparent'} top-0 justify-between items-center"
+    class="py-8 px-12 flex overflow-auto {isPlaying
+        ? 'absolute'
+        : 'sticky z-50 bg-white shadow-md w-full'} top-0 justify-between items-center"
 >
     <a href="/" class="flex items-center gap-3">
         <img src={logo} alt="Med Ed Logo" class="size-12" />
-        {#if !isPlaying}
+        {#if !isPlaying && $game !== undefined}
             <div class="mt-2 text-4xl font-bold tracking-tight">Med Ed</div>
         {/if}
     </a>
     {#if !isPlaying}
-        <div class="flex gap-14 items-center text-lg mt-4">
+        <div class="flex gap-14 items-center text-lg">
             {#each routes as { name, path }}
                 <a
                     href={path}
                     class={$page.url.pathname === path
                         ? "text-primary"
-                        : "opacity-80"}
+                        : "text-slate-500"}
                 >
                     {name}
                 </a>

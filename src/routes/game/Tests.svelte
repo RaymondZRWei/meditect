@@ -14,31 +14,32 @@
 
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
     import { writable } from "svelte/store";
+    import { tick } from "svelte";
 
     export let game: GameData;
 
-    const {
-        elements: {
-            trigger,
-            overlay,
-            content,
-            title,
-            description,
-            close,
-            portalled,
-        },
-        states: { open },
-    } = createDialog({
-        forceVisible: true,
-    });
+    // const {
+    //     elements: {
+    //         trigger,
+    //         overlay,
+    //         content,
+    //         title,
+    //         description,
+    //         close,
+    //         portalled,
+    //     },
+    //     states: { open },
+    // } = createDialog({
+    //     forceVisible: true,
+    // });
 
-    let selectedTest: Test | null = null;
+    // let selectedTest: Test | null = null;
 
-    open.subscribe((isOpen) => {
-        if (!isOpen) {
-            selectedTest = null;
-        }
-    });
+    // open.subscribe((isOpen) => {
+    //     if (!isOpen) {
+    //         selectedTest = null;
+    //     }
+    // });
 
     const adminsterTest = (selectedTest: Test | null) => {
         if (!selectedTest) return;
@@ -47,18 +48,29 @@
 
         let results: TestResult["results"] = {};
 
-        selectedTest.queriedSymptoms.forEach((symptom) => {
-            results[symptom] = game[symptom];
-        });
+        switch (selectedTest.queriedSymptoms[0]) {
+            case "respiratoryRate":
+                results.respiratoryRate = game.respiratoryRate;
+                break;
+            case "oxygenSaturation":
+                results.oxygenSaturation = game.oxygenSaturation;
+                break;
+            case "bloodGlucose":
+                results.bloodGlucose = game.bloodGlucose;
+                break;
+            case "pain":
+                results.pain = Math.floor(game.pain);
+                break;
+        }
 
         game.testResults = [
+            ...game.testResults,
             {
                 testName: selectedTest.name,
                 duration: selectedTest.duration,
                 results,
                 timeAdministered: game.elapsedTime,
             },
-            ...game.testResults,
         ];
     };
 
@@ -66,11 +78,10 @@
     function findLatestSymptomValue(
         symptom: TestableSymptoms,
     ): number | undefined {
-        for (let i = 0; i < game.testResults.length; i++) {
-            if (!game.testResults[i]) continue;
-            const result = game.testResults[i].results;
-            if (result && symptom in result) {
-                return result[symptom];
+        for (let i = game.testResults.length - 1; i >= 0; i--) {
+            let result = game.testResults[i].results[symptom];
+            if (result) {
+                return result;
             }
         }
         return undefined;
@@ -86,6 +97,28 @@
         latestOxygenSaturation = findLatestSymptomValue("oxygenSaturation");
         latestGlucoseLevel = findLatestSymptomValue("bloodGlucose");
         latestPain = findLatestSymptomValue("pain");
+    }
+
+    $: {
+        if (game.testResults) {
+            scroll(game.testResults.length - 1);
+        }
+    }
+
+    async function scroll(index: number) {
+        await tick();
+
+        if (typeof document !== "undefined") {
+            const selectedLineElement = document.getElementById(
+                `line-${index}`,
+            );
+            if (selectedLineElement) {
+                selectedLineElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+            }
+        }
     }
 </script>
 
@@ -138,9 +171,11 @@
     {#if game.testResults.length === 0}
         <p>No tests administered yet.</p>
     {:else}
-        <div class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2">
-            {#each game.testResults as test}
-                <div class="flex justify-between">
+        <div
+            class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2"
+        >
+            {#each game.testResults as test, i}
+                <div id={`line-${i}`} class="flex justify-between px-2 py-1 {i === game.testResults.length - 1 && "bg-slate-200"}">
                     <div>
                         {test.testName}
                     </div>

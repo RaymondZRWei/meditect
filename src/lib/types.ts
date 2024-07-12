@@ -35,7 +35,7 @@ export interface Disease {
 
 export interface Medicine {
     name: string;
-    description: "";
+    description: string;
     duration: number;
     updateGame: (game: GameData) => GameData;
 }

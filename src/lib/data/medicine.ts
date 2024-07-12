@@ -3,7 +3,7 @@ import type { GameData, Medicine } from "$lib/types";
 export const medicines: Medicine[] = [
   {
     name: "Naloxone",
-    description: "",
+    description: "Blocks the effects of certain stimulants in the brain. Restores normal breathing to those affected.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.opioid) return game;
@@ -14,18 +14,24 @@ export const medicines: Medicine[] = [
   },
   {
     name: "Rivaroxaban",
-    description: "",
+    description: "An anticoagulant that prevents blood clots from worsening.",
     duration: 5,
     updateGame: (game) => {
-      if (!game.disease.arbitraryValues.pulmonary) return game;
+      if (!game.disease.arbitraryValues.heart && !game.disease.arbitraryValues.pulmonary) return game;
 
-      game.disease.arbitraryValues.pulmonary -= 50;
+      if (!game.disease.arbitraryValues.heart) {
+        game.disease.arbitraryValues.heart -= 50;
+      }
+
+      if (!game.disease.arbitraryValues.pulmonary) {
+        game.disease.arbitraryValues.pulmonary -= 50;
+      }
       return game;
     },
   },
   {
     name: "Inhaler (Puffer)",
-    description: "",
+    description: "A device that can help open airways for easier breathing.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.asthma) return game;
@@ -36,18 +42,24 @@ export const medicines: Medicine[] = [
   },
   {
     name: "Thrombolytics",
-    description: "",
+    description: "An antithrombotic that dissolves existing blood clots.",
     duration: 5,
     updateGame: (game) => {
-      if (!game.disease.arbitraryValues.heart) return game;
-      game.disease.arbitraryValues.heart -= 50;
+      if (!game.disease.arbitraryValues.heart && !game.disease.arbitraryValues.pulmonary) return game;
 
+      if (!game.disease.arbitraryValues.heart) {
+        game.disease.arbitraryValues.heart -= 50;
+      }
+
+      if (!game.disease.arbitraryValues.pulmonary) {
+        game.disease.arbitraryValues.pulmonary -= 50;
+      }
       return game;
     },
   },
   {
     name: "Intravenous Crystalloid IV",
-    description: "",
+    description: "A type of IV fluid that can replace blood.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.acute && !game.disease.arbitraryValues.sepsis) return game;
@@ -62,7 +74,7 @@ export const medicines: Medicine[] = [
   },
   {
     name: "Loperamide",
-    description: "",
+    description: "Controls the movements of the intestines to relive acute diarrhea.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.food) return game;
@@ -72,7 +84,7 @@ export const medicines: Medicine[] = [
   },
   {
     name: "Nafcillin",
-    description: "",
+    description: "An antibiotic injection that can kill most bacteria.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.staph) return game;
@@ -82,8 +94,8 @@ export const medicines: Medicine[] = [
     },
   },
   {
-    name: "Ibuprofen",
-    description: "",
+    name: "Potassium Permanganate",
+    description: "A chemical that helps with disinfecting wounds.",
     duration: 5,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.laceration) return game;

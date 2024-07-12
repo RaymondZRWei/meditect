@@ -1252,7 +1252,7 @@ export const diseases: StoredDisease[] = [
             // Intervention check
             if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "Laceration not treated adequately. Head doctor intervenes to apply ibuprofen and gauze.";
+                    "Laceration not treated adequately. Head doctor intervenes to apply potassium permanganate and gauze.";
                 game.finished = true;
 
                 return game;

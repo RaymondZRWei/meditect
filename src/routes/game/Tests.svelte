@@ -129,7 +129,7 @@
     </div>
 </div>
 
-<div class="h-full p-5">
+<div class="h-fit p-5">
     <div class="flex items-center justify-between">
         <div>
             <h2 class="font-bold text-lg mb-2">Tests</h2>

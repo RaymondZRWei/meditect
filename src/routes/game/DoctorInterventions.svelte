@@ -62,12 +62,21 @@
                 }}
                 use:melt={$content}
             >
-                <h2
-                    use:melt={$title}
-                    class="m-0 text-lg font-medium text-black"
-                >
-                    Treatment Test Completed
-                </h2>
+                {#if $game.doctorIntervention}
+                    <h2
+                        use:melt={$title}
+                        class="m-0 text-lg font-medium text-black"
+                    >
+                        Treatment Successful
+                    </h2>
+                {:else}
+                    <h2
+                        use:melt={$title}
+                        class="m-0 text-lg font-medium text-black"
+                    >
+                        Treatment Failed
+                    </h2>
+                {/if}
                 <p
                     use:melt={$description}
                     class="mb-5 mt-2 leading-normal text-slate-600"

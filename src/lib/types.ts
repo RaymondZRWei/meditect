@@ -44,7 +44,7 @@ export interface Medicine {
 }
 
 export interface StoredDisease extends Disease {
-    statHints: { [key in TestableSymptoms]: -2 | -1 | 0 | 1 | 2 };
+    statHints: { [key in QuantitativeSymptoms]: -2 | -1 | 0 | 1 | 2 };
     updateSymptoms: (game: GameData, prevGame: GameData) => GameData;
     getDefaultGameData: () => GameData;
 }

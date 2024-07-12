@@ -44,8 +44,6 @@
     const adminsterTest = (selectedTest: Test | null) => {
         if (!selectedTest) return;
 
-        game.elapsedTime += selectedTest.duration;
-
         let results: TestResult["results"] = {};
 
         switch (selectedTest.queriedSymptoms[0]) {
@@ -72,6 +70,8 @@
                 timeAdministered: game.elapsedTime,
             },
         ];
+
+        game.elapsedTime += selectedTest.duration;
     };
 
     // Function to find the latest value of a symptom
@@ -175,7 +175,12 @@
             class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2"
         >
             {#each game.testResults as test, i}
-                <div id={`line-${i}`} class="flex justify-between px-2 py-1 {i === game.testResults.length - 1 && "bg-slate-200"}">
+                <div
+                    id={`line-${i}`}
+                    class="flex justify-between px-2 py-1 {i ===
+                        game.testResults.length - 1 && 'bg-slate-200'}"
+                >
+                    <div>{test.timeAdministered} min</div>
                     <div>
                         {test.testName}
                     </div>

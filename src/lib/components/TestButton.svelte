@@ -2,7 +2,7 @@
     import SemicircleGauge from "$lib/components/SemicircleGauge.svelte";
 
     export let maxValue: number = 100;
-    export let value: number | null= null;
+    export let value: number | null = null;
 
     export let title: string = "Oxygen Saturation";
     export let unit: string = "% SpO2";
@@ -34,7 +34,7 @@
             <div
                 class="invisible group-hover:visible absolute inset-0 flex items-center justify-center"
             >
-                2 min
+                1 min
             </div>
             <div
                 class="visible group-hover:invisible absolute inset-0 flex items-center justify-center"

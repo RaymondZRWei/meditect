@@ -66,7 +66,7 @@
                     use:melt={$title}
                     class="m-0 text-lg font-medium text-black"
                 >
-                    Treatment Successful
+                    Treatment Test Completed
                 </h2>
                 <p
                     use:melt={$description}

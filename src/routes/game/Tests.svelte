@@ -2,12 +2,18 @@
     import { createDialog, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
-    import type { GameData, Test, TestResult } from "$lib/types";
+    import type {
+        GameData,
+        Test,
+        TestableSymptoms,
+        TestResult,
+    } from "$lib/types";
     import { tests } from "$lib/data/tests";
     import TestButton from "$lib/components/TestButton.svelte";
     import Checklist from "$lib/components/Checklist.svelte";
 
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
+    import { writable } from "svelte/store";
 
     export let game: GameData;
 
@@ -56,20 +62,31 @@
         ];
     };
 
-    let rr;
-
-    $: if (game.testResults) {
-        game.testResults.forEach((testResult) => {
-            if (testResult.testName === tests[0].name) {
-                rr = testResult.results.respiratoryRate;
-                console.log(typeof(testResult.results))
+    // Function to find the latest value of a symptom
+    function findLatestSymptomValue(
+        symptom: TestableSymptoms,
+    ): number | undefined {
+        for (let i = 0; i < game.testResults.length; i++) {
+            if (!game.testResults[i]) continue;
+            const result = game.testResults[i].results;
+            if (result && symptom in result) {
+                return result[symptom];
             }
-        });
+        }
+        return undefined;
     }
 
-    let os;
-    let gl;
-    let pl;
+    let latestRespiratoryRate: number | undefined;
+    let latestOxygenSaturation: number | undefined;
+    let latestGlucoseLevel: number | undefined;
+    let latestPain: number | undefined;
+
+    $: if (game.testResults) {
+        latestRespiratoryRate = findLatestSymptomValue("respiratoryRate");
+        latestOxygenSaturation = findLatestSymptomValue("oxygenSaturation");
+        latestGlucoseLevel = findLatestSymptomValue("bloodGlucose");
+        latestPain = findLatestSymptomValue("pain")
+    }
 </script>
 
 <div class="grid grid-cols-2">
@@ -79,7 +96,7 @@
             unit="Breaths per Min"
             actionMessage="Count"
             maxValue={30}
-            value={rr}
+            value={latestRespiratoryRate}
             onclick={() => adminsterTest(tests[0])}
         />
         <TestButton
@@ -87,6 +104,7 @@
             unit="% Sp02"
             actionMessage="Use Pulse Oximetry"
             maxValue={100}
+            value={latestOxygenSaturation}
             onclick={() => adminsterTest(tests[1])}
         />
         <TestButton
@@ -94,6 +112,7 @@
             unit="mg / dL"
             actionMessage="Use Glucometer"
             maxValue={100}
+            value={latestGlucoseLevel}
             onclick={() => adminsterTest(tests[2])}
         />
         <TestButton
@@ -101,6 +120,7 @@
             unit="Scale 0-100"
             actionMessage="Ask Patient"
             maxValue={100}
+            value={latestPain}
             onclick={() => adminsterTest(tests[3])}
         />
     </div>

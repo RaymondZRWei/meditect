@@ -2,15 +2,15 @@ import type { Test } from "../types";
 
 export const tests: Test[] = [
     {
-        name: "Oximeter",
-        description: "Measures the patient's oxygen saturation.",
-        queriedSymptoms: ["oxygenSaturation"],
-        duration: 2,
-    },
-    {
         name: "Respiratory Rate Monitor",
         description: "Measures the patient's respiratory rate.",
         queriedSymptoms: ["respiratoryRate"],
+        duration: 2,
+    },
+    {
+        name: "Oximeter",
+        description: "Measures the patient's oxygen saturation.",
+        queriedSymptoms: ["oxygenSaturation"],
         duration: 2,
     },
     {

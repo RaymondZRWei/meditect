@@ -126,7 +126,12 @@
         if (txt) text = txt;
 
         let data = localStorage.getItem("checklist");
-        if (data) items = JSON.parse(data);
+        if (data) {
+            let parsedData = JSON.parse(data)
+            parsedData.forEach((disease, i: number) => {
+                items[i].checked = disease.checked;
+            });
+        }
     })
 
     function saveNotes(txt: string) {
@@ -139,8 +144,6 @@
 </script>
 
 <main class="flex flex-col h-full pl-4">
-    <h3 class="text-black font-bold text-3xl">Checklist</h3>
-
     <!-- Items -->
     <div class="mt-4 mx-4 flex flex-col overflow-auto text-slate-600" {...root}>
         {#each items as { disease, stats, checked }, i}

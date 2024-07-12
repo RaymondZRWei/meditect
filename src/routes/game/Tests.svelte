@@ -2,12 +2,18 @@
     import { createDialog, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
 
-    import type { GameData, Test, TestResult } from "$lib/types";
+    import type {
+        GameData,
+        Test,
+        TestableSymptoms,
+        TestResult,
+    } from "$lib/types";
     import { tests } from "$lib/data/tests";
     import TestButton from "$lib/components/TestButton.svelte";
     import Checklist from "$lib/components/Checklist.svelte";
 
     import Fa6SolidPlus from "~icons/fa6-solid/plus";
+    import { writable } from "svelte/store";
 
     export let game: GameData;
 
@@ -55,6 +61,32 @@
             ...game.testResults,
         ];
     };
+
+    // Function to find the latest value of a symptom
+    function findLatestSymptomValue(
+        symptom: TestableSymptoms,
+    ): number | undefined {
+        for (let i = 0; i < game.testResults.length; i++) {
+            if (!game.testResults[i]) continue;
+            const result = game.testResults[i].results;
+            if (result && symptom in result) {
+                return result[symptom];
+            }
+        }
+        return undefined;
+    }
+
+    let latestRespiratoryRate: number | undefined;
+    let latestOxygenSaturation: number | undefined;
+    let latestGlucoseLevel: number | undefined;
+    let latestPain: number | undefined;
+
+    $: if (game.testResults) {
+        latestRespiratoryRate = findLatestSymptomValue("respiratoryRate");
+        latestOxygenSaturation = findLatestSymptomValue("oxygenSaturation");
+        latestGlucoseLevel = findLatestSymptomValue("bloodGlucose");
+        latestPain = findLatestSymptomValue("pain");
+    }
 </script>
 
 <div class="grid grid-cols-2">
@@ -64,24 +96,32 @@
             unit="Breaths per Min"
             actionMessage="Count"
             maxValue={30}
+            value={latestRespiratoryRate}
+            onclick={() => adminsterTest(tests[0])}
         />
         <TestButton
             title="Oxygen Saturation"
             unit="% Sp02"
             actionMessage="Use Pulse Oximetry"
             maxValue={100}
+            value={latestOxygenSaturation}
+            onclick={() => adminsterTest(tests[1])}
         />
         <TestButton
             title="Blood Glucose Level"
             unit="mg / dL"
             actionMessage="Use Glucometer"
             maxValue={100}
+            value={latestGlucoseLevel}
+            onclick={() => adminsterTest(tests[2])}
         />
         <TestButton
             title="Pain Level"
             unit="Scale 0-100"
             actionMessage="Ask Patient"
             maxValue={100}
+            value={latestPain}
+            onclick={() => adminsterTest(tests[3])}
         />
     </div>
     <div class="col-span-1">
@@ -89,27 +129,24 @@
     </div>
 </div>
 
-<div class="h-full p-5">
+<div class="h-fit p-5">
     <div class="flex items-center justify-between">
         <div>
-            <h2>Tests</h2>
+            <h2 class="font-bold text-lg mb-2">Tests</h2>
         </div>
-        <button use:melt={$trigger} aria-label="New Test">
-            <Fa6SolidPlus class="size-8" />
-        </button>
     </div>
     {#if game.testResults.length === 0}
         <p>No tests administered yet.</p>
     {:else}
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3 overflow-auto max-h-28 border-[1px] rounded-sm p-2">
             {#each game.testResults as test}
-                <div class="flex justify-between bg-red-300">
+                <div class="flex justify-between">
                     <div>
                         {test.testName}
                     </div>
                     <div class="flex gap-10">
                         {#each Object.entries(test.results) as [symptom, result]}
-                            {symptom}: {result}
+                            {result}
                         {/each}
                     </div>
                 </div>
@@ -117,7 +154,7 @@
         </div>
     {/if}
 </div>
-
+<!-- 
 {#if $open}
     <div use:melt={$portalled}>
         <div
@@ -172,4 +209,4 @@
             </div>
         </div>
     </div>
-{/if}
+{/if} -->

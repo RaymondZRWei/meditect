@@ -15,6 +15,11 @@
 
         // Updating the game data
         game.set(gameData);
+
+
+        // Reset tests
+        localStorage.removeItem("checklist")
+        localStorage.removeItem("notes")
     };
 
     const getUserCompletedDiseases = (userData: StoredUserData) => {

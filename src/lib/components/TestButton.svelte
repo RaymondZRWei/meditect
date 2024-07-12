@@ -2,14 +2,15 @@
     import SemicircleGauge from "$lib/components/SemicircleGauge.svelte";
 
     export let maxValue: number = 100;
-    export let value = null;
+    export let value: number | null= null;
 
     export let title: string = "Oxygen Saturation";
     export let unit: string = "% SpO2";
     export let actionMessage: string = "Use Pulse Oximetry";
+    export let onclick: () => void;
 </script>
 
-<div class="bg-slate-100 rounded-xl py-1 px-4 flex items-center">
+<div class="bg-slate-100 rounded-xl py-1 px-4 flex items-center min-w-[350px]">
     <div>
         <SemicircleGauge
             {value}
@@ -28,11 +29,12 @@
             class="group border-solid border-2 border-black rounded-xl px-2 py-1 text-xs font-light w-24 h-12 tracking-tighter relative
             active:border-slate-500"
             data-hover="1 minute"
+            on:click={onclick}
         >
             <div
                 class="invisible group-hover:visible absolute inset-0 flex items-center justify-center"
             >
-                1 min
+                2 min
             </div>
             <div
                 class="visible group-hover:invisible absolute inset-0 flex items-center justify-center"

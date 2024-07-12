@@ -2,9 +2,12 @@
     import { createAccordion, melt } from "@melt-ui/svelte";
     import { slide } from "svelte/transition";
 
-    import IconUp from "~icons/material-symbols/keyboard-double-arrow-up-rounded";
-    import IconDown from "~icons/material-symbols/keyboard-double-arrow-down-rounded";
+    import IconDoubleUp from "~icons/material-symbols/keyboard-double-arrow-up-rounded";
+    import IconUp from '~icons/material-symbols/keyboard-arrow-up-rounded'
+    import IconDoubleDown from "~icons/material-symbols/keyboard-double-arrow-down-rounded";
+    import IconDown from '~icons/material-symbols/keyboard-arrow-down-rounded'
     import IconConstant from "~icons/oui/token-constant";
+    import { onMount } from "svelte";
 
     const {
         elements: { content, item, trigger, root },
@@ -26,56 +29,121 @@
         },
         {
             disease: "Pulmonary Embolism",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconDoubleDown,
+                os: IconDown,
+                gl: IconConstant,
+                pain: IconDoubleUp,
+            },
             checked: false,
         },
         {
             disease: "Asthma Attack",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconUp,
+                pain: IconUp,
+            },
             checked: false,
         },
         {
             disease: "Heart Attack",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconDoubleDown,
+                os: IconDown,
+                gl: IconUp,
+                pain: IconDoubleUp,
+            },
             checked: false,
         },
         {
             disease: "Stroke",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconDoubleUp,
+                pain: IconConstant,
+            },
             checked: false,
         },
         {
             disease: "Sepsis",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconDoubleUp,
+                pain: IconDoubleUp,
+            },
             checked: false,
         },
         {
             disease: "Food Poisoning",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconConstant,
+                gl: IconUp,
+                pain: IconDoubleUp,
+            },
             checked: false,
         },
         {
             disease: "Acute Pancreatitis",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconDoubleUp,
+                pain: IconDoubleUp,
+            },
             checked: false,
         },
         {
             disease: "Staph",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconConstant,
+                pain: IconUp,
+            },
             checked: false,
         },
         {
             disease: "Laceration",
-            stats: { rr: -1, os: -1, gl: 0, pain: 1 },
+            stats: {
+                rr: IconUp,
+                os: IconDown,
+                gl: IconConstant,
+                pain: IconUp,
+            },
             checked: false,
         },
     ];
+
+
     let text = "";
+    onMount(() => {
+        let txt = localStorage.getItem("notes")
+        if (txt) text = txt;
+
+        let data = localStorage.getItem("checklist");
+        if (data) {
+            let parsedData = JSON.parse(data)
+            parsedData.forEach((disease, i: number) => {
+                items[i].checked = disease.checked;
+            });
+        }
+    })
+
+    function saveNotes(txt: string) {
+        localStorage.setItem("notes", txt);
+    }
+
+    function saveChecklist(checklist) {
+        localStorage.setItem("checklist", JSON.stringify(checklist));
+    }
 </script>
 
-<main class="flex flex-col h-full">
-    <h3 class="text-black font-bold text-3xl">Checklist</h3>
-
+<main class="flex flex-col h-full pl-4">
     <!-- Items -->
     <div class="mt-4 mx-4 flex flex-col overflow-auto text-slate-600" {...root}>
         {#each items as { disease, stats, checked }, i}
@@ -95,7 +163,7 @@
                     >
                         {disease}
                     </button>
-                    <input type="checkbox" bind:checked class="ml-auto" />
+                    <input type="checkbox" bind:checked on:input={() => saveChecklist(items)} class="ml-auto" />
                 </h2>
                 {#if $isSelected(disease)}
                     <div
@@ -144,7 +212,9 @@
         <span>Notes:</span>
         <textarea
             name="paragraph_text"
-            class="h-full w-full px-4 py-2 border-solid border-black border-[1px] text-sm rounded-sm resize-none"
+            class="h-full w-full px-2 py-1 border-solid border-black border-[1px] text-sm rounded-sm resize-none"
+            bind:value={text}
+            on:input={() => saveNotes(text)}
         />
     </div>
 </main>

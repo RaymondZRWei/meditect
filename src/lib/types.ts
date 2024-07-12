@@ -9,7 +9,8 @@ export type ContinuousSymptoms = (typeof continuousSymptoms)[number];
 export type TestableSymptoms =
     | "oxygenSaturation"
     | "respiratoryRate"
-    | "bloodGlucose";
+    | "bloodGlucose"
+    | "pain";
 
 export type QuantitativeSymptoms = ContinuousSymptoms | TestableSymptoms;
 

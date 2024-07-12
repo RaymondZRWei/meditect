@@ -10,7 +10,7 @@
     export let onclick: () => void;
 </script>
 
-<div class="bg-slate-100 rounded-xl py-1 px-4 flex items-center">
+<div class="bg-slate-100 rounded-xl py-1 px-4 flex items-center min-w-[350px]">
     <div>
         <SemicircleGauge
             {value}

@@ -77,10 +77,9 @@
         gameData.respiratoryRate = Math.round(
             gameData.respiratoryRate + Math.random() * 2 - 1,
         );
-        gameData.oxygenSaturation = varyAndRound(
-            gameData.oxygenSaturation,
-            -1,
-            1,
+        gameData.oxygenSaturation = Math.min(
+            varyAndRound(gameData.oxygenSaturation, -1, 1),
+            100,
         );
         gameData.bloodGlucose = varyAndRound(gameData.bloodGlucose, -2, 2);
         gameData.bloodPressureSystolic.value = varyAndRound(

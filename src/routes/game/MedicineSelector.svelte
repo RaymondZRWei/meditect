@@ -26,11 +26,12 @@
         use:melt={$trigger}
         class="flex justify-between items-center bg-slate-200 border-4 rounded-xl px-4 py-5 w-full {selectedMedicine &&
         selectedMedicine.name === medicine.name
-            ? 'border-slate-400'
-            : 'border-slate-200'}"
+            ? 'border-secondary'
+            : 'border-slate-200'} transition-all"
         on:click={() => (selectedMedicine = medicine)}
     >
         <div class="font-bold">{medicine.name}</div>
+        <div>{medicine.duration}m</div>
     </button>
 
     {#if $open}

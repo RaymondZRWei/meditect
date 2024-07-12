@@ -34,7 +34,7 @@
 </script>
 
 <section
-    class="bg-slate-100 p-8 rounded-xl h-full flex flex-col justify-between"
+    class="bg-slate-100 p-10 rounded-xl h-full flex flex-col justify-between"
 >
     <div>
         <h2 class="text-3xl font-bold mb-6">Treatments</h2>

@@ -5,6 +5,7 @@
     import WelcomeModal from "./WelcomeModal.svelte";
     import game from "$lib/store/game";
     import type { StoredUserData } from "$lib/types";
+    import Loading from "$lib/components/Loading.svelte";
 
     const startGame = () => {
         // Picking a random disease
@@ -45,7 +46,7 @@
 </script>
 
 {#if $userData === undefined}
-    <div>Loading User Data...</div>
+    <Loading />
 {/if}
 
 <WelcomeModal />

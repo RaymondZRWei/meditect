@@ -8,7 +8,7 @@
     import MaterialSymbolsSearchInsights from "~icons/material-symbols/search-insights";
     import PhJarLabelFill from "~icons/ph/jar-label-fill";
     import MaterialSymbolsAddChart from "~icons/material-symbols/add-chart";
-    import Fa6SolidPlus from "~icons/fa6-solid/plus";
+    import MaterialSymbolsTimer5 from "~icons/material-symbols/timer-5";
 
     import Stat from "$lib/components/Stat.svelte";
     import Tests from "./Tests.svelte";
@@ -127,15 +127,17 @@
                     title="Elapsed Time"
                     value={$game.elapsedTime}
                     unit="minutes"
-                    tooltip="This pops up on hover"
+                    tooltip="Click the button to increment the time"
                 >
                     <div>
                         <button
                             on:click={increaseElapsedTime}
-                            class="outline-none"
+                            class="outline-none rounded-xl"
                             aria-label="Increment Time"
                         >
-                            <Fa6SolidPlus class="size-8 text-slate-500" />
+                            <MaterialSymbolsTimer5
+                                class="size-10 text-primary hover:text-primary-dark transition-colors"
+                            />
                         </button>
                     </div>
                 </Stat>
@@ -144,19 +146,19 @@
                     title="Heart Rate"
                     value={$game.heartRate.value}
                     unit="bpm"
-                    tooltip="This pops up on hover"
+                    tooltip="The patient's heart beats per minute"
                 />
                 <Stat
                     title="Blood Pressure (Sys)"
                     value={$game.bloodPressureSystolic.value}
                     unit="mmHg"
-                    tooltip="This pops up on hover"
+                    tooltip="Pressure in the patient's arteries when their heart beats"
                 />
                 <Stat
                     title="Blood Pressure (Dia)"
                     value={$game.bloodPressureDiastolic.value}
                     unit="mmHg"
-                    tooltip="This pops up on hover"
+                    tooltip="Pressure in the patient's arteries when their heart is at rest"
                 />
             </section>
             <div class="h-full col-span-3">

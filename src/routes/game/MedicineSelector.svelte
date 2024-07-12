@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { updateGameWithMedicine } from "$lib/data/medicine";
     import { createTooltip, melt } from "@melt-ui/svelte";
     import { fade } from "svelte/transition";
     import type { GameData, Medicine } from "$lib/types";
@@ -17,30 +16,30 @@
         forceVisible: true,
     });
 
-    export let game: GameData;
     export let medicine: Medicine;
-
-    const administerMedicine = (medicine: Medicine) => {
-        game = updateGameWithMedicine(game, medicine);
-    };
+    export let selectedMedicine: Medicine | null;
 </script>
 
 <div>
-    <div
+    <button
         use:melt={$trigger}
-        class="flex justify-between items-center bg-slate-200 rounded-xl px-4 py-6"
+        class="flex justify-between items-center bg-slate-200 border-4 rounded-xl px-4 py-5 w-full {selectedMedicine &&
+        selectedMedicine.name === medicine.name
+            ? 'border-slate-400'
+            : 'border-slate-200'}"
+        on:click={() => (selectedMedicine = medicine)}
     >
         <div class="font-bold">{medicine.name}</div>
-    </div>
+    </button>
 
     {#if $open}
         <div
             use:melt={$content}
             transition:fade={{ duration: 100 }}
-            class=" z-10 rounded-lg bg-white shadow"
+            class=" z-10 rounded-lg bg-slate-600 text-white shadow"
         >
             <div use:melt={$arrow} />
-            <p class="px-4 py-1">Add item to library</p>
+            <p class="px-4 py-1">{medicine.description}</p>
         </div>
     {/if}
 </div>

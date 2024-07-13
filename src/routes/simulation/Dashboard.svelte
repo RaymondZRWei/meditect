@@ -1,15 +1,16 @@
 <script lang="ts">
-    import userData from "$lib/store/userData";
-    import { diseases } from "$lib/data/diseases";
+    import toast from "svelte-french-toast";
+    import colors from "tailwindcss/colors";
 
-    import game from "$lib/store/game";
     import type { StoredUserData } from "$lib/types";
+    import { diseases } from "$lib/data/diseases";
+    import userData from "$lib/store/userData";
+    import game from "$lib/store/game";
 
     import microCredential from "$lib/images/micro-credential.png";
 
     import WelcomeModal from "./WelcomeModal.svelte";
     import Loading from "$lib/components/Loading.svelte";
-    import colors from "tailwindcss/colors";
 
     const startGame = () => {
         // Picking a random disease
@@ -25,7 +26,12 @@
         const completedDiseases =
             getUserCompletedDiseases($userData).completedDiseases;
 
-        if (!completedDiseases) return;
+        if (!completedDiseases || completedDiseases.size === 0) {
+            toast.error(
+                "You pass at least one simulation to download your credentials.",
+            );
+            return;
+        }
 
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");

@@ -98,6 +98,44 @@
             Math.min(varyAndRound(gameData.pain, -2, 2), 100),
         );
 
+        // failsafes for value corruption
+        if(gameData.pain < 0){
+          gameData.pain = Math.round(Math.random()*20);
+        }
+        if(gameData.pain > 100){
+          gameData.pain = Math.round(Math.random()*10)+90;
+        }
+        if(gameData.heartRate.value < 0){
+          gameData.heartRate.value = Math.round(Math.random()*20)+20;
+        }
+        if(gameData.heartRate.value > 200){
+          gameData.heartRate.value = Math.round(Math.random()*10)+170;
+        }
+        if(gameData.respiratoryRate < 0){
+          gameData.respiratoryRate = Math.round(Math.random()*10);
+        }
+        if(gameData.respiratoryRate > 45){
+          gameData.respiratoryRate = Math.round(Math.random()*5)+35;
+        }
+        if(gameData.oxygenSaturation < 55){
+          gameData.oxygenSaturation = Math.round(Math.random()*10)+55;
+        }
+        if(gameData.oxygenSaturation > 100){
+          gameData.oxygenSaturation = Math.round(Math.random()*2)+97;
+        }
+        if(gameData.bloodPressureSystolic.value < 50){
+          gameData.bloodPressureSystolic.value = Math.round(Math.random()*10)+50;
+        }
+        if(gameData.bloodPressureSystolic.value > 200){
+          gameData.bloodPressureSystolic.value = Math.round(Math.random()*20)+180;
+        }
+        if(gameData.bloodPressureDiastolic.value < 30){
+          gameData.bloodPressureDiastolic.value = Math.round(Math.random()*10)+30;
+        }
+        if(gameData.bloodPressureDiastolic.value > 120){
+          gameData.bloodPressureDiastolic.value = Math.round(Math.random()*20)+90;
+        }
+
         game.set(newGameData);
 
         prevGame = structuredClone(newGameData);

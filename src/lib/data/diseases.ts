@@ -43,7 +43,7 @@ const storedDiseaseToDisease = (storedDisease: StoredDisease): Disease => {
     // Return everything in storedDisease except for updateSymptoms and getDefaultGameData
     const { updateSymptoms, getDefaultGameData, ...disease } = storedDisease;
 
-    return disease;
+    return structuredClone(disease);
 };
 
 const defaultGameData = {

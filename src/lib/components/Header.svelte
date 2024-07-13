@@ -3,42 +3,37 @@
 
     import logo from "$lib/images/logo.png";
     import game from "$lib/store/game";
+    import color from "tailwindcss/colors";
 
-    interface Route {
-        name: string;
-        path: string;
-    }
+    const onScroll = () => {
+        const header = document.getElementById("header");
 
-    const routes: Route[] = [
-        { name: "Home", path: "/" },
-        { name: "About", path: "/about" },
-    ];
+        if (!header) return;
+
+        if (window.scrollY > 100) {
+            header.style.background = color.white;
+            header.classList.add("shadow-md");
+        } else {
+            header.style.background = color.transparent;
+            header.classList.remove("shadow-md");
+        }
+    };
+
     $: isPlaying = $page.url.pathname.includes("/simulation");
 </script>
+
+<svelte:window on:scroll={onScroll} />
 
 <header
     class="py-8 px-12 flex overflow-auto {isPlaying && $game !== null
         ? 'absolute'
-        : 'sticky z-50 bg-white shadow-md w-full'} top-0 justify-between items-center"
+        : 'sticky z-50 w-full'} top-0 justify-between items-center transition-all"
+    id="header"
 >
-    <a href={routes[0].path} class="flex items-center gap-3">
+    <a href="/" class="flex items-center gap-3">
         <img src={logo} alt="Meditect Logo" class="size-12" />
         {#if !isPlaying || $game === null}
             <div class="text-3xl font-bold tracking-tight">Meditect</div>
         {/if}
     </a>
-    {#if !isPlaying || $game === null}
-        <div class="flex gap-14 items-center text-lg">
-            {#each routes as { name, path }}
-                <a
-                    href={path}
-                    class={$page.url.pathname === path
-                        ? "text-primary"
-                        : "text-slate-500"}
-                >
-                    {name}
-                </a>
-            {/each}
-        </div>
-    {/if}
 </header>

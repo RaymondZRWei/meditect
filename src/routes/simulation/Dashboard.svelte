@@ -50,7 +50,7 @@
 
 <WelcomeModal />
 
-<div class="mt-16">
+<div class="mt-12">
     <div class="grid grid-cols-10 gap-8">
         <div class="col-span-7">
             <h1 class="text-5xl font-bold mb-6">Dashboard</h1>

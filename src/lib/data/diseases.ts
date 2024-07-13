@@ -347,7 +347,7 @@ export const diseases: StoredDisease[] = [
                 );
             } else if (isFirstTimeAboveElapsedTime(game, prevGame, 20)) {
                 game.doctorHints.push(
-                    "Hint: The patient has a history of cardiac issuesof cardiac issues.",
+                    "Hint: The patient has a history of cardiac issues.",
                 );
             }
 
@@ -689,7 +689,7 @@ export const diseases: StoredDisease[] = [
             // Intervention check
             if (isFirstTimeAboveElapsedTime(game, prevGame, 27)) {
                 game.doctorIntervention =
-                    "Patient is completely paralyzed. The head doctor intervenes and administers tissue plasminogen activator (tPA).";
+                    "Patient is completely paralyzed. The head doctor intervenes and administers thrombolytics.";
                 game.finished = true;
                 return game;
             }

@@ -98,4 +98,41 @@
             </section>
         </div>
     </div>
+    <h2 class="text-6xl font-bold text-center mb-14">Our Team</h2>
+    <section class="max-w-screen-xl mx-auto px-6 md:px-12 my-12">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col items-centegr">
+                <img
+                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
+                    alt="photo 1"
+                    class="rounded-lg shadow-md"
+                />
+                <p class="text-slate-500 mb-14 text-lg">first</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <img
+                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
+                    alt="photo 2"
+                    class="rounded-lg shadow-md"
+                />
+                <p class="text-slate-500 mb-14 text-lg">second</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <img
+                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
+                    alt="photo 3"
+                    class="rounded-lg shadow-md"
+                />
+                <p class="text-slate-500 mb-14 text-lg">third</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <img
+                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
+                    alt="photo 4"
+                    class="rounded-lg shadow-md"
+                />
+                <p class="text-slate-500 mb-14 text-lg">fourth</p>
+            </div>
+        </div>
+    </section>
 </div>

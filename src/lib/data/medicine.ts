@@ -4,11 +4,11 @@ export const medicines: Medicine[] = [
   {
     name: "Naloxone",
     description: "Blocks the effects of certain stimulants in the brain.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.opioid) return game;
 
-      game.disease.arbitraryValues.opioid -= 50;
+      game.disease.arbitraryValues.opioid -= 100;
       return game;
     },
   },
@@ -16,7 +16,7 @@ export const medicines: Medicine[] = [
     name: "Rivaroxaban",
     description:
       "An anticoagulant that prevents blood clots from worsening.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (
         !game.disease.arbitraryValues.heart &&
@@ -26,15 +26,15 @@ export const medicines: Medicine[] = [
       }
 
       if (!game.disease.arbitraryValues.stroke) {
-        game.disease.arbitraryValues.stroke -= 50;
+        game.disease.arbitraryValues.stroke -= 100;
       }
 
       if (!game.disease.arbitraryValues.heart) {
-        game.disease.arbitraryValues.heart -= 50;
+        game.disease.arbitraryValues.heart -= 100;
       }
 
       if (!game.disease.arbitraryValues.pulmonary) {
-        game.disease.arbitraryValues.pulmonary -= 50;
+        game.disease.arbitraryValues.pulmonary -= 100;
       }
       return game;
     },
@@ -43,18 +43,18 @@ export const medicines: Medicine[] = [
     name: "Inhaler (Puffer)",
     description:
       "A device that can help open airways for easier breathing.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.asthma) return game;
 
-      game.disease.arbitraryValues.asthma -= 50;
+      game.disease.arbitraryValues.asthma -= 100;
       return game;
     },
   },
   {
     name: "Thrombolytics",
     description: "An antithrombotic that dissolves existing blood clots.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (
         !game.disease.arbitraryValues.heart &&
@@ -63,16 +63,16 @@ export const medicines: Medicine[] = [
         return game;
       }
 
-      if (!game.disease.arbitraryValues.stroke) {
-        game.disease.arbitraryValues.stroke -= 50;
+      if (game.disease.arbitraryValues.stroke) {
+        game.disease.arbitraryValues.stroke -= 100;
       }
 
-      if (!game.disease.arbitraryValues.heart) {
-        game.disease.arbitraryValues.heart -= 50;
+      if (game.disease.arbitraryValues.heart) {
+        game.disease.arbitraryValues.heart -= 100;
       }
 
-      if (!game.disease.arbitraryValues.pulmonary) {
-        game.disease.arbitraryValues.pulmonary -= 50;
+      if (game.disease.arbitraryValues.pulmonary) {
+        game.disease.arbitraryValues.pulmonary -= 100;
       }
       return game;
     },
@@ -80,7 +80,7 @@ export const medicines: Medicine[] = [
   {
     name: "Intravenous Crystalloid IV",
     description: "A type of IV fluid that can replace blood.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (
         !game.disease.arbitraryValues.acute &&
@@ -88,10 +88,10 @@ export const medicines: Medicine[] = [
       )
         return game;
       if (game.disease.arbitraryValues.acute) {
-        game.disease.arbitraryValues.acute -= 50;
+        game.disease.arbitraryValues.acute -= 100;
       }
       if (game.disease.arbitraryValues.sepsis) {
-        game.disease.arbitraryValues.sepsis -= 50;
+        game.disease.arbitraryValues.sepsis -= 100;
       }
       return game;
     },
@@ -100,20 +100,21 @@ export const medicines: Medicine[] = [
     name: "Loperamide",
     description:
       "Controls the movements of the intestines to relive acute diarrhea.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.food) return game;
-      game.disease.arbitraryValues.food -= 50;
+
+      game.disease.arbitraryValues.food -= 100;
       return game;
     },
   },
   {
     name: "Nafcillin",
     description: "An antibiotic injection that can kill most bacteria.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.staph) return game;
-      game.disease.arbitraryValues.staph -= 50;
+      game.disease.arbitraryValues.staph -= 100;
 
       return game;
     },
@@ -121,10 +122,10 @@ export const medicines: Medicine[] = [
   {
     name: "Potassium Permanganate",
     description: "A chemical that helps with disinfecting wounds.",
-    duration: 5,
+    duration: 10,
     updateGame: (game) => {
       if (!game.disease.arbitraryValues.laceration) return game;
-      game.disease.arbitraryValues.laceration -= 50;
+      game.disease.arbitraryValues.laceration -= 100;
 
       return game;
     },

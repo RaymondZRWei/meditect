@@ -17,10 +17,15 @@
         : null;
 
     const saveAndGoToDashboard = () => {
-        if (!$game) return;
-
+        if (!$game) {
+          console.log("not game");
+            return;
+        }
         userData.update((data) => {
-            if (!data) return data;
+            if (!data) {
+              console.log("not data");
+              return data;
+            }
 
             const storedGame: GameResult = {
                 bloodPressureDiastolic: $game.bloodPressureDiastolic,
@@ -33,10 +38,14 @@
             };
 
             data.games.push(storedGame);
-
+            console.log(data);
+            game.set(null);
+            // console.log("chungus");
+            // console.log(data);
             return data;
         });
 
+        console.log("what is going on ");
         game.set(null);
     };
 </script>

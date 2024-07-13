@@ -15,7 +15,12 @@
         const gameData = randomDisease.getDefaultGameData();
 
         // Updating the game data
+        // console.log("LOL");
+        // console.log(game);
+        // game.set(null);
         game.set(gameData);
+        // console.log("LOL2");
+        // console.log(game);
     };
 
     const getUserCompletedDiseases = (userData: StoredUserData) => {

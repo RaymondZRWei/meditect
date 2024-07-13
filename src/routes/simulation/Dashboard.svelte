@@ -2,10 +2,14 @@
     import userData from "$lib/store/userData";
     import { diseases } from "$lib/data/diseases";
 
-    import WelcomeModal from "./WelcomeModal.svelte";
     import game from "$lib/store/game";
     import type { StoredUserData } from "$lib/types";
+
+    import microCredential from "$lib/images/micro-credential.png";
+
+    import WelcomeModal from "./WelcomeModal.svelte";
     import Loading from "$lib/components/Loading.svelte";
+    import colors from "tailwindcss/colors";
 
     const startGame = () => {
         // Picking a random disease
@@ -15,6 +19,61 @@
         const gameData = structuredClone(randomDisease.getDefaultGameData());
 
         game.set(gameData);
+    };
+
+    const downloadCredentials = () => {
+        const completedDiseases =
+            getUserCompletedDiseases($userData).completedDiseases;
+
+        if (!completedDiseases) return;
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) return;
+
+        const image = new Image();
+        image.src = microCredential;
+
+        image.onload = () => {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+
+            ctx.font = "bold 20px Arial";
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(
+                `Completed Diseases: ${completedDiseases.size}`,
+                canvas.width / 2,
+                canvas.height / 2,
+            );
+
+            // Random 20 character string of numbers and letters
+            const randomString = Math.random().toString(36).substring(2, 22);
+
+            ctx.font = "13px Arial";
+            ctx.fillStyle = colors.white;
+            const text = `ID: ${randomString}`;
+
+            const textWidth = ctx.measureText(text).actualBoundingBoxRight;
+
+            const textX = canvas.width - textWidth - 8;
+            const textY =
+                canvas.height -
+                8 -
+                ctx.measureText(text).actualBoundingBoxAscent;
+
+            ctx.fillText(text, textX, textY);
+
+            const dataURL = canvas.toDataURL("image/png");
+
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = `micro-credential-${randomString}.png`;
+            link.click();
+        };
     };
 
     const getUserCompletedDiseases = (userData: StoredUserData) => {
@@ -100,7 +159,7 @@
                     Start Simulation
                 </button>
                 <button
-                    on:click={startGame}
+                    on:click={downloadCredentials}
                     class="bg-secondary hover:bg-secondary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
                 >
                     Download Credentials

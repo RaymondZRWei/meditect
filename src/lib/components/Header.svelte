@@ -5,9 +5,9 @@
     import game from "$lib/store/game";
     import color from "tailwindcss/colors";
 
-    const onScroll = () => {
-        const header = document.getElementById("header");
+    let header: HTMLElement | null = null;
 
+    const onScroll = () => {
         if (!header) return;
 
         if (window.scrollY > 100) {
@@ -28,7 +28,7 @@
     class="py-8 px-12 flex overflow-auto {isPlaying && $game !== null
         ? 'absolute'
         : 'sticky z-50 w-full'} top-0 justify-between items-center transition-all"
-    id="header"
+    bind:this={header}
 >
     <a href="/" class="flex items-center gap-3">
         <img src={logo} alt="Meditect Logo" class="size-12" />

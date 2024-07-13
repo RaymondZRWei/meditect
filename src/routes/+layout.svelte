@@ -4,8 +4,9 @@
     import { page } from "$app/stores";
     import { Toaster } from "svelte-french-toast";
 
-    import Header from "$lib/components/Header.svelte";
     import game from "$lib/store/game";
+
+    import Header from "$lib/components/Header.svelte";
 
     $: isPlaying = $page.url.pathname.includes("/simulation");
 </script>
@@ -18,7 +19,7 @@
     <div
         class="{isPlaying
             ? 'hidden'
-            : 'block'} absolute inset-0 h-[50vh] bg-gradient-to-b from-slate-400/70 -z-50"
+            : 'block'} absolute inset-0 h-[50vh] bg-gradient-to-b from-slate-300 -z-50"
     ></div>
 
     <Header />

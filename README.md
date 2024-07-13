@@ -7,7 +7,7 @@
 1. Install [Node.js 20.x.x](https://nodejs.org/en)
 2. Clone the repository locally.
     ```shell
-    git clone https://github.com/RaymondZRWei/med-ed
+    git clone https://github.com/RaymondZRWei/meditect
     ```
 3. Install the dependencies.
     ```shell

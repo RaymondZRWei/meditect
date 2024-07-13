@@ -1,9 +1,10 @@
 <script lang="ts">
+    import Footer from "$lib/components/Footer.svelte";
     import Scene from "$lib/components/Scene.svelte";
 
-    const onScroll = () => {
-        const mouse = document.getElementById("mouse");
+    let mouse: HTMLElement | null = null;
 
+    const onScroll = () => {
         if (!mouse) return;
 
         if (window.scrollY > 10) {
@@ -50,7 +51,7 @@
 
     <div
         class="w-10 h-16 border-[3px] border-slate-400 rounded-3xl fixed z-20 bottom-8 left-1/2 before:w-3 before:h-3 before:absolute before:top-2 before:left-1/2 before:-translate-x-1/2 before:bg-slate-400 before:rounded-full before:animate-wheel transition-opacity"
-        id="mouse"
+        bind:this={mouse}
     />
     <div class="flex flex-col pt-24">
         <div class="max-w-screen-lg mx-auto px-14 md:px-0">
@@ -135,4 +136,6 @@
             </div>
         </div>
     </section>
+
+    <Footer />
 </div>

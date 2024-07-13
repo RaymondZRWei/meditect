@@ -2,7 +2,9 @@
     import { page } from "$app/stores";
 </script>
 
-<div class="h-full absolute inset-0 flex items-center justify-center">
+<div
+    class="h-full absolute inset-0 flex items-center justify-center text-center"
+>
     <div>
         <h1
             class="mb-2 text-8xl font-bold md:text-9xl lg:text-[12rem] text-primary lg:pr-2.5"

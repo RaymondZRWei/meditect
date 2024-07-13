@@ -16,7 +16,7 @@
                 <TestButton bind:game {test} />
             {/each}
         </div>
-        <div class="grow">
+        <div class="overflow-auto h-[400px]">
             <Checklist />
         </div>
     </div>

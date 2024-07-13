@@ -62,6 +62,8 @@ type ContinuousSymptomStore = {
 type TestableSymptomStore = { [key in TestableSymptoms]: number };
 
 export interface GameData extends ContinuousSymptomStore, TestableSymptomStore {
+    name: string;
+    age: number;
     finished: boolean;
     elapsedTime: number;
     testResults: TestResult[];

@@ -123,7 +123,9 @@
         <div
             class="bg-slate-100 w-full p-4 rounded-xl mb-3 flex justify-between items-center"
         >
-            <div class="text-lg font-medium pl-4">Bob Baker (45 years old)</div>
+            <div class="text-lg font-medium pl-4">
+                {$game.name} ({$game.age} years old)
+            </div>
             <button
                 class="bg-red-500 hover:bg-red-600 transition-colors px-6 py-3 text-white rounded-lg"
                 on:click={() => {

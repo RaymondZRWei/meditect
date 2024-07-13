@@ -15,16 +15,16 @@
             </span>
         </h1>
         <p class="mb-6 text-slate-500 md:mb-10 md:text-lg lg:text-xl">
-            There was a problem with learning medicine, it was boring! Med Ed
+            There was a problem with learning medicine, it was boring! Meditect
             solves that issue with game driven teaching where learning isn't
             just not boring, it's fun!
         </p>
         <div>
             <a
                 class="bg-primary hover:bg-primary-dark transition-colors text-white rounded-lg px-6 py-4"
-                href="/game"
+                href="/simulation"
             >
-                Start Playing
+                Start Simulation
             </a>
         </div>
     </div>

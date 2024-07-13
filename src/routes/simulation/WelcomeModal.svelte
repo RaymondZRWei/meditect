@@ -33,7 +33,7 @@
             use:melt={$content}
         >
             <h2 use:melt={$title} class="mb-3 text-3xl font-bold text-black">
-                Welcome to Med Ed
+                Welcome to Meditect
             </h2>
             <p
                 use:melt={$description}

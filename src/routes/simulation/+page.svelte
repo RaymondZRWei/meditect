@@ -18,8 +18,6 @@
     import DoctorInterventions from "./DoctorInterventions.svelte";
     import Loading from "$lib/components/Loading.svelte";
 
-    const CONTINUOUS_DATA_UPDATE_INTERVAL = 5;
-
     interface Page {
         name: string;
         icon: ComponentType;
@@ -132,7 +130,7 @@
                     game.set(null);
                 }}
             >
-                Leave Game
+                Quit Simulation
             </button>
         </div>
         <div class="grid grid-cols-4 gap-4 grow h-full">

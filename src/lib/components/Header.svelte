@@ -12,9 +12,8 @@
     const routes: Route[] = [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
-        { name: "Statistics", path: "/stats" },
     ];
-    $: isPlaying = $page.url.pathname.includes("/game");
+    $: isPlaying = $page.url.pathname.includes("/simulation");
 </script>
 
 <header
@@ -23,9 +22,9 @@
         : 'sticky z-50 bg-white shadow-md w-full'} top-0 justify-between items-center"
 >
     <a href={routes[0].path} class="flex items-center gap-3">
-        <img src={logo} alt="Med Ed Logo" class="size-12" />
+        <img src={logo} alt="Meditect Logo" class="size-12" />
         {#if !isPlaying || $game === null}
-            <div class="text-3xl font-bold tracking-tight">Med Ed</div>
+            <div class="text-3xl font-bold tracking-tight">Meditect</div>
         {/if}
     </a>
     {#if !isPlaying || $game === null}

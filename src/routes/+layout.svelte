@@ -7,7 +7,7 @@
     import Header from "$lib/components/Header.svelte";
     import game from "$lib/store/game";
 
-    $: isPlaying = $page.url.pathname.includes("/game") && $game;
+    $: isPlaying = $page.url.pathname.includes("/simulation") && $game;
 </script>
 
 <div

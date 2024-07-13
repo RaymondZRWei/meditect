@@ -53,7 +53,7 @@
 <div class="mt-16">
     <div class="grid grid-cols-10 gap-8">
         <div class="col-span-7">
-            <h1 class="text-5xl font-bold mb-5">Dashboard</h1>
+            <h1 class="text-5xl font-bold mb-6">Dashboard</h1>
             <p class="text-slate-500 mb-10">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
                 consequatur unde recusandae aliquid, amet accusamus vitae
@@ -97,13 +97,13 @@
                     on:click={startGame}
                     class="bg-primary hover:bg-primary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
                 >
-                    Start Game
+                    Start Simulation
                 </button>
                 <button
                     on:click={startGame}
                     class="bg-secondary hover:bg-secondary-dark transition-colors px-6 py-3.5 rounded-lg text-white outline-none"
                 >
-                    Past Games
+                    Download Credentials
                 </button>
             </section>
             <section class="grow p-8 bg-slate-100 rounded-xl">

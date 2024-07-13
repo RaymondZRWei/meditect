@@ -1,3 +1,4 @@
+import randomName from "node-random-name";
 import type { Disease, GameData, StoredDisease } from "../types";
 
 const isFirstTimeAboveElapsedTime = (
@@ -46,13 +47,24 @@ const storedDiseaseToDisease = (storedDisease: StoredDisease): Disease => {
     return structuredClone(disease);
 };
 
-const defaultGameData = {
-    elapsedTime: 0,
-    doctorHints: [],
-    doctorIntervention: null,
-    testResults: [],
-    finished: false,
-    pageIndex: 0,
+const getConstantGameData = () => {
+    let constantGameData = {
+        elapsedTime: 0,
+        doctorHints: [],
+        doctorIntervention: null,
+        testResults: [],
+        finished: false,
+        pageIndex: 0,
+        name: "",
+        age: 0,
+    };
+
+    constantGameData.name = randomName();
+
+    // Random number between 18 and 70
+    constantGameData.age = Math.floor(Math.random() * 52) + 18;
+
+    return constantGameData;
 };
 
 export const diseases: StoredDisease[] = [
@@ -92,7 +104,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is drowsy, pale, and has a decreased level of responsiveness.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -216,7 +228,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient suffers from intense chest pain and difficulty breathing.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -340,7 +352,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is wheezing and feels a tightness in their chest",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -462,7 +474,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient is in agony and feels a tightness in their chest",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -586,7 +598,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient feels numb and their speech is impeded.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -709,7 +721,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient appears disoriented, agitated, and confused.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -833,7 +845,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient feels a sharp pain in their stomach and is sweating profusely.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -957,7 +969,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "The patient has difficulty breathing and feels an acute epigastric pain.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -1081,7 +1093,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "There are swollen red bumps on the patient's skin.",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {
@@ -1205,7 +1217,7 @@ export const diseases: StoredDisease[] = [
                 qualitativeSymptoms: [
                     "There is a large wound on the patient's arm",
                 ],
-                ...defaultGameData,
+                ...getConstantGameData(),
             };
         },
         updateSymptoms: (game: GameData, prevGame: GameData): GameData => {

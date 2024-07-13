@@ -39,9 +39,8 @@
                 use:melt={$description}
                 class="mb-5 mt-2 leading-normal text-slate-600"
             >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Pariatur molestiae quo quod expedita magnam animi quidem fuga.
-                Beatae, ea in.
+                Dive into realistic ER scenarios to test you clinical
+                decision-making.
             </p>
 
             <button

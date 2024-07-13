@@ -24,7 +24,7 @@
             <h1
                 class="mb-4 text-4xl font-mono tracking-tighter !leading-[1.2] font-bold md:text-5xl xl:text-6xl"
             >
-                Medical Education through
+                Micro-Credentials through a
                 <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
                 >
@@ -32,9 +32,7 @@
                 </span>
             </h1>
             <p class="mb-6 text-slate-500 md:mb-10 md:text-lg lg:text-xl">
-                There was a problem with learning medicine, it was boring!
-                Meditect solves that issue with game driven teaching where
-                learning isn't just not boring, it's fun!
+                Bridging theory and practice in medicine.
             </p>
             <div>
                 <a

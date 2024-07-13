@@ -55,10 +55,10 @@
         <div class="col-span-7">
             <h1 class="text-5xl font-bold mb-6">Dashboard</h1>
             <p class="text-slate-500 mb-10">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-                consequatur unde recusandae aliquid, amet accusamus vitae
-                consectetur, omnis quo porro necessitatibus. Est quam libero
-                incidunt dolores voluptatum accusamus ab dolorem.
+                Complete the simulation to earn credentials for the following
+                ailments. Make use of the qualitative and quantitative data to
+                diagnose and treat each patient. Beware, you are judged on speed
+                and accuracy!
             </p>
             <section>
                 <h2 class="text-3xl font-bold mb-6">Disease Certifications</h2>

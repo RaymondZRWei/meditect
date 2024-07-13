@@ -87,7 +87,7 @@
                         </div>
                     {:else}
                         <div>
-                            You have successfully treated the patient with {diseaseName}.
+                            You have successfully treated the patient.
                             You had {totalDoctorHints} doctor hints.
                         </div>
                     {/if}

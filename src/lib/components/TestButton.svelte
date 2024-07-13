@@ -12,6 +12,7 @@
 
     const findLatestSymptomValue = (
         symptom: TestableSymptoms,
+        game: GameData,
     ): number | null => {
         for (let i = game.testResults.length - 1; i >= 0; i--) {
             let result = game.testResults[i].results[symptom];
@@ -48,7 +49,7 @@
     <div class="flex items-center gap-4">
         <div>
             <SemicircleGauge
-                value={findLatestSymptomValue(test.queriedSymptom)}
+                value={findLatestSymptomValue(test.queriedSymptom, game)}
                 maxValue={test.maxValue}
             />
         </div>
@@ -66,7 +67,7 @@
             class="group border-2 border-zinc-600 rounded-xl text-xs font-light w-32 h-10 tracking-tighter relative
             active:border-slate-500"
             data-hover="1 minute"
-            on:click={onclick}
+            on:click={adminsterTest}
         >
             <div
                 class="invisible group-hover:visible absolute inset-0 flex items-center justify-center"

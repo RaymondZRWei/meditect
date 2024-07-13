@@ -7,7 +7,7 @@ export const tests: Test[] = [
         actionMessage: "Use Spirometer",
         queriedSymptom: "respiratoryRate",
         maxValue: 30,
-        duration: 1,
+        duration: 2,
     },
     {
         name: "Oxygen Saturation",
@@ -15,7 +15,7 @@ export const tests: Test[] = [
         actionMessage: "Use Oximeter",
         queriedSymptom: "oxygenSaturation",
         maxValue: 100,
-        duration: 1,
+        duration: 2,
     },
     {
         name: "Blood Glucose",
@@ -23,7 +23,7 @@ export const tests: Test[] = [
         actionMessage: "Use Glucometer",
         queriedSymptom: "bloodGlucose",
         maxValue: 100,
-        duration: 1,
+        duration: 2,
     },
     {
         name: "Pain Response",

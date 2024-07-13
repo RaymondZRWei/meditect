@@ -54,7 +54,7 @@
 <div class="mt-16">
     <div class="grid grid-cols-10 gap-8">
         <div class="col-span-7">
-            <h1 class="text-5xl font-bold mb-4">Dashboard</h1>
+            <h1 class="text-5xl font-bold mb-5">Dashboard</h1>
             <p class="text-slate-500 mb-10">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
                 consequatur unde recusandae aliquid, amet accusamus vitae
@@ -107,10 +107,44 @@
                     Past Games
                 </button>
             </section>
-            <section
-                class="grow p-8 bg-slate-100 rounded-xl flex flex-col gap-3"
-            >
-                <h2 class="text-3xl font-bold">Account Stats</h2>
+            <section class="grow p-8 bg-slate-100 rounded-xl">
+                {#if $userData && completedDiseases !== null && partiallyCompletedDiseases !== null}
+                    <h2 class="text-3xl font-bold mb-6">Account Stats</h2>
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <h3 class="text-lg font-semibold">
+                                Games Completed
+                            </h3>
+                            <p class="text-base text-slate-500">
+                                {$userData.games.length}
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">Completions</h3>
+                            <p class="text-base text-slate-500">
+                                {completedDiseases.size}
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">
+                                Partial Completions
+                            </h3>
+                            <p class="text-base text-slate-500">
+                                {partiallyCompletedDiseases.size}
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">
+                                Failed Completions
+                            </h3>
+                            <p class="text-base text-slate-500">
+                                {$userData.games.length -
+                                    completedDiseases.size -
+                                    partiallyCompletedDiseases.size}
+                            </p>
+                        </div>
+                    </div>
+                {/if}
             </section>
         </div>
     </div>

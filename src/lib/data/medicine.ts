@@ -4,7 +4,7 @@ export const medicines: Medicine[] = [
     {
         name: "Naloxone",
         description: "Blocks the effects of certain stimulants in the brain.",
-        duration: 5,
+        duration: 3,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.opioid) return game;
 
@@ -16,7 +16,7 @@ export const medicines: Medicine[] = [
         name: "Rivaroxaban",
         description:
             "An anticoagulant that prevents blood clots from worsening.",
-        duration: 5,
+        duration: 8,
         updateGame: (game) => {
             if (
                 !game.disease.arbitraryValues.heart &&
@@ -38,7 +38,7 @@ export const medicines: Medicine[] = [
         name: "Inhaler (Puffer)",
         description:
             "A device that can help open airways for easier breathing.",
-        duration: 5,
+        duration: 2,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.asthma) return game;
 
@@ -49,7 +49,7 @@ export const medicines: Medicine[] = [
     {
         name: "Thrombolytics",
         description: "An antithrombotic that dissolves existing blood clots.",
-        duration: 5,
+        duration: 2,
         updateGame: (game) => {
             if (
                 !game.disease.arbitraryValues.heart &&
@@ -70,7 +70,7 @@ export const medicines: Medicine[] = [
     {
         name: "Intravenous Crystalloid IV",
         description: "A type of IV fluid that can replace blood.",
-        duration: 5,
+        duration: 8,
         updateGame: (game) => {
             if (
                 !game.disease.arbitraryValues.acute &&
@@ -90,7 +90,7 @@ export const medicines: Medicine[] = [
         name: "Loperamide",
         description:
             "Controls the movements of the intestines to relive acute diarrhea.",
-        duration: 5,
+        duration: 2,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.food) return game;
             game.disease.arbitraryValues.food -= 50;
@@ -111,7 +111,7 @@ export const medicines: Medicine[] = [
     {
         name: "Potassium Permanganate",
         description: "A chemical that helps with disinfecting wounds.",
-        duration: 5,
+        duration: 3,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.laceration) return game;
             game.disease.arbitraryValues.laceration -= 50;

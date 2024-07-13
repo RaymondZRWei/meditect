@@ -1,26 +1,69 @@
 <script lang="ts">
     import SemicircleGauge from "$lib/components/SemicircleGauge.svelte";
+    import type {
+        GameData,
+        Test,
+        TestableSymptoms,
+        TestResult,
+    } from "$lib/types";
 
-    export let maxValue: number = 100;
-    export let value: number | null = null;
+    export let test: Test;
+    export let game: GameData;
 
-    export let title: string = "Oxygen Saturation";
-    export let unit: string = "% SpO2";
-    export let actionMessage: string = "Use Pulse Oximetry";
-    export let onclick: () => void;
+    const findLatestSymptomValue = (
+        symptom: TestableSymptoms,
+    ): number | null => {
+        for (let i = game.testResults.length - 1; i >= 0; i--) {
+            let result = game.testResults[i].results[symptom];
+            if (result) {
+                return result;
+            }
+        }
+
+        return null;
+    };
+
+    const adminsterTest = () => {
+        let results: TestResult["results"] = {};
+
+        results[test.queriedSymptom] = game[test.queriedSymptom];
+
+        game.testResults = [
+            ...game.testResults,
+            {
+                testName: test.name,
+                duration: test.duration,
+                results,
+                timeAdministered: game.elapsedTime,
+            },
+        ];
+
+        game.elapsedTime += test.duration;
+    };
 </script>
 
-<div class="bg-slate-200 rounded-xl p-2 flex items-center">
-    <SemicircleGauge {value} {maxValue} width={100} height={80} />
+<div
+    class="bg-slate-200 rounded-xl px-5 py-2 flex items-center justify-between"
+>
+    <div class="flex items-center gap-4">
+        <div>
+            <SemicircleGauge
+                value={findLatestSymptomValue(test.queriedSymptom)}
+                maxValue={test.maxValue}
+            />
+        </div>
 
-    <div class="flex flex-col gap-1 min-w-20 px-4 flex-1">
-        <div class="font-bold text-sm">{title}</div>
-        <div class="font-extralight text-sm text-slate-400">{unit}</div>
+        <div class="flex flex-col">
+            <div class="font-bold">{test.name}</div>
+            <div class="font-extralight text-sm text-slate-600">
+                {test.unit}
+            </div>
+        </div>
     </div>
 
     <div>
         <button
-            class="group border-2 border-zinc-600 rounded-xl text-xs font-light w-28 h-10 tracking-tighter relative
+            class="group border-2 border-zinc-600 rounded-xl text-xs font-light w-32 h-10 tracking-tighter relative
             active:border-slate-500"
             data-hover="1 minute"
             on:click={onclick}
@@ -33,7 +76,7 @@
             <div
                 class="visible group-hover:invisible absolute inset-0 flex items-center justify-center"
             >
-                {actionMessage}
+                {test.actionMessage}
             </div>
         </button>
     </div>

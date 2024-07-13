@@ -14,10 +14,12 @@
     },
     "devDependencies": {
         "@iconify-json/bi": "^1.1.23",
+        "@iconify-json/bxs": "^1.1.10",
         "@iconify-json/f7": "^1.1.0",
         "@iconify-json/fa6-solid": "^1.1.22",
         "@iconify-json/material-symbols": "^1.1.83",
         "@iconify-json/material-symbols-light": "^1.1.23",
+        "@iconify-json/mdi": "^1.1.67",
         "@iconify-json/oui": "^1.1.2",
         "@iconify-json/ph": "^1.1.13",
         "@iconify-json/solar": "^1.1.9",

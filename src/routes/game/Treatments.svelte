@@ -53,6 +53,7 @@
         >
             Administer
         </button>
+
         {#if $open && selectedMedicine === null}
             <div
                 use:melt={$content}

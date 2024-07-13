@@ -24,13 +24,13 @@
 <div>
     <button
         use:melt={$trigger}
-        class="flex justify-between items-center bg-slate-200 border-4 rounded-xl px-4 py-5 w-full {selectedMedicine &&
+        class="flex justify-between items-center bg-slate-200 border-[2.5px] rounded-xl px-4 py-5 w-full {selectedMedicine &&
         selectedMedicine.name === medicine.name
             ? 'border-secondary'
             : 'border-slate-200'} transition-all"
         on:click={() => (selectedMedicine = medicine)}
     >
-        <div class="font-bold">{medicine.name}</div>
+        <div class="font-semibold">{medicine.name}</div>
         <div>{medicine.duration}m</div>
     </button>
 

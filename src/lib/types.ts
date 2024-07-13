@@ -19,9 +19,11 @@ export type QuantitativeSymptoms = ContinuousSymptoms | TestableSymptoms;
 
 export interface Test {
     name: string;
-    description: string;
-    queriedSymptoms: TestableSymptoms;
+    unit: string;
+    actionMessage: string;
+    maxValue: number;
     duration: number;
+    queriedSymptom: TestableSymptoms;
 }
 
 export interface TestResult {
@@ -68,7 +70,6 @@ export interface GameData extends ContinuousSymptomStore, TestableSymptomStore {
     pain: number;
     doctorHints: string[];
     doctorIntervention: string | null;
-    notes: string;
     pageIndex: number;
 }
 

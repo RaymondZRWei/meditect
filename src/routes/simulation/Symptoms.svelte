@@ -28,18 +28,18 @@
 </script>
 
 <div class="h-full grid grid-cols-5 gap-4">
-    <div class="col-span-3 bg-slate-100 pl-6 py-6 rounded-xl">
+    <div class="col-span-3 bg-slate-100 px-6 py-4 rounded-xl">
         <div class="h-fit p-5">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-bold text-lg mb-2">Tests</h2>
+                    <h2 class="font-bold text-3xl mb-6">Test History</h2>
                 </div>
             </div>
             {#if game.testResults.length === 0}
                 <p>No tests administered yet.</p>
             {:else}
                 <div
-                    class="flex flex-col gap-3 max-h-[60vh] overflow-auto rounded-sm border-[1px] p-2"
+                    class="flex flex-col gap-3 max-h-[60vh] overflow-auto rounded-xl border-[1px] px-6 py-4 bg-slate-200 text-lg"
                 >
                     {#each game.testResults as test, i}
                         <div

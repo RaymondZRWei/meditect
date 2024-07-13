@@ -1,7 +1,8 @@
 <script lang="ts">
     export let value: number | null;
-    export let defaultValue: number = 25;
-    export let maxValue: number = 100;
+    export let maxValue: number;
+
+    const defaultValue = 25;
 
     const width = 80;
     const height = 75;

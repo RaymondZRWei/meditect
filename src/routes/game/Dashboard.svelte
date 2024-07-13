@@ -12,9 +12,8 @@
         const randomDisease =
             diseases[Math.floor(Math.random() * diseases.length)];
 
-        const gameData = randomDisease.getDefaultGameData();
+        const gameData = structuredClone(randomDisease.getDefaultGameData());
 
-        // Updating the game data
         game.set(gameData);
     };
 

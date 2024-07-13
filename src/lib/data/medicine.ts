@@ -8,7 +8,7 @@ export const medicines: Medicine[] = [
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.opioid) return game;
 
-            game.disease.arbitraryValues.opioid -= 50;
+            game.disease.arbitraryValues.opioid -= 100;
             return game;
         },
     },
@@ -20,16 +20,22 @@ export const medicines: Medicine[] = [
         updateGame: (game) => {
             if (
                 !game.disease.arbitraryValues.heart &&
-                !game.disease.arbitraryValues.pulmonary
-            )
+                !game.disease.arbitraryValues.pulmonary &&
+                !game.disease.arbitraryValues.stroke
+            ) {
                 return game;
+            }
+
+            if (!game.disease.arbitraryValues.stroke) {
+                game.disease.arbitraryValues.stroke -= 100;
+            }
 
             if (!game.disease.arbitraryValues.heart) {
-                game.disease.arbitraryValues.heart -= 50;
+                game.disease.arbitraryValues.heart -= 100;
             }
 
             if (!game.disease.arbitraryValues.pulmonary) {
-                game.disease.arbitraryValues.pulmonary -= 50;
+                game.disease.arbitraryValues.pulmonary -= 100;
             }
             return game;
         },
@@ -42,7 +48,7 @@ export const medicines: Medicine[] = [
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.asthma) return game;
 
-            game.disease.arbitraryValues.asthma -= 50;
+            game.disease.arbitraryValues.asthma -= 100;
             return game;
         },
     },
@@ -53,16 +59,22 @@ export const medicines: Medicine[] = [
         updateGame: (game) => {
             if (
                 !game.disease.arbitraryValues.heart &&
-                !game.disease.arbitraryValues.pulmonary
-            )
+                !game.disease.arbitraryValues.pulmonary &&
+                !game.disease.arbitraryValues.stroke
+            ) {
                 return game;
-
-            if (!game.disease.arbitraryValues.heart) {
-                game.disease.arbitraryValues.heart -= 50;
             }
 
-            if (!game.disease.arbitraryValues.pulmonary) {
-                game.disease.arbitraryValues.pulmonary -= 50;
+            if (game.disease.arbitraryValues.stroke) {
+                game.disease.arbitraryValues.stroke -= 100;
+            }
+
+            if (game.disease.arbitraryValues.heart) {
+                game.disease.arbitraryValues.heart -= 100;
+            }
+
+            if (game.disease.arbitraryValues.pulmonary) {
+                game.disease.arbitraryValues.pulmonary -= 100;
             }
             return game;
         },
@@ -78,10 +90,10 @@ export const medicines: Medicine[] = [
             )
                 return game;
             if (game.disease.arbitraryValues.acute) {
-                game.disease.arbitraryValues.acute -= 50;
+                game.disease.arbitraryValues.acute -= 100;
             }
-            if (game.disease.arbitraryValues.acute) {
-                game.disease.arbitraryValues.sepsis -= 50;
+            if (game.disease.arbitraryValues.sepsis) {
+                game.disease.arbitraryValues.sepsis -= 100;
             }
             return game;
         },
@@ -93,7 +105,8 @@ export const medicines: Medicine[] = [
         duration: 10,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.food) return game;
-            game.disease.arbitraryValues.food -= 50;
+
+            game.disease.arbitraryValues.food -= 100;
             return game;
         },
     },
@@ -103,7 +116,7 @@ export const medicines: Medicine[] = [
         duration: 10,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.staph) return game;
-            game.disease.arbitraryValues.staph -= 50;
+            game.disease.arbitraryValues.staph -= 100;
 
             return game;
         },
@@ -114,7 +127,7 @@ export const medicines: Medicine[] = [
         duration: 10,
         updateGame: (game) => {
             if (!game.disease.arbitraryValues.laceration) return game;
-            game.disease.arbitraryValues.laceration -= 50;
+            game.disease.arbitraryValues.laceration -= 100;
 
             return game;
         },

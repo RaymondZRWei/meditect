@@ -17,12 +17,15 @@
         : null;
 
     const saveAndGoToDashboard = () => {
-        if (!$game) return;
-
+        if (!$game) {
+            return;
+        }
         userData.update((data) => {
-            if (!data) return data;
+            if (!data) {
+                return data;
+            }
 
-            const storedGame: GameResult = {
+            const storedGame: GameResult = structuredClone({
                 bloodPressureDiastolic: $game.bloodPressureDiastolic,
                 bloodPressureSystolic: $game.bloodPressureSystolic,
                 disease: $game.disease,
@@ -30,10 +33,10 @@
                 heartRate: $game.heartRate,
                 doctorHints: $game.doctorHints,
                 doctorIntervention: $game.doctorIntervention,
-            };
+            });
 
             data.games.push(storedGame);
-
+            game.set(null);
             return data;
         });
 

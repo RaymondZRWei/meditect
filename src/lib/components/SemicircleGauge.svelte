@@ -1,9 +1,12 @@
 <script lang="ts">
     export let value: number | null;
-    export let defaultValue: number = 25;
-    export let maxValue: number = 100;
-    export let width: number = 200;
-    export let height: number = 100;
+    export let maxValue: number;
+
+    const defaultValue = 25;
+
+    const width = 80;
+    const height = 75;
+    const strokeWidth = 5;
 
     const describeArc = (
         x: number,
@@ -72,7 +75,12 @@
 
 <div class="relative">
     <svg {width} {height} viewBox={`0 0 ${width} ${height}`}>
-        <path d={svgPath} stroke={color} stroke-width={5} fill="none" />
+        <path
+            d={svgPath}
+            stroke={color}
+            stroke-width={strokeWidth}
+            fill="none"
+        />
     </svg>
     <div
         class="text-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center text-black z-50 pb-1"

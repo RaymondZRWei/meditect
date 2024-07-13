@@ -32,9 +32,20 @@
                 <button
                     {...$trigger(disease.name)}
                     use:trigger
-                    class="flex-1 text-left cursor-pointer"
+                    class="flex-1 text-left cursor-pointer flex"
                 >
-                    {disease.name}
+                    <div>
+                        {disease.name}
+                    </div>
+                    {#if $isSelected(disease.name)}
+                        <div class="ml-auto flex items-center">
+                            <IconUp></IconUp>
+                        </div>
+                    {:else}
+                        <div class="ml-auto flex items-center justify-center">
+                            <IconDown></IconDown>
+                        </div>
+                    {/if}
                 </button>
             </h2>
             {#if $isSelected(disease.name)}

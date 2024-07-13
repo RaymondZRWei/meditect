@@ -1,21 +1,32 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+    import { browser } from "$app/environment";
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
     import Footer from "$lib/components/Footer.svelte";
     import Scene from "$lib/components/Scene.svelte";
 
     import MdiGithub from "~icons/mdi/github";
     import SimpleIconsDevpost from "~icons/simple-icons/devpost";
 
-    let mouse: HTMLElement | null = null;
+    if (browser) {
+        gsap.registerPlugin(ScrollTrigger);
+    }
 
-    const onScroll = () => {
-        if (!mouse) return;
-
-        if (window.scrollY > 10) {
-            mouse.style.opacity = "0";
-        } else {
-            mouse.style.opacity = "1";
-        }
-    };
+    onMount(() => {
+        // Scroll Indicator
+        gsap.to("#mouse", {
+            opacity: 0,
+            scrollTrigger: {
+                trigger: "#content",
+                start: "top bottom-=100",
+                end: "top bottom-=100",
+                scrub: true,
+                // markers: true,
+            },
+        });
+    });
 
     interface TeamMember {
         name: string;
@@ -26,22 +37,16 @@
 
     const teamMembers: TeamMember[] = [
         {
-            name: "Raymond Wei",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
-            devPostLink: "https://devpost.com/raymondweizr",
-            githubLink: "https://github.com/RaymondZRWei",
-        },
-        {
-            name: "Elijah Won",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
-            devPostLink: "https://devpost.com/ejinsw",
-            githubLink: "https://github.com/ejinsw",
-        },
-        {
             name: "Gabe D'Souza",
             image: "https://i.imgur.com/AkAD7ln.jpg",
             devPostLink: "https://devpost.com/principle105",
             githubLink: "https://github.com/principle105",
+        },
+        {
+            name: "Raymond Wei",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/raymondweizr",
+            githubLink: "https://github.com/RaymondZRWei",
         },
         {
             name: "Henry Wei",
@@ -49,10 +54,14 @@
             devPostLink: "https://devpost.com/henryweihw",
             githubLink: "https://github.com/HenryWei8",
         },
+        {
+            name: "Elijah Won",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/ejinsw",
+            githubLink: "https://github.com/ejinsw",
+        },
     ];
 </script>
-
-<svelte:window on:scroll={onScroll} />
 
 <div class="relative">
     <section
@@ -88,9 +97,10 @@
 
     <div
         class="w-10 h-16 border-[3px] border-slate-400 rounded-3xl fixed z-20 bottom-8 left-1/2 before:w-3 before:h-3 before:absolute before:top-2 before:left-1/2 before:-translate-x-1/2 before:bg-slate-400 before:rounded-full before:animate-wheel transition-opacity"
-        bind:this={mouse}
+        id="mouse"
     />
-    <div class="flex flex-col pt-24">
+
+    <div class="flex flex-col pt-24" id="content">
         <div class="max-w-screen-lg mx-auto">
             <section class="mb-32">
                 <h2 class="text-6xl font-bold text-center mb-14">About</h2>

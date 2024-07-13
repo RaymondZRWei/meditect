@@ -18,16 +18,14 @@
 
     const saveAndGoToDashboard = () => {
         if (!$game) {
-          console.log("not game");
             return;
         }
         userData.update((data) => {
             if (!data) {
-              console.log("not data");
-              return data;
+                return data;
             }
 
-            const storedGame: GameResult = {
+            const storedGame: GameResult = structuredClone({
                 bloodPressureDiastolic: $game.bloodPressureDiastolic,
                 bloodPressureSystolic: $game.bloodPressureSystolic,
                 disease: $game.disease,
@@ -35,17 +33,13 @@
                 heartRate: $game.heartRate,
                 doctorHints: $game.doctorHints,
                 doctorIntervention: $game.doctorIntervention,
-            };
+            });
 
             data.games.push(storedGame);
-            console.log(data);
             game.set(null);
-            // console.log("chungus");
-            // console.log(data);
             return data;
         });
 
-        console.log("what is going on ");
         game.set(null);
     };
 </script>

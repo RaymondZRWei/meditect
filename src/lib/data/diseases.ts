@@ -21,10 +21,10 @@ const moveSymptomTowardsValue = (
     timeSinceLastUpdate: number,
     value: number,
 ): number => {
-    const difference = symptomValue - value;
+    const difference = Math.abs(symptomValue - value);
     const differenceIncrement = difference / 30;
 
-    if (difference > 0) {
+    if (symptomValue > value) {
         symptomValue = Math.max(
             symptomValue - timeSinceLastUpdate * differenceIncrement,
             value,
@@ -36,7 +36,7 @@ const moveSymptomTowardsValue = (
         );
     }
 
-    return symptomValue;
+    return Math.abs(symptomValue);
 };
 
 const storedDiseaseToDisease = (storedDisease: StoredDisease): Disease => {
@@ -52,7 +52,6 @@ const defaultGameData = {
     doctorIntervention: null,
     testResults: [],
     finished: false,
-    notes: "",
     pageIndex: 0,
 };
 
@@ -100,56 +99,6 @@ export const diseases: StoredDisease[] = [
             const opioidLevel = game.disease.arbitraryValues.opioid;
 
             const timeSinceLastUpdate = game.elapsedTime - prevGame.elapsedTime;
-
-            // outdated didnt add glucose lvl
-            // if (opioidLevel > 60) {
-            //     game.heartRate.value = moveSymptomTowardsValue(
-            //         game.heartRate.value,
-            //         timeSinceLastUpdate,
-            //         35,
-            //     );
-            //     game.oxygenSaturation = moveSymptomTowardsValue(
-            //         game.oxygenSaturation,
-            //         timeSinceLastUpdate,
-            //         75,
-            //     );
-            //     game.respiratoryRate = moveSymptomTowardsValue(
-            //         game.respiratoryRate,
-            //         timeSinceLastUpdate,
-            //         2,
-            //     );
-            // } else if (opioidLevel > 30) {
-            //     game.heartRate.value = moveSymptomTowardsValue(
-            //         game.heartRate.value,
-            //         timeSinceLastUpdate,
-            //         45,
-            //     );
-            //     game.oxygenSaturation = moveSymptomTowardsValue(
-            //         game.oxygenSaturation,
-            //         timeSinceLastUpdate,
-            //         90,
-            //     );
-            //     game.respiratoryRate = moveSymptomTowardsValue(
-            //         game.respiratoryRate,
-            //         timeSinceLastUpdate,
-            //         10,
-            //     );
-            // } else if (opioidLevel > 0) {
-            //     game.heartRate.value = moveSymptomTowardsValue(
-            //         game.heartRate.value,
-            //         timeSinceLastUpdate,
-            //         60,
-            //     );
-            //     game.oxygenSaturation = moveSymptomTowardsValue(
-            //         game.oxygenSaturation,
-            //         timeSinceLastUpdate,
-            //         95,
-            //     );
-            //     game.respiratoryRate = moveSymptomTowardsValue(
-            //         game.respiratoryRate,
-            //         timeSinceLastUpdate,
-            //         15,
-            //     );
 
             if (opioidLevel > 0) {
                 game.heartRate.value = moveSymptomTowardsValue(

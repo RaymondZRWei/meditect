@@ -5,7 +5,7 @@
 <section class="grid h-full pb-32 pt-6 grid-cols-5 max-w-screen-xl mx-auto">
     <div class="pt-28 col-span-3">
         <h1
-            class="mb-4 text-4xl font-mono tracking-tighter !leading-[1.2] font-semibold md:text-5xl xl:text-6xl"
+            class="mb-4 text-4xl font-mono tracking-tighter !leading-[1.2] font-bold md:text-5xl xl:text-6xl"
         >
             Medical Education through
             <span

@@ -41,7 +41,7 @@
     ];
 
     const varyAndRound = (value: number, low: number, high: number): number => {
-        return Math.round(value + Math.random() * (high - low) + low);
+        return Math.round(value + (Math.random() * (high - low) + low));
     };
 
     let prevGame: GameData | null = $game ? structuredClone($game) : null;
@@ -73,9 +73,12 @@
             -3,
             3,
         );
-        gameData.respiratoryRate = Math.round(
-            gameData.respiratoryRate + Math.random() * 2 - 1,
+        gameData.respiratoryRate = varyAndRound(
+            gameData.respiratoryRate,
+            -2,
+            2,
         );
+
         gameData.oxygenSaturation = Math.min(
             varyAndRound(gameData.oxygenSaturation, -1, 1),
             100,

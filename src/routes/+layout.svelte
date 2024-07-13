@@ -2,7 +2,6 @@
     import "./global.css";
 
     import { page } from "$app/stores";
-    import { Toaster } from "svelte-french-toast";
 
     import game from "$lib/store/game";
 
@@ -28,5 +27,3 @@
         <slot />
     </main>
 </div>
-
-<Toaster />

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import toast from "svelte-french-toast";
     import colors from "tailwindcss/colors";
 
     import type { StoredUserData } from "$lib/types";
@@ -25,11 +24,10 @@
     const downloadCredentials = () => {
         const completedDiseases =
             getUserCompletedDiseases($userData).completedDiseases;
+        const partiallyCompletedDiseases =
+            getUserCompletedDiseases($userData).partiallyCompletedDiseases;
 
-        if (!completedDiseases || completedDiseases.size === 0) {
-            toast.error(
-                "You pass at least one simulation to download your credentials.",
-            );
+        if (!completedDiseases || !partiallyCompletedDiseases) {
             return;
         }
 
@@ -46,15 +44,40 @@
             canvas.height = image.height;
             ctx.drawImage(image, 0, 0);
 
-            ctx.font = "bold 20px Arial";
-            ctx.fillStyle = "black";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(
-                `Completed Diseases: ${completedDiseases.size}`,
-                canvas.width / 2,
-                canvas.height / 2,
-            );
+            const imageWidth = image.width;
+
+            let currentHeight = 235;
+
+            const fontSize = 18;
+
+            for (const disease of diseases) {
+                ctx.font = `${fontSize}px Arial`;
+                ctx.fillStyle = colors.black;
+
+                const textX = 50;
+                const textY = currentHeight;
+
+                ctx.fillText(disease.name, textX, textY);
+
+                const circleX = imageWidth - 50;
+                const circleY = currentHeight - fontSize / 2;
+                const circleRadius = fontSize / 2.75;
+
+                ctx.beginPath();
+                ctx.arc(circleX, circleY, circleRadius, 0, 2 * Math.PI);
+
+                if (completedDiseases.has(disease.name)) {
+                    ctx.fillStyle = colors.green[400];
+                } else if (partiallyCompletedDiseases.has(disease.name)) {
+                    ctx.fillStyle = colors.yellow[400];
+                } else {
+                    ctx.fillStyle = colors.red[400];
+                }
+
+                ctx.fill();
+
+                currentHeight += fontSize * 1.6;
+            }
 
             // Random 20 character string of numbers and letters
             const randomString = Math.random().toString(36).substring(2, 22);

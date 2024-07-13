@@ -2,6 +2,9 @@
     import Footer from "$lib/components/Footer.svelte";
     import Scene from "$lib/components/Scene.svelte";
 
+    import MdiGithub from "~icons/mdi/github";
+    import SimpleIconsDevpost from "~icons/simple-icons/devpost";
+
     let mouse: HTMLElement | null = null;
 
     const onScroll = () => {
@@ -13,6 +16,40 @@
             mouse.style.opacity = "1";
         }
     };
+
+    interface TeamMember {
+        name: string;
+        image: string;
+        devPostLink: string;
+        githubLink: string;
+    }
+
+    const teamMembers: TeamMember[] = [
+        {
+            name: "Raymond Wei",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/raymondweizr",
+            githubLink: "https://github.com/RaymondZRWei",
+        },
+        {
+            name: "Elijah Won",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/ejinsw",
+            githubLink: "https://github.com/ejinsw",
+        },
+        {
+            name: "Gabe D'Souza",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/principle105",
+            githubLink: "https://github.com/principle105",
+        },
+        {
+            name: "Henry Wei",
+            image: "https://i.imgur.com/AkAD7ln.jpg",
+            devPostLink: "https://devpost.com/henryweihw",
+            githubLink: "https://github.com/HenryWei8",
+        },
+    ];
 </script>
 
 <svelte:window on:scroll={onScroll} />
@@ -54,7 +91,7 @@
         bind:this={mouse}
     />
     <div class="flex flex-col pt-24">
-        <div class="max-w-screen-lg mx-auto px-14 md:px-0">
+        <div class="max-w-screen-lg mx-auto">
             <section class="mb-32">
                 <h2 class="text-6xl font-bold text-center mb-14">About</h2>
 
@@ -97,45 +134,49 @@
                     come back hungrier than before.
                 </p>
             </section>
+            <section>
+                <h2 class="text-6xl font-bold text-center mb-14">Our Team</h2>
+                <div
+                    class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 pb-32"
+                >
+                    {#each teamMembers as teamMember}
+                        <div class="text-center">
+                            <img
+                                class="rounded-xl sm:size-48 lg:size-60 mx-auto"
+                                src={teamMember.image}
+                                alt={teamMember.name}
+                            />
+                            <div class="mt-2 sm:mt-4">
+                                <h3
+                                    class="text-sm font-medium text-slate-800 sm:text-base lg:text-lg"
+                                >
+                                    {teamMember.name}
+                                </h3>
+                                <div class="flex justify-center gap-1 mt-1">
+                                    <a
+                                        href={teamMember.devPostLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-slate-600 hover:text-slate-800 transition-colors"
+                                    >
+                                        <SimpleIconsDevpost class="w-6 h-6" />
+                                    </a>
+                                    <a
+                                        href={teamMember.githubLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-slate-600 hover:text-slate-800 transition-colors"
+                                    >
+                                        <MdiGithub class="w-6 h-6" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {/each}
+                </div>
+            </section>
         </div>
     </div>
-    <h2 class="text-6xl font-bold text-center mb-14">Our Team</h2>
-    <section class="max-w-screen-xl mx-auto px-6 md:px-12 my-12">
-        <div class="grid grid-cols-2 gap-4">
-            <div class="flex flex-col items-centegr">
-                <img
-                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
-                    alt="photo 1"
-                    class="rounded-lg shadow-md"
-                />
-                <p class="text-slate-500 mb-14 text-lg">first</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <img
-                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
-                    alt="photo 2"
-                    class="rounded-lg shadow-md"
-                />
-                <p class="text-slate-500 mb-14 text-lg">second</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <img
-                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
-                    alt="photo 3"
-                    class="rounded-lg shadow-md"
-                />
-                <p class="text-slate-500 mb-14 text-lg">third</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <img
-                    src="https://t4.ftcdn.net/jpg/01/36/70/67/360_F_136706734_KWhNBhLvY5XTlZVocpxFQK1FfKNOYbMj.jpg"
-                    alt="photo 4"
-                    class="rounded-lg shadow-md"
-                />
-                <p class="text-slate-500 mb-14 text-lg">fourth</p>
-            </div>
-        </div>
-    </section>
 
     <Footer />
 </div>

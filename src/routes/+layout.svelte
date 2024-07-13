@@ -19,7 +19,7 @@
     <div
         class="{isPlaying
             ? 'hidden'
-            : 'block'} absolute inset-0 h-[50vh] bg-gradient-to-b from-slate-300 -z-50"
+            : 'block'} absolute inset-0 h-[75vh] bg-gradient-to-b from-slate-300 -z-50"
     ></div>
 
     <Header />

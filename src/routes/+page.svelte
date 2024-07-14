@@ -9,6 +9,10 @@
 
     import MdiGithub from "~icons/mdi/github";
     import SimpleIconsDevpost from "~icons/simple-icons/devpost";
+    import gabe from "$lib/images/gabe.webp";
+    import raymond from "$lib/images/raymond.webp";
+    import henry from "$lib/images/henry.webp";
+    import elijah from "$lib/images/elijah.webp";
 
     if (browser) {
         gsap.registerPlugin(ScrollTrigger);
@@ -38,25 +42,25 @@
     const teamMembers: TeamMember[] = [
         {
             name: "Gabe D'Souza",
-            image: "src/lib/images/gabe.webp",
+            image: gabe,
             devPostLink: "https://devpost.com/principle105",
             githubLink: "https://github.com/principle105",
         },
         {
             name: "Raymond Wei",
-            image: "src/lib/images/raymond.webp",
+            image: raymond,
             devPostLink: "https://devpost.com/raymondweizr",
             githubLink: "https://github.com/RaymondZRWei",
         },
         {
             name: "Henry Wei",
-            image: "src/lib/images/henry.webp",
+            image: henry,
             devPostLink: "https://devpost.com/henryweihw",
             githubLink: "https://github.com/HenryWei8",
         },
         {
             name: "Elijah Won",
-            image: "src/lib/images/elijah.webp",
+            image: elijah,
             devPostLink: "https://devpost.com/ejinsw",
             githubLink: "https://github.com/ejinsw",
         },

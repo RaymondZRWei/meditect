@@ -114,14 +114,38 @@
 
         let completedDiseases: Set<string> = new Set();
         let partiallyCompletedDiseases: Set<string> = new Set();
-
+        let str1 = 0;
+        let str2 = 0;
         for (const game of userData.games) {
-            if (game.doctorIntervention) continue;
-
+            if (game.doctorIntervention) {
+                // console.log("doctor intervention: " + game);
+                continue;
+            }
+            let flag = 0;
             if (game.doctorHints.length === 0) {
-                completedDiseases.add(game.disease.name);
+                flag = 1;
+                if (!completedDiseases.has(game.disease.name)) {
+                    // console.log("success: " + game);
+                    completedDiseases.add(game.disease.name);
+                    str1++;
+                    flag = 0;
+                }
             } else {
-                partiallyCompletedDiseases.add(game.disease.name);
+                flag = 2;
+                if (!partiallyCompletedDiseases.has(game.disease.name)) {
+                    // console.log("kinda success: " + game);
+                    partiallyCompletedDiseases.add(game.disease.name);
+                    str2++;
+                    flag = 0;
+                }
+            }
+
+            if (flag == 1) {
+                completedDiseases.add(str1 + " extra");
+                str1++;
+            } else if (flag == 2) {
+                partiallyCompletedDiseases.add(str2 + " extra");
+                str2++;
             }
         }
 

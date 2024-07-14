@@ -26,15 +26,15 @@ export const medicines: Medicine[] = [
                 return game;
             }
 
-            if (!game.disease.arbitraryValues.stroke) {
+            if (game.disease.arbitraryValues.stroke) {
                 game.disease.arbitraryValues.stroke -= 100;
             }
 
-            if (!game.disease.arbitraryValues.heart) {
+            if (game.disease.arbitraryValues.heart) {
                 game.disease.arbitraryValues.heart -= 100;
             }
 
-            if (!game.disease.arbitraryValues.pulmonary) {
+            if (game.disease.arbitraryValues.pulmonary) {
                 game.disease.arbitraryValues.pulmonary -= 100;
             }
             return game;

@@ -38,25 +38,25 @@
     const teamMembers: TeamMember[] = [
         {
             name: "Gabe D'Souza",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
+            image: "src/lib/images/gabe.webp",
             devPostLink: "https://devpost.com/principle105",
             githubLink: "https://github.com/principle105",
         },
         {
             name: "Raymond Wei",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
+            image: "src/lib/images/raymond.webp",
             devPostLink: "https://devpost.com/raymondweizr",
             githubLink: "https://github.com/RaymondZRWei",
         },
         {
             name: "Henry Wei",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
+            image: "src/lib/images/henry.webp",
             devPostLink: "https://devpost.com/henryweihw",
             githubLink: "https://github.com/HenryWei8",
         },
         {
             name: "Elijah Won",
-            image: "https://i.imgur.com/AkAD7ln.jpg",
+            image: "src/lib/images/elijah.webp",
             devPostLink: "https://devpost.com/ejinsw",
             githubLink: "https://github.com/ejinsw",
         },
@@ -179,6 +179,16 @@
                                     >
                                         <MdiGithub class="w-6 h-6" />
                                     </a>
+                                    {#if teamMember.name == "Raymond Wei"}
+                                        <a
+                                            href={"https://github.com/inconspicuousaltacc"}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="text-slate-600 hover:text-slate-800 transition-colors"
+                                        >
+                                            <MdiGithub class="w-6 h-6" />
+                                        </a>
+                                    {/if}
                                 </div>
                             </div>
                         </div>

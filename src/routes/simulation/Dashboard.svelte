@@ -46,7 +46,7 @@
 
             const imageWidth = image.width;
 
-            let currentHeight = 235;
+            let currentHeight = 225;
 
             const fontSize = 18;
 
@@ -76,7 +76,7 @@
 
                 ctx.fill();
 
-                currentHeight += fontSize * 1.6;
+                currentHeight += fontSize * 1.7;
             }
 
             // Random 20 character string of numbers and letters

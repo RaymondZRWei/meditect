@@ -70,7 +70,7 @@
 <div class="relative">
     <div class="relative">
         <section
-            class="grid min-h-screen h-full pb-80 pt-12 grid-cols-5 max-w-screen-xl mx-auto"
+            class="grid min-h-screen h-full pb-40 pt-12 grid-cols-5 max-w-screen-xl mx-auto"
         >
             <div class="pt-20 col-span-3">
                 <h1
@@ -106,7 +106,7 @@
         id="mouse"
     />
 
-    <div class="flex flex-col pt-24" id="content">
+    <div class="flex flex-col pt-12" id="content">
         <div class="max-w-screen-lg mx-auto">
             <section>
                 <h2 class="text-6xl font-bold text-center mb-16">Our Team</h2>
@@ -161,6 +161,5 @@
             </section>
         </div>
     </div>
-
     <Footer />
 </div>
